@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#14532d">
+<title>My Work — Grammar for IELTS Writing</title>
+<style>
+:root{
+  --bg:#f4f7ec; --paper:#ffffff; --ink:#1c2a17; --muted:#5f6d5a;
+  --line:#dde6cf; --brand:#166534; --brand-deep:#14532d; --brand-soft:#e3f5d4;
+  --lime:#65a30d; --lime-hot:#84cc16; --lime-soft:#ecfccb;
+  --amber:#b45309; --amber-soft:#fef3c7; --orange:#ea580c; --orange-soft:#ffedd5;
+  --radius:14px; --shadow:0 2px 10px rgba(28,42,23,.08);
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{-webkit-text-size-adjust:100%;}
+body{background:var(--bg); color:var(--ink); font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif; line-height:1.55; min-height:100vh;}
+button{font:inherit; cursor:pointer; -webkit-tap-highlight-color:transparent;}
+a:focus-visible,button:focus-visible{outline:3px solid #a3e635; outline-offset:2px;}
+.topbar{position:sticky; top:0; z-index:50; background:rgba(255,255,255,.94); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+.topbar-in{max-width:1180px; margin:0 auto; padding:10px 16px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+.logo{display:flex; align-items:center; gap:10px; font-weight:800; font-size:16.5px; text-decoration:none; color:var(--ink);}
+.logo-badge{background:var(--brand-deep); color:#fff; border-radius:9px; padding:4px 9px; font-size:13px;}
+.logo-badge b{color:var(--lime-hot);}
+.nav{margin-left:auto; display:flex; gap:6px; flex-wrap:wrap;}
+.nav a{text-decoration:none; color:var(--ink); font-weight:600; font-size:14px; padding:9px 13px; border-radius:10px; min-height:44px; display:inline-flex; align-items:center;}
+.nav a:hover{background:var(--brand-soft);}
+.nav a.active{background:var(--brand); color:#fff;}
+.wrap{max-width:960px; margin:0 auto; padding:22px 16px calc(90px + env(safe-area-inset-bottom));}
+.hero{background:linear-gradient(120deg,#14532d 0%,#166534 45%,#65a30d 82%,#84cc16 100%); color:#fff; border-radius:20px; padding:30px 26px; margin-bottom:24px; box-shadow:0 6px 22px rgba(20,83,45,.28);}
+.hero h1{font-size:clamp(23px,3.6vw,32px); margin-bottom:8px;}
+.hero h1::after{content:""; display:block; width:90px; height:5px; border-radius:99px; margin-top:12px; background:linear-gradient(90deg,#fbbf24,#fb923c);}
+.hero p{opacity:.92; max-width:660px; font-size:15px;}
+.section{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px; margin-bottom:18px;}
+.section h2{font-size:19px; margin-bottom:10px; display:flex; align-items:center; gap:9px;}
+.section h2 .ico{width:30px; height:30px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; font-size:15px; background:var(--brand-soft); flex-shrink:0;}
+.btn{border:none; border-radius:10px; padding:10px 17px; font-weight:700; font-size:14px; min-height:44px; display:inline-flex; align-items:center; gap:7px;}
+.btn-primary{background:var(--brand); color:#fff;}
+.btn-ghost{background:#fff; color:var(--ink); border:1.5px solid var(--line);}
+.btn-ghost:hover{border-color:var(--brand); color:var(--brand);}
+.btn-sm{min-height:38px; padding:7px 12px; font-size:13px;}
+.wc{font-size:13px; font-weight:700; color:var(--muted); margin-top:6px;}
+.wc.ok{color:var(--brand);}
+.wcard{border:1px solid var(--line); border-left:5px solid var(--tc,var(--brand)); border-radius:11px; padding:14px 16px; margin-bottom:11px; background:#fbfdf4;}
+.wcard h3{font-size:15.5px; color:var(--brand-deep); margin-bottom:3px;}
+.wcard .meta{font-size:12.5px; color:var(--muted); margin-bottom:8px;}
+.wcard .preview{font-family:Georgia,serif; font-size:13.5px; color:#3c4a37; background:#fff; border:1px dashed var(--line); border-radius:8px; padding:9px 12px; max-height:110px; overflow:auto; white-space:pre-wrap;}
+.wcard .row{display:flex; gap:8px; margin-top:9px; flex-wrap:wrap; align-items:center;}
+.empty{background:var(--amber-soft); border:1px dashed #f59e0b; border-radius:11px; padding:16px 18px; font-size:14.5px; color:var(--amber);}
+.foot{color:var(--muted); font-size:13px; margin-top:20px;}
+@media (max-width:480px){.wrap{padding:16px 12px calc(90px + env(safe-area-inset-bottom));} .hero{padding:24px 18px; border-radius:16px;}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <span class="logo"><span class="logo-badge"><b>GF</b></span> Grammar for IELTS Writing</span>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="gym.html">Paraphrase Gym</a>
+    <a href="task1.html">Task 1 Lab</a>
+    <a href="mywork.html" class="active">My Work</a>
+  </nav>
+</div></header>
+<main class="wrap">
+<div class="hero">
+  <h1>📁 My Work — everything you wrote, in one place</h1>
+  <p>Your written answers from every lesson, the Paraphrase Gym and the Task 1 Lab are collected here automatically (they are saved in this browser only). Download one Word file for your teacher — or start from scratch with the reset button.</p>
+</div>
+
+<div class="section">
+  <h2><span class="ico">📥</span>Download everything</h2>
+  <p style="color:var(--muted); font-size:14px; margin-bottom:10px">One file with a section per lesson — answers, upgrades and overviews in the order you studied them.</p>
+  <div style="display:flex; gap:9px; flex-wrap:wrap; align-items:center;">
+    <button class="btn btn-primary" type="button" id="allDocx">⬇ All my work (.docx)</button>
+    <button class="btn btn-ghost" type="button" id="allDoc">⬇ All my work (.doc)</button>
+    <button class="btn btn-ghost btn-sm" type="button" id="wipe" style="color:var(--orange); border-color:#fdba74;">🗑 Reset my work</button>
+    <span class="wc" id="dlMsg"></span>
+  </div>
+</div>
+
+<div class="section">
+  <h2><span class="ico">🗂️</span>By lesson</h2>
+  <div id="list"></div>
+</div>
+
+<p class="foot">Grammar for IELTS Writing · My Work. Data lives in this browser's local storage only — nothing is uploaded anywhere.</p>
+</main>
+<script>
+"use strict";
+/* order + colours match the hub */
+var ORDER=[
+ ["cond-state-v2","#166534"],["conc-state-v1","#65a30d"],["part-state-v1","#ea580c"],
+ ["rel-state-v1","#b45309"],["nom-state-v1","#4d7c0f"],["cleft-state-v1","#ca8a04"],
+ ["inv1-state-v1","#15803d"],["inv2-state-v1","#a16207"],["mix-state-v1","#b45309"],
+ ["t1lab","#15803d"]
+];
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function getSheets(){try{return JSON.parse(localStorage.getItem("gram_sheets")||"{}")}catch(e){return{}}}
+function entries(){
+  var gs=getSheets(),out=[],seen={};
+  ORDER.forEach(function(p){var k=p[0];
+    if(gs[k]&&gs[k].text&&gs[k].text.trim()){out.push({key:k,title:gs[k].title||k,text:gs[k].text,updated:gs[k].updated||0,color:p[1]});seen[k]=1}
+  });
+  Object.keys(gs).forEach(function(k){
+    if(!seen[k]&&gs[k]&&gs[k].text&&gs[k].text.trim())out.push({key:k,title:gs[k].title||k,text:gs[k].text,updated:gs[k].updated||0,color:"#166534"});
+  });
+  return out;
+}
+
+/* ---- docx/doc builders ---- */
+function crc32(buf){if(!crc32.t){crc32.t=[];for(var n=0;n<256;n++){var c=n;for(var k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;crc32.t[n]=c>>>0}}var c=0xFFFFFFFF;for(var i=0;i<buf.length;i++)c=crc32.t[(c^buf[i])&255]^(c>>>8);return(c^0xFFFFFFFF)>>>0}
+function buildZip(files){var enc=new TextEncoder(),parts=[],central=[],off=0;files.forEach(function(f){var nm=enc.encode(f.name),d=f.data,crc=crc32(d);var h=new DataView(new ArrayBuffer(30));h.setUint32(0,0x04034b50,true);h.setUint16(4,20,true);h.setUint32(14,crc,true);h.setUint32(18,d.length,true);h.setUint32(22,d.length,true);h.setUint16(26,nm.length,true);parts.push(new Uint8Array(h.buffer),nm,d);var cv=new DataView(new ArrayBuffer(46));cv.setUint32(0,0x02014b50,true);cv.setUint16(4,20,true);cv.setUint16(6,20,true);cv.setUint32(16,crc,true);cv.setUint32(20,d.length,true);cv.setUint32(24,d.length,true);cv.setUint16(28,nm.length,true);cv.setUint32(42,off,true);central.push(new Uint8Array(cv.buffer),nm);off+=30+nm.length+d.length});var cdStart=off,cdSize=0;central.forEach(function(u){cdSize+=u.length});var e=new DataView(new ArrayBuffer(22));e.setUint32(0,0x06054b50,true);e.setUint16(8,files.length,true);e.setUint16(10,files.length,true);e.setUint32(12,cdSize,true);e.setUint32(16,cdStart,true);parts.push.apply(parts,central);parts.push(new Uint8Array(e.buffer));return new Blob(parts,{type:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"})}
+function docxFromSections(title,sections){
+  var enc=new TextEncoder();
+  var para=function(s,bold,size){return '<w:p><w:r><w:rPr>'+(bold?'<w:b/>':'')+'<w:sz w:val="'+(size||22)+'"/></w:rPr><w:t xml:space="preserve">'+esc(s)+'</w:t></w:r></w:p>'};
+  var today=new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});
+  var body=para("Grammar for IELTS Writing — "+title,true,34)+para("Date: "+today,false,20)+para("",false,20);
+  sections.forEach(function(sec){
+    body+=para(sec.title.toUpperCase(),true,28)+para("",false,20);
+    sec.text.split(/\n/).forEach(function(line){body+=para(line,false,24)});
+    body+=para("",false,20)+para("— · — · —",false,20)+para("",false,20);
+  });
+  var doc='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>'+body+'<w:sectPr/></w:body></w:document>';
+  var ct='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>';
+  var rels='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>';
+  return buildZip([{name:"[Content_Types].xml",data:enc.encode(ct)},{name:"_rels/.rels",data:enc.encode(rels)},{name:"word/document.xml",data:enc.encode(doc)}]);
+}
+function docFromSections(title,sections){
+  var today=new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});
+  var html='<html xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="UTF-8"></head><body>';
+  html+='<h1 style="font-family:Arial">'+esc(title)+'</h1><p style="font-family:Arial;color:#666;font-size:11px">'+today+'</p>';
+  sections.forEach(function(sec){
+    html+='<h2 style="font-family:Arial;color:#14532d">'+esc(sec.title)+'</h2>';
+    sec.text.split(/\n/).forEach(function(l){html+='<p style="font-family:Georgia;font-size:12pt">'+esc(l||' ')+'</p>'});
+  });
+  html+='</body></html>';
+  return new Blob([html],{type:"application/msword"});
+}
+function dl(blob,fname){var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=fname;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},600)}
+
+/* ---- render list ---- */
+function render(){
+  var list=document.getElementById("list"),en=entries();
+  if(!en.length){
+    list.innerHTML='<div class="empty">Nothing here yet. Open any lesson, write in the answer boxes, and your work will appear on this page automatically.</div>';
+    return;
+  }
+  list.innerHTML=en.map(function(e,i){
+    var d=e.updated?new Date(e.updated).toLocaleString("en-GB",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}):"";
+    var words=e.text.trim().split(/\s+/).filter(Boolean).length;
+    var prev=e.text.trim().split(/\n/).filter(function(l){return l.trim()}).slice(0,3).join("\n");
+    return '<div class="wcard" style="--tc:'+e.color+'"><h3>'+esc(e.title)+'</h3>'+
+      '<div class="meta">'+(d?("Last saved: "+d+" · "):"")+words+' words</div>'+
+      '<div class="preview">'+esc(prev)+'</div>'+
+      '<div class="row"><button type="button" class="btn btn-ghost btn-sm" data-dl="'+i+'">⬇ .docx</button></div></div>';
+  }).join("");
+  list.querySelectorAll("[data-dl]").forEach(function(b){
+    b.addEventListener("click",function(){
+      var e=entries()[+b.dataset.dl];
+      dl(docxFromSections(e.title,[{title:e.title,text:e.text}]),e.title.toLowerCase().replace(/[^a-z0-9]+/g,"_").replace(/^_|_$/g,"")+".docx");
+    });
+  });
+}
+
+document.getElementById("allDocx").addEventListener("click",function(){
+  var en=entries(),msg=document.getElementById("dlMsg");
+  if(!en.length){msg.textContent="Nothing to download yet — write in a lesson first.";msg.className="wc";return}
+  dl(docxFromSections("My Work — all lessons",en.map(function(e){return{title:e.title,text:e.text}})),"grammar_for_ielts_my_work.docx");
+  msg.textContent="Downloaded ✓";msg.className="wc ok";setTimeout(function(){msg.textContent="";msg.className="wc"},3000);
+});
+document.getElementById("allDoc").addEventListener("click",function(){
+  var en=entries(),msg=document.getElementById("dlMsg");
+  if(!en.length){msg.textContent="Nothing to download yet — write in a lesson first.";msg.className="wc";return}
+  dl(docFromSections("My Work — all lessons",en.map(function(e){return{title:e.title,text:e.text}})),"grammar_for_ielts_my_work.doc");
+  msg.textContent="Downloaded ✓";msg.className="wc ok";setTimeout(function(){msg.textContent="";msg.className="wc"},3000);
+});
+document.getElementById("wipe").addEventListener("click",function(){
+  if(!confirm("Delete ALL saved answers from every lesson in this browser? This cannot be undone."))return;
+  var keep=[];
+  for(var i=0;i<localStorage.length;i++)keep.push(localStorage.key(i));
+  keep.forEach(function(k){
+    if(k==="gram_sheets"||/-state-v\d+$/.test(k))localStorage.removeItem(k);
+  });
+  render();
+  var msg=document.getElementById("dlMsg");
+  msg.textContent="All saved work has been deleted.";msg.className="wc";
+});
+
+render();
+</script>
+</body>
+</html>

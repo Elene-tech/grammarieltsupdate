@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Mixed Grammar Practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FAF6EE;--surface:#FFFEFA;--fg:#16241C;--muted:#566359;--line:#D8D3C2;--grid:rgba(11,110,117,.07);--band:#1B4332;--gold:#C9A84C;--gold-soft:#F6EBC8;--warn:#B8420F;--warn-soft:#FCE9DC;--teal:#0B6E75;--teal-soft:#DCEFEF;--ok:#1E7B45;--ok-bg:#E3F3E8;--on-band:#F4F1E6;--f-s:'Source Serif 4',Georgia,serif;--f-b:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;--f-m:'IBM Plex Mono',ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1A14;--surface:#16231C;--fg:#E8EFE9;--muted:#9FB0A5;--line:#2C3C33;--grid:rgba(120,200,200,.06);--band:#0B2218;--gold:#E0BE63;--gold-soft:#3A3217;--warn:#F08A5A;--warn-soft:#3B2216;--teal:#5CC4CB;--teal-soft:#123A3C;--ok:#7FD39A;--ok-bg:#16301F;--on-band:#F4F1E6}}
+:root[data-theme="dark"]{--bg:#0F1A14;--surface:#16231C;--fg:#E8EFE9;--muted:#9FB0A5;--line:#2C3C33;--grid:rgba(120,200,200,.06);--band:#0B2218;--gold:#E0BE63;--gold-soft:#3A3217;--warn:#F08A5A;--warn-soft:#3B2216;--teal:#5CC4CB;--teal-soft:#123A3C;--ok:#7FD39A;--ok-bg:#16301F;--on-band:#F4F1E6}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font:18px/1.6 var(--f-b);background-color:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px;color:var(--fg);min-height:100vh;padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right));padding-bottom:max(60px,env(safe-area-inset-bottom))}
+.wrap{max-width:960px;margin:0 auto}
+header{background:var(--band);color:var(--on-band);border-radius:0 0 20px 20px;padding:30px 28px 24px;margin:0 -4px 0}
+.kick{font:500 13px var(--f-m);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+h1{font:700 clamp(26px,5vw,38px)/1.15 var(--f-s);margin:8px 0}
+header p{color:#CFE0D6;max-width:640px;font-size:17px}
+.bar{position:static;z-index:5;background:var(--surface);border:1px solid var(--line);border-top:0;border-radius:0 0 14px 14px;padding:10px 14px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;box-shadow:0 4px 14px rgba(0,0,0,.06)}
+.track{flex:1;min-width:140px;height:10px;background:var(--line);border-radius:99px;overflow:hidden}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--gold));transition:width .35s}
+.lab{font:500 14px var(--f-m);color:var(--muted);white-space:nowrap}
+.save{font:400 13px var(--f-m);color:var(--muted)}
+.tabs{display:flex;gap:10px;margin:22px 0 14px;flex-wrap:wrap}
+.tab{flex:1;min-width:200px;text-align:left;padding:12px 16px;border-radius:14px;border:2px solid var(--line);background:var(--surface);color:var(--fg);font:600 17px var(--f-b);cursor:pointer}
+.tab small{display:block;font:400 14px var(--f-b);color:var(--muted);margin-top:2px}
+.tab.on{background:var(--teal-soft);border-color:var(--teal)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
+.chip{padding:7px 14px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:500 15px var(--f-b);cursor:pointer}
+.chip.on{background:var(--band);border-color:var(--band);color:var(--on-band)}
+.how{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:18px;font-size:16.5px}
+.how b{color:var(--teal)}
+.card{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--line);border-radius:14px;padding:20px 20px 18px;margin-bottom:16px}
+.card.done{border-left-color:var(--ok)}
+.head{display:flex;gap:14px;align-items:flex-start}
+.num{min-width:38px;height:38px;border-radius:10px;background:var(--band);color:var(--gold);display:flex;align-items:center;justify-content:center;font:600 16px var(--f-m)}
+.card.done .num{background:var(--ok);color:#fff}
+.src-l{font:500 12px var(--f-m);letter-spacing:.12em;text-transform:uppercase;color:var(--warn);margin-bottom:3px}
+.src{font-size:19px;font-weight:500;line-height:1.5}
+.hint{display:inline-block;margin-top:8px;font-size:17px;background:var(--warn-soft);border:1px dashed var(--warn);color:var(--warn);border-radius:99px;padding:3px 14px;font-weight:500}
+.hint.tag{background:var(--teal-soft);border-color:var(--teal);color:var(--teal);border-style:solid}
+textarea{width:100%;margin-top:14px;min-height:84px;border:2px solid var(--line);border-radius:12px;padding:12px 14px;font:18px/1.5 var(--f-b);resize:vertical;background:var(--bg);color:var(--fg)}
+textarea:focus{outline:none;border-color:var(--teal)}
+.row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.btn{padding:10px 18px;border-radius:10px;border:2px solid var(--teal);background:var(--teal);color:#fff;font:600 16px var(--f-b);cursor:pointer}
+.btn.ghost{background:transparent;color:var(--teal)}
+.btn.done.on{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn:focus-visible,.chip:focus-visible,.tab:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.model{display:none;margin-top:16px;background:var(--band);color:var(--on-band);border-radius:14px;padding:18px 20px}
+.model.show{display:block}
+.ml{font:500 12px var(--f-m);letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.mt{font-size:19px;line-height:1.6;font-weight:500}
+.mt b{color:#FFE08A;background:rgba(250,204,21,.14);padding:1px 6px;border-radius:5px;font-weight:600}
+.alt{margin-top:10px;font-size:17.5px;color:#DCE9E0}
+.alt b{color:#FFE08A;font-weight:600}
+.tags{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}
+.tg{font:500 13px var(--f-m);background:rgba(255,255,255,.12);border-radius:99px;padding:3px 12px;color:#E8F2EA}
+.note{margin-top:12px;border-top:1px solid rgba(255,255,255,.18);padding-top:10px;font-size:16px;color:#CFE0D6}
+.sc{display:none;margin-top:14px;background:var(--ok-bg);border:1px solid var(--ok);border-radius:12px;padding:12px 16px}
+.sc.show{display:block}
+.sc h4{font:500 12px var(--f-m);letter-spacing:.12em;text-transform:uppercase;color:var(--ok);margin-bottom:6px}
+.sc label{display:flex;gap:10px;align-items:flex-start;font-size:16.5px;margin:6px 0;cursor:pointer}
+.sc input{margin-top:5px;width:18px;height:18px;accent-color:var(--ok)}
+.tools{margin:26px 0 10px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.small{font-size:15px;color:var(--muted)}
+.forms{margin-top:8px;font-size:16px;color:var(--muted)}
+.forms b{color:var(--teal);font-weight:600}
+.forms div{margin-top:3px}
+.plan{margin-top:12px;background:var(--teal-soft);border:1px solid var(--teal);border-radius:12px;padding:12px 16px}
+.plan h4{font:500 12px var(--f-m);letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:6px}
+.plan ol{padding-left:22px;font-size:17px}.plan li{margin:5px 0}.plan li b{color:var(--teal)}
+.st{margin-top:10px}.st summary,.rem summary{cursor:pointer;font-weight:600;color:var(--teal);font-size:16.5px}
+.st ul{margin:8px 0 0 20px;font-size:17px;font-style:italic;color:var(--muted)}
+.rem{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 18px;margin-bottom:18px}
+.rem .rb{margin-top:10px;display:grid;gap:8px;font-size:16.5px}
+.rem .rb div b{color:var(--teal)}
+.empty{padding:30px;text-align:center;color:var(--muted)}
+@media(max-width:560px){body{font-size:17px}.head{flex-direction:column;gap:8px}.src{font-size:18px}header{padding:24px 18px 20px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kick">Target English · IELTS Writing · Grammar for Essays</div>
+  <h1>Mixed Practice: all the structures</h1>
+  <p>Conditionals, concession, participles, relative clauses, nominalisation, cleft sentences and inversion. Write your own sentence first. Then open the model and compare.</p>
+</header>
+<div class="bar"><div class="track"><div class="fill" id="fill"></div></div><div class="lab" id="lab">0 / 0</div><div class="save" id="save"></div></div>
+
+<div class="tabs" id="tabs"></div>
+<div class="how" id="how"></div>
+<details class="rem"><summary>Structure reminders (formulas)</summary><div class="rb" id="remb"></div></details>
+<div class="chips" id="chips"></div>
+<div id="board"></div>
+
+<div class="tools">
+  <button class="btn ghost" id="copy">Copy all my answers</button>
+  <button class="btn ghost" id="reset">Start again</button>
+  <span class="small" id="msg"></span>
+</div>
+<p class="small">Your answers stay in this page only. Use “Copy all my answers” to send your work to your teacher.</p>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+const FAM={cond:'Conditionals',conc:'Concession',part:'Participles',rel:'Relative clauses',nom:'Nominalisation',cleft:'Cleft sentences',inv:'Inversion'};
+const FORM={
+ cond:'If + past simple, would + verb · If + past perfect, would have + V3 · Were … to / Had … / Unless',
+ conc:'Despite + noun phrase · Although + clause · While + clause · Admittedly …. Nevertheless …',
+ part:'…, -ing result · Having + V3, … · Faced with …, … · Not + -ing',
+ rel:'noun + who / which / whose + clause · , which (whole idea) · noun + -ing / -ed',
+ nom:'verb / adjective → noun · Due to + noun phrase · noun phrase + led to / contributed to',
+ cleft:'It is … that … · What … is … · The reason why … is that … · It is not … but … that',
+ inv:'Not only + aux + S … · Only by + -ing + aux + S · Rarely + aux + S · So + adj + aux + S + that · Hardly had … when · Not until … did …'
+};
+/* Tab 1: guided. Each family has 4 items: [sentence, hint, model, alt, note] */
+const G={
+cond:[
+ ['Many people drive because buses are too expensive.','Type 2 conditional','If buses were cheaper, fewer people would <b>drive</b>.','Were buses to become cheaper, fewer people would drive.','Flip the fact: expensive → cheaper. Type 2 = if + past simple, would + verb.'],
+ ['Teenagers sleep badly because they use phones at night.','Type 2 conditional','If teenagers did not use their phones at night, they would sleep better.','Teenagers would sleep better if they stopped using their phones at night.','Flip the fact: use → did not use.'],
+ ['The government did not invest in flood defences, so the city suffered serious damage.','Type 3 conditional','If the government had invested in flood defences, the city would not have suffered serious damage.','Had the government invested in flood defences, the city would not have suffered so much damage.','Type 3 = if + past perfect, would have + V3. Inverted: Had + S + V3.'],
+ ['Many families did not save money in the past. Now they cannot cope with rising prices.','Mixed conditional (past → present)','If families had saved money in the past, they would be able to cope with rising prices now.','If more families had saved, rising prices would not be such a burden today.','Past cause (had saved) → present result (would be able to).']],
+conc:[
+ ['Online learning is flexible. It does not suit every student.','Admittedly … Nevertheless','Admittedly, online learning is flexible. Nevertheless, it does not suit every student.','While online learning is flexible, it does not suit every student.','Two separate sentences: full stop before Nevertheless.'],
+ ['The cost of living is high. Many young people still move to big cities.','Despite + noun phrase','Despite the high cost of living, many young people still move to big cities.','In spite of the high cost of living, many young people still move to big cities.','After Despite use a noun phrase. Test: Despite THIS.'],
+ ['Renewable energy is getting cheaper. It is still only a small part of global production.','Although / Even though','Even though renewable energy is getting cheaper, it still makes up only a small part of global production.','Although renewable energy is getting cheaper, it remains a small part of global production.','Full clause after although. No “but” in the main clause.'],
+ ['Public transport has improved in the capital. Services in small towns are still poor.','While / Whilst','Whilst public transport has improved in the capital, services in small towns remain poor.','Although public transport has improved in the capital, services in small towns remain poor.','While + clause sets two ideas side by side.']],
+part:[
+ ['Cheap flights have increased. This has led to more pollution.','Result -ing phrase','Cheap flights have increased, leading to more pollution.','The increase in cheap flights has contributed to more pollution.','After a comma use -ing: leading, causing, resulting in.'],
+ ['Many graduates have lost their jobs. They are retraining.','Having + past participle','Having lost their jobs, many graduates are retraining.','Many graduates, having lost their jobs, are retraining.','The first action finished before the second. Same subject in both parts.'],
+ ['Governments face limited budgets, so they must choose carefully.','Faced with … (past participle opener)','Faced with limited budgets, governments must choose carefully.','Given limited budgets, governments must choose carefully.','Governments are faced with budgets: past participle.'],
+ ['Teenagers do not know the risks, so they share personal data online.','Not + -ing','Not knowing the risks, teenagers share personal data online.','Unaware of the risks, teenagers share personal data online.','Put Not before the -ing form.']],
+rel:[
+ ['Some students do not get enough sleep. They often perform badly in exams.','Defining clause (who)','Students who do not get enough sleep often perform badly in exams.','Students not getting enough sleep often perform badly in exams.','No commas: the clause tells us which students.'],
+ ['Tokyo has over 14 million people. Tokyo has an excellent metro system.','Non-defining clause (, which)','Tokyo, which has over 14 million people, has an excellent metro system.','With over 14 million people, Tokyo has an excellent metro system.','Extra information goes between commas. Never “that” here.'],
+ ['Some countries depend on tourism. Their economies suffer when travel stops.','whose','Countries whose economies depend on tourism suffer when travel stops.','Countries that depend on tourism suffer economically when travel stops.','Whose + noun shows possession.'],
+ ['Fuel prices have risen sharply. This has forced many families to use public transport.',', which (whole idea)','Fuel prices have risen sharply, which has forced many families to use public transport.','The sharp rise in fuel prices has forced many families to use public transport.',', which refers to the whole first idea.']],
+nom:[
+ ['Prices rose sharply, so many families cut spending.','Due to + noun phrase','Due to the sharp rise in prices, many families cut spending.','Because of the sharp rise in prices, many families cut spending.','rose → the rise. After Due to use a noun phrase.'],
+ ['Many young people are unemployed. This causes social problems.','Adjective → noun','Youth unemployment causes social problems.','Unemployment among young people causes social problems.','unemployed → unemployment.'],
+ ['Cities grew quickly. This has put pressure on housing.','Verb → noun','The rapid growth of cities has put pressure on housing.','The rapid expansion of cities has put pressure on housing.','grew → the growth of.'],
+ ['People use more plastic every year. This damages the oceans.','Noun phrase as subject','Increased plastic use damages the oceans.','The growing use of plastic damages the oceans.','Make the idea the subject. Avoid “People …”.']],
+cleft:[
+ ['Cities need better public transport.','What-cleft','What cities need is better public transport.','Better public transport is what cities need.','What + clause + is + focus.'],
+ ['Education reduces poverty more than anything else.','It-cleft','It is education that reduces poverty more than anything else.','What reduces poverty more than anything else is education.','It is + focus + that.'],
+ ['Many people think money motivates workers. Job satisfaction matters more.','It is not … but … that','It is not money but job satisfaction that motivates workers most.','It is job satisfaction, not money, that motivates workers most.','Correct a common belief. X and Y are the same type.'],
+ ['Many graduates cannot find jobs because they lack practical experience.','The reason why … is that','The main reason why many graduates cannot find jobs is that they lack practical experience.','Many graduates cannot find jobs mainly because they lack practical experience.','In formal writing: is that, not is because.']],
+inv1:[
+ ['Technology has changed communication. It has also changed work.','Not only … but also','Not only has technology changed communication, but it has also changed work.','Technology has not only changed communication but also changed work.','Only the auxiliary moves: Not only HAS technology changed.'],
+ ['Governments can reduce congestion by investing in public transport.','Only by + -ing','Only by investing in public transport can governments reduce congestion.','Governments can reduce congestion only by investing in public transport.','No comma. The auxiliary comes before the subject: can governments.'],
+ ['Governments have rarely solved poverty without long-term investment.','Rarely + inversion','Rarely have governments solved poverty without long-term investment.','Governments have seldom solved poverty without long-term investment.','Rarely + aux + S.'],
+ ['The shortage of housing is severe. Many young people live with their parents.','So … that','So severe is the shortage of housing that many young people live with their parents.','The shortage of housing is so severe that many young people live with their parents.','So + adjective + is + S + that.']],
+inv2:[
+ ['The vaccine was approved. Almost immediately, doctors raised concerns.','Hardly … when','Hardly had the vaccine been approved when doctors raised concerns.','As soon as the vaccine was approved, doctors raised concerns.','Hardly + had + S + V3 … when (never than).'],
+ ['Many companies did not take climate change seriously until regulations forced them to change.','Not until','Not until regulations forced them to change did many companies take climate change seriously.','Many companies took climate change seriously only after regulations forced them to change.','Only the main clause inverts: did many companies take.'],
+ ['The housing crisis is enormous. Governments have declared an emergency.','Such is the …','Such is the scale of the housing crisis that governments have declared an emergency.','The scale of the housing crisis is so great that governments have declared an emergency.','Such is + noun phrase + that + normal clause.'],
+ ['Many consumers do not realise that fast fashion pollutes water.','Little do …','Little do many consumers realise that fast fashion pollutes water.','Many consumers are unaware that fast fashion pollutes water.','Rhetorical: one per essay at most.']]
+};
+/* Tab 2: mixed, no hints. [sentence, model, modelTag, alt, altTag, note] */
+const MX=[
+ ['Many people use social media too much, and it harms their sleep.','Heavy social media use can harm people’s sleep.','nom','Social media, which many people use for hours every day, can harm their sleep.','rel','Two good routes: a noun phrase subject, or a non-defining clause.'],
+ ['Remote work is convenient. It can make employees feel lonely.','While remote work is convenient, it can make employees feel lonely.','conc','Remote work, which is convenient for many employees, can also leave them feeling lonely.','rel','Concession links the contrast; a relative clause adds the extra point.'],
+ ['Cars cause air pollution. People use cars more every year.','Rising car use contributes to air pollution.','nom','Cars cause air pollution, which is getting worse as people drive more every year.','rel','Noun phrase subject + cause verb is the neat Band 7 route.'],
+ ['Students do not get enough practice. They do not improve their speaking.','If students got more practice, their speaking would improve.','cond','Only by practising regularly can students improve their speaking.','inv','Flip the fact for a Type 2 conditional.'],
+ ['Many teenagers want to look successful. They copy online influencers.','Wanting to look successful, many teenagers copy online influencers.','part','Many teenagers, who want to look successful, copy online influencers.','rel','Same subject in both parts of the participle sentence.'],
+ ['Governments should invest in schools. This is the best way to reduce poverty.','It is investment in schools that reduces poverty most effectively.','cleft','Only by investing in schools can governments reduce poverty effectively.','inv','Put the key idea in the spotlight.'],
+ ['The company did not listen to its customers. It lost many of them.','If the company had listened to its customers, it would not have lost so many of them.','cond','Not listening to its customers, the company lost many of them.','part','Type 3 for a past situation that did not happen.'],
+ ['Electric cars are expensive. Many families buy them.','Despite the high price of electric cars, many families still buy them.','conc','Electric cars, which are expensive, are still bought by many families.','rel','Despite + noun phrase.'],
+ ['Young people do not understand the risks of debt. They borrow too much.','Little do many young people realise how risky debt can be.','inv','Young people who do not understand the risks of debt often borrow too much.','rel','Little do is rhetorical: use it once at most.'],
+ ['The city introduced a congestion charge. Traffic fell quickly.','Hardly had the city introduced a congestion charge when traffic began to fall.','inv','Having introduced a congestion charge, the city saw traffic fall quickly.','part','Hardly … when (never than).'],
+ ['People are worried about job security. This affects their health.','Anxiety about job security affects people’s health.','nom','What affects people’s health is anxiety about job security.','cleft','worried → anxiety.'],
+ ['Many students rely on translation apps. They do not learn vocabulary.','Many students rely on translation apps, which means that they do not learn vocabulary.','rel','If students relied less on translation apps, they would learn more vocabulary.','cond',', which comments on the whole idea.'],
+ ['Public transport is cheap and reliable. People use their cars less.','Cheap and reliable public transport leads to a reduction in car use.','nom','So cheap and reliable is public transport in some cities that people use their cars much less.','inv','Verb → noun: use less → a reduction in car use.'],
+ ['Some employers offer flexible hours. They keep their best staff.','Only by offering flexible hours can employers keep their best staff.','inv','Employers who offer flexible hours keep their best staff.','rel','Only by + -ing + can + S.'],
+ ['Many tourists visit fragile places. This damages the environment.','Many tourists visit fragile places, damaging the environment.','part','Mass tourism in fragile places leads to environmental damage.','nom','Result -ing after a comma.'],
+ ['Online shopping is growing fast. Small shops are closing.','So rapid has the growth of online shopping been that small shops are closing.','inv','The rapid growth of online shopping has led to the closure of small shops.','nom','So + adjective + aux + S + that.'],
+ ['People do not exercise enough. They get health problems later.','If people exercised more, they would have fewer health problems later.','cond','A lack of exercise leads to health problems later in life.','nom','Flip the fact: do not exercise → exercised more.'],
+ ['Smartphones distract students in class. Most teenagers own one.','Smartphones, which most teenagers own, distract students in class.','rel','Owned by most teenagers, smartphones distract students in class.','part','Extra information between commas.'],
+ ['Cheap flights are popular. They harm the environment.','Although cheap flights are popular, they harm the environment.','conc','Cheap flights, which are popular, harm the environment.','rel','Although + full clause, no “but”.'],
+ ['Many workers lost their jobs. Spending fell.','Due to widespread job losses, spending fell.','nom','Many workers lost their jobs, resulting in lower spending.','part','lost → job losses.'],
+ ['Teachers should give feedback. Students improve faster this way.','It is regular feedback that helps students improve faster.','cleft','Only when students receive regular feedback do they improve quickly.','inv','It is + focus + that.'],
+ ['The government did not act early. The disease spread widely.','Had the government acted early, the disease would not have spread so widely.','cond','Not until the disease had spread widely did the government act.','inv','Inverted Type 3: Had + S + V3.'],
+ ['Some people think technology makes life easier. It also creates new problems.','Admittedly, technology makes life easier. Nevertheless, it creates new problems.','conc','Technology, which makes life easier, also creates new problems.','rel','Admit a point, then argue back.'],
+ ['A lot of young people study abroad. They become more independent.','Young people studying abroad often become more independent.','rel','Studying abroad, young people often become more independent.','part','Reduced relative clause: who study → studying.']
+];
+/* Tab 3: paragraph upgrades [topic, sentences, model, structures] */
+const PP=[
+ ['Technology','Many teenagers use social media a lot. They do not sleep enough. They get bad results at school. Schools should teach them to use it better.','Heavy social media use means that many teenagers do not sleep enough, <b>leading to</b> weaker results at school. <b>Only by teaching</b> responsible use <b>can schools</b> reduce the problem.',['Nominalisation','Result -ing','Only by + inversion'],
+  [['Nominalisation','turn “use social media a lot” into a noun phrase subject (Heavy … use)'],['Result -ing','join the sleep and results ideas with , leading to …'],['Only by + -ing','write the solution: Only by + -ing + can + subject']],
+  ['Heavy social media use means that …, leading to …','Only by teaching … can schools …']],
+ ['Environment','Cities have too many cars. The air is dirty. People get ill. Governments should limit cars.','<b>Traffic congestion, which</b> affects most big cities, has led to a sharp decline in air quality, <b>damaging</b> public health. <b>Unless</b> governments limit car use, the problem will only get worse.',['Non-defining clause','Nominalisation','Result -ing','Unless'],
+  [['Non-defining clause','join sentences 1 and 2: Traffic congestion, which …, has led to …'],['Nominalisation','dirty air → a decline in air quality'],['Result -ing','add , damaging public health'],['Unless','solution: Unless + present simple, … will …']],
+  ['Traffic congestion, which …, has led to …','Unless governments …, the problem will …']],
+ ['Work','Many people work from home now. They save time. Some feel lonely. Companies should let people choose.','<b>Although</b> remote work saves time, <b>isolation</b> remains a serious concern. <b>What companies should do is</b> give employees a choice between home and office.',['Although','Nominalisation','What-cleft'],
+  [['Although','join the benefit and the problem: Although + clause, …'],['Nominalisation','feel lonely → isolation (a noun)'],['What-cleft','solution: What companies should do is + verb …']],
+  ['Although remote work …, … remains a serious concern.','What companies should do is …']],
+ ['Education','Students use translation apps. They do not learn words. Their exams are bad. Teachers should limit apps.','<b>Students who</b> rely on translation apps often fail to learn vocabulary, <b>resulting in</b> poor exam results. <b>Were teachers to limit</b> app use, students would remember far more words.',['Defining clause','Result -ing','Inverted conditional'],
+  [['Defining clause','Students who …'],['Result -ing',', resulting in + noun phrase (exam results)'],['Inverted conditional','solution: Were teachers to + verb, students would …']],
+  ['Students who … often fail to …, resulting in …','Were teachers to …, students would …']],
+ ['Housing','Housing is expensive. Young people live with parents. Governments built few houses. They must build more.','<b>So expensive has housing become that</b> many young people live with their parents. <b>Having built</b> too few homes in the past, governments must now invest heavily in affordable housing.',['So … that inversion','Having + past participle','Nominalisation'],
+  [['So … that','So + adjective + has/is + subject + that …'],['Having + past participle','Having built …, governments must …'],['Nominalisation','build more houses → invest in affordable housing']],
+  ['So expensive has housing become that …','Having built too few homes …, governments must …']],
+ ['Health','People eat a lot of fast food. They get obese. Fast food is cheap. The government should tax it.','<b>Not only is</b> fast food cheap, <b>but it is also</b> a major cause of obesity. <b>It is the government that</b> must act: taxing unhealthy food would encourage healthier choices.',['Not only … but also','It-cleft','Nominalisation'],
+  [['Not only … but also','Not only is fast food cheap, but it is also …'],['Nominalisation','get obese → obesity'],['It-cleft','solution: It is the government that …']],
+  ['Not only is fast food cheap, but …','It is the government that …']]
+];
+const KEY='mix-state-v1';
+let S={done:{},text:{},tab:'t1',filter:'all'};
+let storageOK=true;
+try{const r=localStorage.getItem(KEY);if(r)S=Object.assign(S,JSON.parse(r))}catch(e){storageOK=false}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(S));$('#save').textContent='Saved on this device ✓'}catch(e){storageOK=false;$('#save').textContent='Auto-save is off. Use “Copy all my answers”.'}}
+/* build item lists */
+const ORDER=['cond','conc','part','rel','nom','cleft','inv1','inv2'];
+const T1=[];
+for(let i=0;i<4;i++)ORDER.forEach(k=>{const r=G[k][i];T1.push({id:'g-'+k+'-'+i,fam:k.replace(/\d/,''),s:r[0],hint:r[1],model:r[2],alt:r[3],note:r[4]})});
+const T2=MX.map((r,i)=>({id:'m-'+i,fam:r[2],fam2:r[4],s:r[0],model:r[1],alt:r[3],note:r[5]}));
+const T3=PP.map((r,i)=>({id:'p-'+i,topic:r[0],s:r[1],model:r[2],structs:r[3],plan:r[4],starts:r[5]}));
+const TABS={
+ t1:{name:'1 · Guided',sub:'each task names the structure',items:T1,how:'<b>How it works.</b> Read the simple sentence (Band 5–6). The orange pill tells you which structure to use. Write your sentence in the box, then open the model and compare.'},
+ t2:{name:'2 · Mixed',sub:'choose from 2 suggested structures',items:T2,how:'<b>Guided choice.</b> Each task suggests two structures that fit well. Choose one and write your sentence. The formulas are under the pill. Your idea can be different from the model, so check the grammar, not only the words.'},
+ t3:{name:'3 · Paragraphs',sub:'upgrade a whole paragraph',items:T3,how:'<b>Paragraph upgrade.</b> Rewrite the four short sentences as two or three longer ones. Follow the <b>plan</b>: it tells you which structure to use for each idea. Open the sentence starters if you need a first step.'}
+};
+const CHECK=['I used a structure from the course, and it is grammatically correct','Word order, auxiliaries and commas are right','The meaning is the same as the original'];
+function esc(t){return String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function total(){return T1.length+T2.length+T3.length}
+function doneN(items){return items.filter(x=>S.done[x.id]).length}
+function renderTabs(){
+  $('#tabs').innerHTML=Object.keys(TABS).map(k=>`<button class="tab${S.tab===k?' on':''}" data-t="${k}">${TABS[k].name}<small>${doneN(TABS[k].items)} / ${TABS[k].items.length} · ${TABS[k].sub}</small></button>`).join('');
+  $('#how').innerHTML=TABS[S.tab].how;
+  const f=S.tab==='t3'?'':['all',...Object.keys(FAM)].map(k=>`<button class="chip${S.filter===k?' on':''}" data-f="${k}">${k==='all'?'All structures':FAM[k]}</button>`).join('');
+  $('#chips').innerHTML=f;
+}
+function card(x,i){
+  const d=!!S.done[x.id];
+  let top;
+  if(S.tab==='t3')top=`<div class="src-l">Band 5–6 paragraph · ${esc(x.topic)}</div><div class="src">${esc(x.s)}</div><div class="plan"><h4>Your plan</h4><ol>${x.plan.map(p=>`<li><b>${esc(p[0])}:</b> ${esc(p[1])}</li>`).join('')}</ol></div><details class="st"><summary>Need sentence starters?</summary><ul>${x.starts.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></details>`;
+  else if(S.tab==='t2'){const fs=[x.fam,x.fam2].filter((v,i,a)=>a.indexOf(v)===i).sort((p,q)=>FAM[p].localeCompare(FAM[q]));top=`<div class="src-l">Band 5–6</div><div class="src">${esc(x.s)}</div><span class="hint">Try: ${fs.map(k=>FAM[k]).join(' or ')}</span><div class="forms">${fs.map(k=>`<div><b>${FAM[k]}</b>: ${esc(FORM[k])}</div>`).join('')}</div>`}
+  else top=`<div class="src-l">Band 5–6</div><div class="src">${esc(x.s)}</div>`+(S.tab==='t1'?`<span class="hint">Use: ${esc(x.hint)}</span>`:'');
+  let model;
+  if(S.tab==='t3')model=`<div class="ml">Model · Band 7+</div><div class="mt">${x.model}</div><div class="tags">${x.structs.map(t=>`<span class="tg">${esc(t)}</span>`).join('')}</div>`;
+  else{
+    const tags=S.tab==='t2'?`<div class="tags"><span class="tg">Model: ${FAM[x.fam]}</span><span class="tg">Version 2: ${FAM[x.fam2]}</span></div>`:'';
+    model=`<div class="ml">Model · Band 7+</div><div class="mt">${x.model}</div><div class="alt">Or: ${x.alt}</div>${tags}<div class="note">${esc(x.note)}</div>`;
+  }
+  return `<div class="card${d?' done':''}" data-id="${x.id}"><div class="head"><div class="num">${i+1}</div><div>${top}</div></div>
+  <textarea data-ta="${x.id}" placeholder="${S.tab==='t3'?'Write your upgraded paragraph here…':'Write your sentence here…'}" rows="${S.tab==='t3'?5:2}">${esc(S.text[x.id]||'')}</textarea>
+  <div class="row"><button class="btn" data-a="model">Show model</button><button class="btn ghost done${d?' on':''}" data-a="done">${d?'✓ Done':'Mark as done'}</button></div>
+  <div class="model">${model}</div>
+  <div class="sc"><h4>Self-check</h4>${CHECK.map(c=>`<label><input type="checkbox"> ${c}</label>`).join('')}</div></div>`;
+}
+function render(){
+  renderTabs();
+  $('#remb').innerHTML=Object.keys(FAM).map(k=>`<div><b>${FAM[k]}</b>: ${esc(FORM[k])}</div>`).join('');
+  let items=TABS[S.tab].items;
+  if(S.tab!=='t3'&&S.filter!=='all')items=items.filter(x=>x.fam===S.filter||x.fam2===S.filter);
+  $('#board').innerHTML=items.length?items.map((x,i)=>card(x,i)).join(''):'<div class="empty">No tasks for this filter in this tab. Try another tab.</div>';
+  progress();
+}
+function progress(){
+  const n=Object.keys(S.done).filter(k=>S.done[k]).length;
+  $('#fill').style.width=(n/total()*100)+'%';$('#lab').textContent=n+' / '+total();
+  const tabs=document.querySelectorAll('.tab');
+  Object.keys(TABS).forEach((k,i)=>{if(tabs[i])tabs[i].querySelector('small').textContent=doneN(TABS[k].items)+' / '+TABS[k].items.length+' · '+TABS[k].sub});
+}
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-t]');if(t){S.tab=t.dataset.t;persist();render();return}
+  const f=e.target.closest('[data-f]');if(f){S.filter=f.dataset.f;persist();render();return}
+  const b=e.target.closest('[data-a]');
+  if(b){
+    const c=b.closest('.card'),id=c.dataset.id;
+    if(b.dataset.a==='model'){const m=c.querySelector('.model'),sc=c.querySelector('.sc');const sh=!m.classList.contains('show');m.classList.toggle('show',sh);sc.classList.toggle('show',sh);b.textContent=sh?'Hide model':'Show model'}
+    else{S.done[id]=!S.done[id];c.classList.toggle('done',S.done[id]);b.classList.toggle('on',S.done[id]);b.textContent=S.done[id]?'✓ Done':'Mark as done';persist();progress()}
+  }
+});
+document.addEventListener('input',e=>{if(e.target.matches('textarea[data-ta]')){S.text[e.target.dataset.ta]=e.target.value;persist()}});
+$('#copy').addEventListener('click',()=>{
+  const all=[...T1.map(x=>['Guided',x]),...T2.map(x=>['Mixed',x]),...T3.map(x=>['Paragraph',x])];
+  const out=['Mixed Grammar Practice: my answers',''];
+  all.forEach(([k,x])=>{const a=(S.text[x.id]||'').trim();if(a){out.push(k+' · '+x.s);out.push('→ '+a);out.push('')}});
+  const txt=out.join('\n');
+  const ok=()=>{$('#msg').textContent='Copied. Paste it into your homework.'};
+  const fb=()=>{const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok()}catch(_){$('#msg').textContent='Copy failed. Select your answers manually.'}ta.remove()};
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(ok,fb);else fb();
+});
+let rs=false;
+$('#reset').addEventListener('click',()=>{
+  if(!rs){rs=true;$('#reset').textContent='Click again to erase everything';setTimeout(()=>{rs=false;$('#reset').textContent='Start again'},4000);return}
+  S={done:{},text:{},tab:S.tab,filter:'all'};persist();rs=false;$('#reset').textContent='Start again';render();$('#msg').textContent='';
+});
+if(!storageOK)$('#save').textContent='Auto-save is off here. Use “Copy all my answers”.';
+render();
+</script>
+
+<!-- === Grammar for IELTS Writing · site integration === -->
+<script>
+(function(){
+"use strict";
+/* ---- styles + site bar ---- */
+var st=document.createElement("style");
+st.textContent=[
+".gsitebar{position:static;z-index:999;background:#14532d;color:#fff;display:flex;align-items:center;gap:6px;padding:6px 12px;font:500 13px/1.2 -apple-system,'Segoe UI',Roboto,Arial,sans-serif;box-shadow:0 2px 10px rgba(0,0,0,.25);flex-wrap:wrap}",
+".gsitebar a{color:#fff;text-decoration:none;padding:7px 11px;border-radius:8px;min-height:36px;display:inline-flex;align-items:center;white-space:nowrap}",
+".gsitebar a:hover{background:rgba(255,255,255,.15)}",
+".gsitebar .gbrand{font-weight:800;letter-spacing:.3px;margin-right:4px}",
+".gsitebar .gbrand b{background:#84cc16;color:#14532d;border-radius:6px;padding:2px 7px;margin-right:7px}",
+".gsitebar .gsp{flex:1}",
+".bar{top:52px!important;border-radius:0 0 14px 14px}",
+".gexp{display:inline-flex;gap:8px;flex-wrap:wrap}",
+".gexp button{font:500 14px -apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:#166534;color:#fff;border:1px solid #166534;border-radius:6px;padding:8px 14px;cursor:pointer;min-height:40px}",
+".gexp button:hover{background:#14532d}",
+"#sprintbar{display:none;z-index:40;background:linear-gradient(90deg,#14532d,#166534);color:#fff;border-radius:14px;padding:12px 16px;margin:0 0 16px;align-items:center;gap:14px;flex-wrap:wrap;box-shadow:0 6px 18px rgba(20,83,45,.3)}",
+"#sprintbar.on{display:flex}",
+"#sprintbar .clk{font:600 26px ui-monospace,Menlo,monospace;color:#a3e635;font-variant-numeric:tabular-nums}",
+"#sprintbar .lab2{font:500 14px ui-monospace,Menlo,monospace;opacity:.9}",
+"#sprintbar button{font:600 14px -apple-system,'Segoe UI',Roboto,Arial,sans-serif;border:none;border-radius:9px;padding:9px 16px;min-height:44px;cursor:pointer;background:#84cc16;color:#14532d}",
+"#sprintbar button.ghost2{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.5)}",
+".card.sprinthide{display:none}",
+"@media(max-width:900px){.gsitebar .gbrand{display:none}}@media(max-width:640px){.gsitebar a{padding:7px 8px;font-size:12px}#sprintbar{margin-bottom:14px}}"
+].join("\n");
+(document.head||document.documentElement).appendChild(st);
+var bar=document.createElement("div");
+bar.className="gsitebar";
+bar.innerHTML='<span class="gbrand"><b>GF</b>Grammar for IELTS Writing</span>'+
+ '<a href="index.html">← All lessons</a><span class="gsp"></span>'+
+ '<a class="gcur" href="gym.html">Paraphrase Gym</a><a href="task1.html">Task 1 Lab</a><a href="mywork.html">My Work</a>';
+document.body.insertBefore(bar,document.body.firstChild);
+/* ---- builders (shared) ---- */
+function crc32(buf){if(!crc32.t){crc32.t=[];for(var n=0;n<256;n++){var c=n;for(var k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;crc32.t[n]=c>>>0}}var c=0xFFFFFFFF;for(var i=0;i<buf.length;i++)c=crc32.t[(c^buf[i])&255]^(c>>>8);return(c^0xFFFFFFFF)>>>0}
+function buildZip(files){var enc=new TextEncoder(),parts=[],central=[],off=0;files.forEach(function(f){var nm=enc.encode(f.name),d=f.data,crc=crc32(d);var h=new DataView(new ArrayBuffer(30));h.setUint32(0,0x04034b50,true);h.setUint16(4,20,true);h.setUint32(14,crc,true);h.setUint32(18,d.length,true);h.setUint32(22,d.length,true);h.setUint16(26,nm.length,true);parts.push(new Uint8Array(h.buffer),nm,d);var cv=new DataView(new ArrayBuffer(46));cv.setUint32(0,0x02014b50,true);cv.setUint16(4,20,true);cv.setUint16(6,20,true);cv.setUint32(16,crc,true);cv.setUint32(20,d.length,true);cv.setUint32(24,d.length,true);cv.setUint16(28,nm.length,true);cv.setUint32(42,off,true);central.push(new Uint8Array(cv.buffer),nm);off+=30+nm.length+d.length});var cdStart=off,cdSize=0;central.forEach(function(u){cdSize+=u.length});var e=new DataView(new ArrayBuffer(22));e.setUint32(0,0x06054b50,true);e.setUint16(8,files.length,true);e.setUint16(10,files.length,true);e.setUint32(12,cdSize,true);e.setUint32(16,cdStart,true);parts.push.apply(parts,central);parts.push(new Uint8Array(e.buffer));return new Blob(parts,{type:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"})}
+function xesc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function docxFromText(title,text){var enc=new TextEncoder();var para=function(s,bold,size){return '<w:p><w:r><w:rPr>'+(bold?'<w:b/>':'')+'<w:sz w:val="'+(size||22)+'"/></w:rPr><w:t xml:space="preserve">'+xesc(s)+'</w:t></w:r></w:p>'};var today=new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});var body=para("Grammar for IELTS Writing — "+title,true,32)+para("Date: "+today,false,20)+para("",false,20);text.split(/\n/).forEach(function(l){body+=para(l,false,24)});var doc='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>'+body+'<w:sectPr/></w:body></w:document>';var ct='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>';var rels='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>';return buildZip([{name:"[Content_Types].xml",data:enc.encode(ct)},{name:"_rels/.rels",data:enc.encode(rels)},{name:"word/document.xml",data:enc.encode(doc)}])}
+function docFromText(title,text){var today=new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});var paras=text.split(/\n/).map(function(l){return '<p style="font-family:Georgia;font-size:12pt">'+xesc(l||' ')+'</p>'}).join('');return new Blob(['<html xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="UTF-8"></head><body><h2 style="font-family:Arial">'+xesc(title)+'</h2><p style="font-family:Arial;color:#666;font-size:11px">'+today+'</p>'+paras+'</body></html>'],{type:"application/msword"})}
+function dl(blob,fname){var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=fname;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},600)}
+/* ---- compile answers text from gym state ---- */
+function allItems(){return T1.map(function(x){return['Guided',x]}).concat(T2.map(function(x){return['Mixed',x]}),T3.map(function(x){return['Paragraph',x]}))}
+function compileText(){
+  var out=['Mixed Grammar Practice (Paraphrase Gym): my answers',''];
+  allItems().forEach(function(pair){var k=pair[0],x=pair[1];var a=(S.text[x.id]||'').trim();if(a){out.push(k+' · '+x.s);out.push('→ '+a);out.push('')}});
+  return out.join('\n');
+}
+/* ---- export buttons ---- */
+var tools=document.querySelector('.tools');
+var wrap=document.createElement("span");wrap.className="gexp";
+var b1=document.createElement("button");b1.type="button";b1.textContent="⬇ Download (.docx)";
+var b2=document.createElement("button");b2.type="button";b2.textContent="⬇ Download (.doc)";
+function grab(){var t=compileText();var has=t.split('\n').length>3;if(!has){var m=document.getElementById('msg');if(m)m.textContent='Nothing to download yet — write some answers first.';return null}return t}
+b1.addEventListener("click",function(){var t=grab();if(t)dl(docxFromText("Paraphrase Gym",t),"paraphrase_gym_my_answers.docx")});
+b2.addEventListener("click",function(){var t=grab();if(t)dl(docFromText("Paraphrase Gym",t),"paraphrase_gym_my_answers.doc")});
+wrap.appendChild(b1);wrap.appendChild(b2);
+tools.insertBefore(wrap,tools.children[1]);
+/* ---- share to My Work ---- */
+var lastSent="";
+setInterval(function(){var t=compileText();if(t===lastSent)return;lastSent=t;
+  if(t.split('\n').length<=3)return;
+  try{var all=JSON.parse(localStorage.getItem("gram_sheets")||"{}");all['mix-state-v1']={title:"Paraphrase Gym (Mixed Practice)",text:t,updated:Date.now()};localStorage.setItem("gram_sheets",JSON.stringify(all))}catch(e){}
+},2000);
+/* ---- SPRINT MODE ---- */
+var sp=document.createElement("div");sp.id="sprintbar";sp.className="on";
+sp.innerHTML='<span class="clk" id="spclk">15:00</span><span class="lab2" id="splab">Sprint: 10 random sentences from Mixed</span><span style="flex:1"></span><button type="button" id="spgo">Start sprint</button><button type="button" class="ghost2" id="spstop" style="display:none">Stop</button>';
+var board=document.getElementById("board");
+board.parentNode.insertBefore(sp,board);
+var sprint={on:false,ids:[],iv:null,left:900};
+function pickIds(){
+  var pool=T2.map(function(x){return x.id});
+  for(var i=pool.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var tmp=pool[i];pool[i]=pool[j];pool[j]=tmp}
+  return pool.slice(0,10);
+}
+function applySprintFilter(){
+  document.querySelectorAll('#board .card').forEach(function(c){
+    c.classList.toggle('sprinthide',sprint.on&&sprint.ids.indexOf(c.dataset.id)===-1);
+  });
+}
+function sprintTick(){
+  sprint.left--;
+  var m=Math.floor(sprint.left/60),s=sprint.left%60;
+  document.getElementById('spclk').textContent=m+':'+String(s).padStart(2,'0');
+  var doneN=sprint.ids.filter(function(id){return S.done[id]}).length;
+  document.getElementById('splab').textContent='Sprint: '+doneN+' / '+sprint.ids.length+' marked done';
+  if(sprint.left<=0)endSprint(true);
+}
+function endSprint(timeup){
+  clearInterval(sprint.iv);sprint.iv=null;sprint.on=false;
+  var doneN=sprint.ids.filter(function(id){return S.done[id]}).length;
+  document.getElementById('spclk').textContent='15:00';
+  document.getElementById('splab').textContent='Sprint over — you completed '+doneN+' of '+sprint.ids.length+'. '+(timeup?'Exam pace: aim for all 10!':'');
+  document.getElementById('spgo').textContent='Start sprint';
+  document.getElementById('spstop').style.display='none';
+  render();applySprintFilter();
+  alert('Sprint finished!\n\nCompleted: '+doneN+' / '+sprint.ids.length+'\n\n'+(doneN>=8?'Excellent exam pace!':doneN>=5?'Good — keep practising for speed.':'Tough round. Review the models and try another sprint.'));
+}
+document.getElementById('spgo').addEventListener('click',function(){
+  if(sprint.on){return}
+  sprint.on=true;sprint.ids=pickIds();sprint.left=900;
+  S.tab='t2';S.filter='all';persist();render();applySprintFilter();
+  document.getElementById('spgo').textContent='Sprint running…';
+  document.getElementById('spstop').style.display='';
+  document.getElementById('splab').textContent='Sprint: 0 / '+sprint.ids.length+' marked done';
+  sprint.iv=setInterval(sprintTick,1000);
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+document.getElementById('spstop').addEventListener('click',function(){endSprint(false)});
+/* re-apply filter after every render (tab/filter clicks call render) */
+var origRender=render;
+render=function(){origRender();applySprintFilter()};
+})();
+</script>
+
+</body>
+</html>

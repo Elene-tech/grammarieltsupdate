@@ -1,0 +1,720 @@
+<meta charset="UTF-8">
+<title>Concession in Task 2</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap">
+<style>
+/* Layout: exam-paper column on graph paper. Brand green hero band, teal IELTS accent, sticky progress bar with section chips. */
+:root{
+  --bg:#FAF6EE;--surface:#FFFEFA;--fg:#16241C;--muted:#566359;--line:#D8D3C2;--grid:rgba(11,110,117,.07);
+  --band:#1B4332;--band-fg:#F3EFE2;--gold:#C9A84C;--warn:#B8420F;--gold-soft:#F6EBC8;--warn-soft:#FCE9DC;
+  --teal:#0B6E75;--teal-soft:#DCEFEF;--ok:#1E6B43;--ok-bg:#E0F1E6;--bad:#A8261E;--bad-bg:#FBE6E3;--mark:#FFF0B8;
+  --f-d:'Source Serif 4',Georgia,serif;--f-b:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;--f-m:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E1914;--surface:#15241D;--fg:#ECEADD;--muted:#A3B0A7;--line:#2A3C33;--grid:rgba(92,200,206,.07);
+  --band:#0A1F16;--band-fg:#F3EFE2;--gold:#D9BC63;--warn:#FF8A52;--gold-soft:#3E3718;--warn-soft:#4A2A18;
+  --teal:#5CC8CE;--teal-soft:#123A3D;--ok:#7AD7A3;--ok-bg:#17402D;--bad:#FF9088;--bad-bg:#432220;--mark:#4A4217;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1914;--surface:#15241D;--fg:#ECEADD;--muted:#A3B0A7;--line:#2A3C33;--grid:rgba(92,200,206,.07);
+  --band:#0A1F16;--band-fg:#F3EFE2;--gold:#D9BC63;--warn:#FF8A52;--gold-soft:#3E3718;--warn-soft:#4A2A18;
+  --teal:#5CC8CE;--teal-soft:#123A3D;--ok:#7AD7A3;--ok-bg:#17402D;--bad:#FF9088;--bad-bg:#432220;--mark:#4A4217;color-scheme:dark}
+
+*{box-sizing:border-box}
+body{margin:0;background-color:var(--bg);color:var(--fg);font:18px/1.6 var(--f-b);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px}
+.wrap{max-width:960px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-d);text-wrap:balance;line-height:1.2;margin:0}
+p{margin:0 0 .8em}
+.muted{color:var(--muted)}
+.mono{font-family:var(--f-m)}
+
+/* hero */
+.hero{background:var(--band);color:var(--band-fg);border-bottom:4px solid var(--gold);padding-block:36px 30px;position:relative;overflow:hidden}
+.hero::after{content:"despite · although · nevertheless";position:absolute;right:-10px;bottom:-14px;font:500 74px/1 var(--f-m);color:rgba(243,239,226,.06);white-space:nowrap;pointer-events:none}
+.kicker{font:500 12px/1 var(--f-m);letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.hero h1{font-size:clamp(32px,6vw,52px);font-weight:700;margin-bottom:10px}
+.hero .sub{font-size:18px;max-width:34em;margin-bottom:18px;color:#E4E0D0}
+.meta{display:flex;flex-wrap:wrap;gap:8px 18px;list-style:none;margin:0;padding:0;font:400 13px var(--f-m);color:#CFE6E3}
+.meta li::before{content:"";display:inline-block;width:7px;height:7px;background:var(--gold);margin-right:8px}
+
+/* sticky bar */
+.bar{position:static;z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.barin{display:flex;flex-direction:column;gap:6px;padding-block:8px}
+.stats{display:flex;flex-wrap:wrap;align-items:center;gap:4px 18px;font:400 14px var(--f-m)}
+.stats b{font-weight:500;color:var(--teal)}
+.stats .sp{flex:1}
+.pbar{height:4px;background:var(--line);border-radius:2px;overflow:hidden}
+.pbar i{display:block;height:100%;width:0;background:var(--teal);transition:width .3s}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}
+.chip{flex:none;text-decoration:none;color:var(--fg);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:14px;display:flex;gap:6px;align-items:baseline;background:var(--bg)}
+.chip small{font:400 12px var(--f-m);color:var(--muted)}
+.chip.done{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+.chip.done small{color:var(--ok)}
+.chip:focus-visible,.btn:focus-visible,.opt:focus-visible,.segb:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+
+/* sections */
+main{padding-block:10px 60px}
+.sec{padding-block:38px 6px;border-top:1px solid var(--line);scroll-margin-top:110px}
+.sec:first-child{border-top:0}
+.sec-h{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:baseline;margin-bottom:18px}
+.time{font:500 13px var(--f-m);color:var(--teal);border:1px solid var(--teal);padding:2px 8px;border-radius:3px;grid-row:span 2;align-self:start;margin-top:6px}
+.sec-h h2{font-size:30px}
+.lead{grid-column:2;color:var(--muted);margin:0}
+.sec.stretch .time{color:var(--warn);border-color:var(--warn)}
+.ex{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:20px;margin-bottom:22px}
+.ex>h3{font:500 13px/1.3 var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:6px}
+.ex>.task{font-weight:600;margin-bottom:14px}
+.qs{margin:0;padding:0;list-style:none;counter-reset:q;display:flex;flex-direction:column;gap:14px}
+.qs>li{counter-increment:q;display:grid;grid-template-columns:32px 1fr;gap:0 6px;min-width:0}
+.qs>li::before{content:counter(q);font:500 15px/1.9 var(--f-m);color:var(--muted)}
+.qs>li>*{grid-column:2;min-width:0}
+.qp{margin-bottom:8px}
+.wrongs{background:var(--bad-bg);border-radius:4px;padding:1px 6px;text-decoration:line-through;text-decoration-color:var(--bad)}
+.opts{display:grid;gap:6px}
+.opt{text-align:left;font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px 12px;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--teal);background:var(--teal-soft)}
+.opt.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:500}
+.opt.bad{background:var(--bad-bg);border-color:var(--bad);color:var(--bad);opacity:.8}
+.fb{font-size:16px;margin:8px 0 0;padding:7px 10px;border-radius:6px;background:var(--teal-soft)}
+.fb.ok{background:var(--ok-bg);color:var(--ok)}.fb.bad{background:var(--bad-bg);color:var(--bad)}
+.gi{padding:8px 10px;border:1px solid transparent;border-radius:6px}
+.gi.ok{background:var(--ok-bg);border-color:var(--ok)}.gi.bad{background:var(--bad-bg);border-color:var(--bad)}
+.gi .fb{background:transparent;padding:4px 0 0;margin:0;color:inherit}
+select,input[type=text],textarea{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:5px;padding:5px 8px;max-width:100%}
+input[type=text]{border-bottom:2px solid var(--teal);min-height:40px;font-family:var(--f-m);font-size:18px}
+select{min-height:40px}
+textarea{width:100%;resize:vertical;line-height:1.5}
+.hint{font:500 17px var(--f-m);color:var(--warn);background:var(--warn-soft);padding:2px 9px;border-radius:4px;margin-left:8px;white-space:nowrap}
+.btn{font:500 16px var(--f-b);background:var(--teal);color:#fff;border:1px solid var(--teal);border-radius:6px;padding:8px 16px;cursor:pointer}
+:root[data-theme="dark"] .btn{color:#06201f}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn{color:#06201f}}
+.btn.ghost{background:transparent;color:var(--teal)}
+.btn.sm{padding:6px 12px;font-size:15px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:14px}
+.sum{font:400 15px var(--f-m);color:var(--muted)}
+.si textarea{margin:6px 0}
+.plain{margin-bottom:4px}
+.use{display:inline-block;font:500 16px var(--f-m);color:var(--warn);background:var(--warn-soft);padding:3px 11px;border-radius:4px;margin-bottom:6px}
+.model{background:var(--teal-soft);border-radius:6px;padding:12px 14px;margin-top:8px;font-size:17px}
+.model p{margin:0 0 6px}
+.note{font-size:15px;color:var(--muted)}
+.nudge{font-size:15px;color:var(--warn);margin:4px 0 0}
+.rate{display:inline-flex;gap:6px;flex-wrap:wrap}
+
+/* teaching components */
+.map{display:grid;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface);margin-bottom:22px}
+.map div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;padding:10px 14px;border-top:1px solid var(--line)}
+.map div:first-child{border-top:0}
+.map b{font-weight:600}.map span{font:500 16px var(--f-m);color:var(--teal)}
+.tblh{font:500 13px/1.3 var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:22px 0 8px}
+.tbl{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.grp{font:500 13px var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:var(--teal);background:var(--bg);padding:10px 16px;border-top:1px solid var(--line)}
+.grp:first-child{border-top:0}
+.tr{display:grid;grid-template-columns:190px minmax(0,1fr);gap:6px 22px;padding:16px;border-top:1px solid var(--line)}
+.tr>div{min-width:0}
+.tr .st{font:600 20px/1.25 var(--f-d);grid-row:1/span 4}
+.tr .fm{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:4px}
+.tr .fm .c1,.tr .fm .c2{font:500 16px/1.4 var(--f-m);padding:6px 11px;border-radius:6px;color:var(--fg)}
+.tr .fm .c1{background:var(--teal-soft);border:1px solid var(--teal)}
+.tr .fm .c2{background:var(--gold-soft);border:1px solid var(--gold)}
+.tr .fm .sep{font:500 20px var(--f-m);color:var(--muted)}
+.tr .uj{font-size:16px;color:var(--muted)}
+.tr .exs{font-size:17.5px}
+.tr .wo{font-size:16px;color:var(--warn)}
+.tr b{background:var(--mark);font-weight:500;padding:0 2px;border-radius:2px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:15px;margin:0 0 10px}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:6px}
+textarea#sheet{font:400 14px/1.5 var(--f-m);margin-top:8px}
+@media (max-width:760px){
+  .tr{grid-template-columns:1fr}.tr .st{grid-row:auto}
+  .map div{grid-template-columns:1fr;gap:2px}
+  .sec-h{grid-template-columns:1fr}.time{grid-row:auto;justify-self:start;margin:0}.lead{grid-column:1}
+}
+.flip{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:stretch;margin:14px 0 6px}
+.flip>div{padding:12px 14px;border-radius:6px;background:var(--bg);border:1px solid var(--line)}
+.flip small{display:block;font:500 11px var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.flip .ar{display:flex;align-items:center;justify-content:center;border:0;background:none;padding:0;font:500 22px var(--f-m);color:var(--teal)}
+.flip .to{background:var(--teal-soft);border-color:var(--teal)}
+.flip .no{background:var(--bad-bg);border-color:var(--bad)}
+.flip small b{font-weight:500}
+@media (max-width:640px){.flip{grid-template-columns:1fr}.flip .ar{transform:rotate(90deg)}}
+.ladder{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:10px 0 0}
+.ladder>div{border-top:3px solid var(--line);padding:8px 0 0}
+.ladder>div:nth-child(2){border-color:var(--teal)}.ladder>div:nth-child(3){border-color:var(--gold)}
+.ladder small{display:block;font:500 11px var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:640px){.ladder{grid-template-columns:1fr}}
+.steps{margin:10px 0 0;padding-left:1.2em}.steps li{margin-bottom:4px}
+.read{font-family:var(--f-d);font-size:20px;line-height:1.75;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px 20px;margin-bottom:14px}
+.read mark{background:var(--mark);color:var(--fg);padding:1px 2px;border-radius:2px}
+.read .tg{font:500 11px var(--f-m);background:var(--teal);color:#fff;border-radius:3px;padding:0 4px;margin-right:4px;vertical-align:2px}
+:root[data-theme="dark"] .read .tg{color:#06201f}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .read .tg{color:#06201f}}
+.banks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:22px}
+.bank{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px}
+.bank h3{font-size:18px;margin-bottom:8px}
+.bank ul{list-style:none;margin:0;padding:0;font-size:16px}
+.bank li{padding:4px 0;border-top:1px dotted var(--line)}
+.bank li:first-child{border-top:0}
+.bank b{font-weight:600;color:var(--teal)}
+@media (max-width:700px){.banks{grid-template-columns:1fr}}
+.wordbank{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px;padding:10px;border:1px dashed var(--teal);border-radius:6px;font:400 16px var(--f-m)}
+.wordbank span{background:var(--teal-soft);padding:2px 8px;border-radius:4px}
+.seg{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.segb{font:500 15px var(--f-b);background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:999px;padding:5px 14px;cursor:pointer}
+.segb.on{background:var(--teal);border-color:var(--teal);color:#fff}
+:root[data-theme="dark"] .segb.on{color:#06201f}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .segb.on{color:#06201f}}
+.prompt{margin:0 0 10px;padding:10px 14px;background:var(--bg);border-left:3px solid var(--gold);font-family:var(--f-d);font-size:17px}
+.wmeta{display:flex;gap:14px;font:400 15px var(--f-m);margin-top:4px}
+.chk{list-style:none;margin:10px 0 0;padding:0;font-size:16px;display:grid;gap:3px}
+.chk li::before{content:"○";font-family:var(--f-m);margin-right:8px;color:var(--muted)}
+.chk li.y{color:var(--ok)}.chk li.y::before{content:"✓";color:var(--ok)}
+.chk li.w{color:var(--bad)}.chk li.w::before{content:"!";color:var(--bad)}
+.timer{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.clock{font:500 26px var(--f-m);color:var(--warn)}
+.review{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:20px}
+.review ul{margin:8px 0 0;padding-left:1.2em;columns:2;column-gap:28px}
+@media (max-width:600px){.review ul{columns:1}}
+.foot{padding-block:10px 40px;color:var(--muted);font-size:14px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<header class="hero"><div class="wrap">
+  <p class="kicker">Target English · IELTS Grammar · Part 1</p>
+  <h1>Concession in Task 2</h1>
+  <p class="sub">Admit the other side, then win the argument. Five structures that lift a plain Band 6 sentence to Band 7+.</p>
+  <ul class="meta"><li>90 minutes</li><li>Writing Task 2</li><li>Discuss both views · Opinion · Advantages and disadvantages</li></ul>
+</div></header>
+
+<div class="bar"><div class="wrap barin">
+  <div class="stats"><span>Answered <b id="st-a">0/0</b></span><span>Correct first time <b id="st-c">0</b></span><span>Accuracy <b id="st-p">–</b></span><span class="sp"></span><span id="st-s" class="muted"></span><span id="st-save" class="muted"></span></div>
+  <div class="pbar"><i id="bar-f"></i></div>
+  <nav class="chips" id="chips" aria-label="Lesson sections"></nav>
+</div></div>
+
+<main class="wrap">
+
+<section class="sec" id="s-w">
+  <div class="sec-h"><span class="time">0–8 min</span><h2>Warm-up: spot the error</h2><p class="lead">Each sentence has a mistake. Choose the corrected version. This shows you what to watch today.</p></div>
+  <div class="ex"><h3>Choose the correct sentence</h3><ol class="qs" id="m-w"></ol></div>
+</section>
+
+<section class="sec" id="s-i">
+  <div class="sec-h"><span class="time">8–22 min</span><h2>Input: admit one point, argue another</h2><p class="lead">A concession admits the opposite point, then returns to your own argument. Five structures do this job.</p></div>
+  <div class="ex"><h3>Why it matters</h3>
+    <p>Grammatical Range and Accuracy is one of the four Writing criteria. Concession is one of the fastest ways to show range.</p>
+    <div class="flip"><div><small>Band 6</small>I agree <b>or</b> I disagree. No shades.</div><div class="ar">→</div><div class="to"><small>Band 7+</small>I admit the opposite point <b>and</b> argue back.</div></div>
+  </div>
+  <p class="tblh">Reference table: five structures</p>
+  <div class="legend"><span><i style="background:var(--teal-soft);border:1px solid var(--teal)"></i>the point you admit</span><span><i style="background:var(--gold-soft);border:1px solid var(--gold)"></i>your main point</span></div>
+  <div class="tbl" id="tbl"></div>
+  <div class="ex" style="margin-top:22px"><h3>The “this” test</h3>
+    <p>After <b>despite</b> and <b>in spite of</b> you need a noun phrase, not a clause. Put <b>this</b> in its place: <i>Despite this</i> works, <i>Despite he works</i> does not.</p>
+    <div class="flip"><div class="no"><small>Not this</small>Despite technology <b>has changed</b> communication, …</div><div class="ar">→</div><div class="to"><small>This</small>Despite the <b>profound changes</b> brought by technology, …</div></div>
+    <p class="note">An -ing form also works: <i>Despite working long hours, …</i> “Despite the fact that + clause” is correct, but it is long. A noun phrase is shorter and sounds more academic.</p>
+  </div>
+  <div class="ex"><h3>See the upgrade</h3><div id="up"></div></div>
+  <div class="ex"><h3>Sort by structure</h3><p class="task">Which structure does each sentence use?</p><div id="m-i"></div></div>
+</section>
+
+<section class="sec" id="s-p">
+  <div class="sec-h"><span class="time">22–40 min</span><h2>Practice: recognise it, then write it yourself</h2><p class="lead">Five steps: the this-test, choose the word, type the word, combine sentences, turn clauses into noun phrases.</p></div>
+  <div class="ex"><h3>A · The “this” test</h3><p class="task">Is the sentence correct?</p><ol class="qs" id="m-pa"></ol></div>
+  <div class="ex"><h3>B · Choose the best answer</h3><ol class="qs" id="m-pb"></ol></div>
+  <div class="ex"><h3>C · Type the missing word or phrase</h3><p class="task">Write the linking word or words. Sometimes more than one answer is possible.</p><div id="m-pc"></div></div>
+  <div class="ex"><h3>D · Combine the sentences</h3><p class="task">Join each pair into one Band 7+ sentence with the structure shown. Write first, then open the model.</p><div id="m-pd"></div></div>
+  <div class="ex"><h3>E · From clause to noun phrase</h3><p class="task">Rewrite each sentence with <b>Despite</b> or <b>In spite of</b>. Turn the clause into a noun phrase. Tip: copy your three best sentences by hand into your notebook.</p><div id="m-pe"></div></div>
+</section>
+
+<section class="sec" id="s-r">
+  <div class="sec-h"><span class="time">40–55 min</span><h2>Reading: concession at work</h2><p class="lead">Read two model paragraphs. Each highlighted sentence has a letter.</p></div>
+  <div class="ex"><h3>Text 1 · Discuss both views · free university education</h3>
+    <div class="read">Many people argue that university education should be free. <mark><span class="tg">A</span>Despite the high cost to taxpayers, free tuition brings clear benefits for society.</mark> <mark><span class="tg">B</span>Although graduates earn more on average, many talented young people cannot afford to start a degree.</mark> <mark><span class="tg">C</span>While student loans help some families, the debt can follow graduates for decades.</mark> <mark><span class="tg">D</span>Admittedly, fully free education would be expensive. Nevertheless, the long-term gains in skills and fairness would justify the investment.</mark> For these reasons, governments should reduce or remove tuition fees.</div>
+    <p class="task">Which structure is used in each highlighted sentence?</p><div id="m-r1"></div><ol class="qs" id="m-r1q" style="margin-top:14px"></ol></div>
+  <div class="ex"><h3>Text 2 · Opinion · cars in city centres</h3>
+    <div class="read">I believe that cities should limit cars in their centres. <mark><span class="tg">A</span>In spite of the inconvenience for some drivers, cleaner air and quieter streets benefit everyone.</mark> <mark><span class="tg">B</span>Even though shop owners fear losing customers, evidence from several cities suggests that pedestrian areas often increase sales.</mark> <mark><span class="tg">C</span>Whilst people with disabilities must still be able to reach the centre, special permits can solve this problem.</mark> Overall, the advantages clearly outweigh the disadvantages.</div>
+    <p class="task">Which structure is used in each highlighted sentence?</p><div id="m-r2"></div><ol class="qs" id="m-r2q" style="margin-top:14px"></ol></div>
+</section>
+
+<section class="sec" id="s-v">
+  <div class="sec-h"><span class="time">55–70 min</span><h2>Vocabulary: noun phrases for concessions</h2><p class="lead">Despite and in spite of need a noun phrase. Learn these as ready-made chunks.</p></div>
+  <div class="banks" id="banks"></div>
+  <div class="ex"><h3>Use the phrases</h3><p class="task">Complete each sentence with a phrase from the box. One phrase is extra.</p><div class="wordbank" id="wb-v"></div><div id="m-v"></div></div>
+</section>
+
+<section class="sec" id="s-o">
+  <div class="sec-h"><span class="time">70–85 min</span><h2>Production: your own concessions</h2><p class="lead">Write single sentences first, then a short paragraph.</p></div>
+  <div class="ex"><h3>A · Write your own sentence</h3><p class="task">Write one sentence for each topic with the structure shown. Your sentence can be different from the model, so check the structure, not the words.</p><div id="m-oa"></div></div>
+  <div class="ex"><h3>B · Write a paragraph</h3><p class="task">Choose one question. Write 60–90 words and use at least two different concession structures.</p><div id="m-ob"></div></div>
+</section>
+
+<section class="sec" id="s-e">
+  <div class="sec-h"><span class="time">85–90 min</span><h2>Exit ticket</h2><p class="lead">Three quick questions to check what stayed with you.</p></div>
+  <div class="ex"><ol class="qs" id="m-e"></ol></div>
+  <p class="note">Next lesson: Concession Part 2 — That said, Much as, Granted (that), Even if, However + adjective.</p>
+</section>
+
+<section class="sec stretch" id="s-s">
+  <div class="sec-h"><span class="time">Stretch</span><h2>Challenge for fast finishers</h2><p class="lead">Optional. These tasks are harder and are not part of the main score.</p></div>
+  <div class="ex"><h3>S1 · Make it shorter</h3><p class="task">“Despite the fact that + clause” is correct but long. Rewrite each sentence with a noun phrase after Despite.</p><div id="m-s1"></div></div>
+  <div class="ex"><h3>S2 · Find and fix</h3><p class="task">Each sentence has a mistake. Write the corrected version.</p><div id="m-s2"></div></div>
+  <div class="ex"><h3>S3 · Use a semicolon</h3><p class="task">Join each pair with <span class="mono">Admittedly …; nevertheless, …</span> in one sentence.</p><div id="m-s3"></div></div>
+  <div class="ex"><h3>S4 · Ten-minute paragraph</h3><div id="m-s4"></div></div>
+</section>
+
+<section class="sec" id="s-x">
+  <div class="sec-h"><span class="time">Review</span><h2>Your review</h2><p class="lead">Questions you missed on the first try appear here. Go back to them next lesson.</p></div>
+  <div class="review"><div id="rv"></div>
+  <p style="margin-top:18px"><b>My answers sheet.</b> <span class="muted">Everything you typed, in one place. Copy it and paste it into the Kwiga task or keep it for your notes.</span></p>
+  <textarea id="sheet" rows="10" readonly aria-label="My answers sheet"></textarea>
+  <div class="actions"><button class="btn" type="button" id="copysheet">Copy my answers</button><button class="btn ghost" type="button" id="reset">Start again</button><span class="sum" id="sheet-s"></span></div></div>
+</section>
+
+<p class="foot">Target English · Lesson on Concession (Part 1). Your answers stay in this page only.</p>
+</main>
+
+<script>
+(function(){
+const $=s=>document.querySelector(s);
+const SECS=[['w','Warm-up','0–8'],['i','Input','8–22'],['p','Practice','22–40'],['r','Reading','40–55'],['v','Vocabulary','55–70'],['o','Production','70–85'],['e','Exit','85–90']];
+function hs(str){let x=1779033703^str.length;for(let i=0;i<str.length;i++){x=Math.imul(x^str.charCodeAt(i),3432918353);x=x<<13|x>>>19}return x>>>0}
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function shuf(arr,key){const r=rng(hs(key));const a=arr.map((v,i)=>[v,i]);for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+const nm=s=>s.toLowerCase().replace(/[’‘]/g,"'").replace(/n't\b/g," not").replace(/[.,;!?]+$/,'').replace(/\s+/g,' ').trim();
+const ST={},MQ={},GB={},SB={},WB={};
+const KEY='conc-state-v1';
+const EMPTY=()=>({first:{},vals:{},mcq:{},shown:{},rated:{},checked:{},pi:{}});
+let SAVE=EMPTY();const PR={};let svT=null;
+function loadSave(){try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x&&x.first)SAVE=Object.assign(EMPTY(),x)}catch(e){}}
+function persist(){clearTimeout(svT);svT=setTimeout(()=>{let ok=true;try{localStorage.setItem(KEY,JSON.stringify(SAVE))}catch(e){ok=false}const el=$('#st-save');if(el)el.textContent=ok?'Saved on this device ✓':'Auto-save is off here. Use “Copy my answers” at the end.'},250)}
+function reg(id,sec,label){ST[id]={sec,label,first:null}}
+function rec(id,ok){if(ST[id]&&ST[id].first===null){ST[id].first=ok;SAVE.first[id]=ok;persist()}refresh()}
+const strip=x=>x.replace(/<[^>]+>/g,'').replace('___','…');
+function mcqApply(q,i,good){const M=MQ[q],li=document.getElementById(q),o=li.querySelector('.opt[data-i="'+i+'"]'),fb=li.querySelector('.fb');if(!o)return;fb.hidden=false;
+  if(good){li.dataset.done=1;o.classList.add('ok');li.querySelectorAll('.opt').forEach(b=>b.disabled=true);fb.className='fb ok';fb.innerHTML='<b>Correct.</b> '+M.e}
+  else{o.classList.add('bad');o.disabled=true;fb.className='fb bad';fb.textContent='Not quite. Try another option.'}}
+function rateText(id,good){const f=$('#r-'+id);f.hidden=false;f.className='fb '+(good?'ok':'bad');f.textContent=good?'Good. Keep this pattern for your essay.':'Compare each part with the model, then try the sentence again.'}
+function restore(){
+  Object.keys(SAVE.first).forEach(id=>{if(ST[id])ST[id].first=SAVE.first[id]});
+  Object.keys(SAVE.vals).forEach(id=>{const el=document.getElementById(id);if(el)el.value=SAVE.vals[id]});
+  Object.keys(SAVE.mcq).forEach(q=>{if(!MQ[q]||!document.getElementById(q))return;const sv=SAVE.mcq[q];sv.w.forEach(i=>mcqApply(q,i,false));if(sv.d)mcqApply(q,MQ[q].c,true)});
+  Object.keys(SAVE.checked).forEach(b=>{if(GB[b])checkGap(b)});
+  Object.keys(SAVE.shown).forEach(id=>{const m=$('#m-'+id);if(m){m.hidden=false;const b=document.querySelector('[data-show="'+id+'"]');if(b)b.hidden=true}});
+  Object.keys(SAVE.rated).forEach(id=>{if($('#r-'+id))rateText(id,String(SAVE.rated[id])==='1')});
+  Object.keys(WB).forEach(b=>{const pi=SAVE.pi[b]||0;WB[b].pi=pi;const wp=$('#wp-'+b);if(wp&&WB[b].cfg.prompts[pi])wp.innerHTML=WB[b].cfg.prompts[pi].t;document.querySelectorAll('[data-wpick="'+b+'"]').forEach(x=>x.classList.toggle('on',+x.dataset.i===pi));updW(b)});
+}
+function refreshSheet(){const ta=$('#sheet');if(!ta)return;const out=['Concession in Task 2: my answers',''];
+  Object.entries(ST).forEach(([id,v])=>{const c=document.getElementById('c-'+id)||document.getElementById('w-'+id);if(!c||!c.value.trim())return;out.push(v.label+': '+(PR[id]?PR[id]+'\n   → ':'')+c.value.trim())});
+  ta.value=out.join('\n')}
+
+/* ---------- builders ---------- */
+function mcq(id,sec,label,prompt,opts,ci,exp){
+  reg(id,sec,label);MQ[id]={c:ci,e:exp};
+  const o=shuf(opts,id).map(([t,i])=>`<button class="opt" type="button" data-q="${id}" data-i="${i}">${t}</button>`).join('');
+  return `<li id="${id}"><p class="qp">${prompt}</p><div class="opts">${o}</div><p class="fb" hidden></p></li>`;
+}
+function gapBlock(bid,sec,lab,items,o){
+  GB[bid]={items,mode:o.mode};
+  const lis=items.map((it,n)=>{
+    const id=`${bid}-${n+1}`;reg(id,sec,`${lab} ${n+1}`);PR[id]=strip(it.s);
+    let ctl;
+    if(o.mode==='select'){
+      const opts=o.bank||shuf(it.opts,id).map(x=>x[0]);
+      ctl=`<select id="c-${id}" aria-label="Answer ${n+1}"><option value="">choose</option>${opts.map(x=>`<option>${x}</option>`).join('')}</select>`;
+    }else ctl=`<input id="c-${id}" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" size="${it.w||11}" aria-label="Answer ${n+1}">`;
+    ctl+=it.h?`<span class="hint">${it.h}</span>`:'';
+    const body=it.s.includes('___')?it.s.replace('___',ctl):`<p class="qp">${it.s}</p>${ctl}`;
+    return `<li class="gi" id="li-${id}"><div>${body}</div><p class="fb" id="f-${id}" hidden></p></li>`;
+  }).join('');
+  return `<ol class="qs">${lis}</ol><div class="actions"><button class="btn" type="button" data-check="${bid}">Check answers</button><span class="sum" id="sum-${bid}"></span></div>`;
+}
+function checkGap(bid){
+  const B=GB[bid];let ok=0,att=0;SAVE.checked[bid]=1;persist();
+  B.items.forEach((it,n)=>{
+    const id=`${bid}-${n+1}`,c=$('#c-'+id),v=c.value.trim(),li=$('#li-'+id),f=$('#f-'+id);
+    if(!v){li.className='gi';f.hidden=true;return}
+    att++;const acc=[].concat(it.a);
+    const good=B.mode==='select'?acc.includes(v):acc.map(nm).includes(nm(v));
+    if(good)ok++;
+    li.className='gi '+(good?'ok':'bad');f.hidden=false;
+    f.innerHTML=good?`<b>Correct.</b> ${it.e||''}`:`Answer: <b>${acc[0]}</b>. ${it.e||''}`;
+    rec(id,good);
+  });
+  $('#sum-'+bid).textContent=att?`${ok} of ${att} correct`:'Answer at least one question first.';
+}
+function selfBlock(bid,sec,lab,items){
+  const lis=items.map((it,n)=>{
+    const id=`${bid}-${n+1}`;reg(id,sec,`${lab} ${n+1}`);SB[id]=1;PR[id]=strip(it.p);
+    return `<li class="si" id="li-${id}"><div><p class="plain">${it.p}</p>${it.t?`<p class="use">Use: ${it.t}</p>`:''}
+      <textarea id="c-${id}" rows="2" data-d="${id}" placeholder="Write your sentence here" aria-label="Your sentence ${n+1}"></textarea>
+      <p class="nudge" id="n-${id}" hidden>Write your own version first, then compare it with the model.</p>
+      <button class="btn ghost sm" type="button" data-show="${id}">Show the model</button>
+      <div class="model" id="m-${id}" hidden><p><b>Model:</b> ${it.m}</p>${it.n?`<p class="note">${it.n}</p>`:''}
+      <p>Your sentence can be different from the model. Does it use the right structure correctly?</p><span class="rate"><button class="btn sm" type="button" data-rate="${id}" data-v="1">Yes, mine works</button><button class="btn sm ghost" type="button" data-rate="${id}" data-v="0">No, I need more practice</button></span><p class="fb" id="r-${id}" hidden></p></div></div></li>`;
+  }).join('');
+  return `<ol class="qs">${lis}</ol>`;
+}
+const NAMES={despite:'Despite',inspite:'In spite of',although:'Although / Even though',while:'While / Whilst',admittedly:'Admittedly … Nevertheless'};
+function detect(t){
+  const x=t.replace(/\r/g,'');
+  const words=(x.trim().match(/\S+/g)||[]).length,s=new Set();
+  if(/\bdespite\b/i.test(x))s.add('despite');
+  if(/\bin spite\b/i.test(x))s.add('inspite');
+  if(/\b(although|even though|though)\b/i.test(x))s.add('although');
+  if(/\bwhil(e|st)\b/i.test(x))s.add('while');
+  if(/\badmittedly\b/i.test(x))s.add('admittedly');
+  const warns=[];
+  if(/\bdespite of\b/i.test(x))warns.push('Say Despite or In spite of. Never “despite of”.');
+  if(/\bin spite (?!of\b)/i.test(x))warns.push('The phrase is in spite of (three words).');
+  if(/\b(despite|in spite of)\s+(i|you|he|she|it|we|they|there)\s+\w+/i.test(x))warns.push('After Despite / In spite of use a noun phrase, not a clause. Test: Despite THIS.');
+  if(/\b(although|even though|though)\b[^.?!]*,\s*(but|however|yet)\b/i.test(x))warns.push('Do not add but, however or yet after Although / Even though.');
+  if(/\badmittedly\b[^.?!;]*,\s*(nevertheless|however|nonetheless)\b/i.test(x))warns.push('Use a full stop or a semicolon before Nevertheless / However, not a comma.');
+  return{words,s,warns};
+}
+function writeBlock(bid,sec,lab,cfg){
+  WB[bid]={cfg,pi:0};reg(bid,sec,lab);
+  const seg=cfg.prompts.length>1?`<div class="seg">${cfg.prompts.map((p,i)=>`<button class="segb${i?'':' on'}" type="button" data-wpick="${bid}" data-i="${i}">${p.tab}</button>`).join('')}</div>`:'';
+  return `<div id="wb-${bid}">${seg}<blockquote class="prompt" id="wp-${bid}">${cfg.prompts[0].t}</blockquote>
+  ${cfg.timer?`<div class="timer"><span id="wt-${bid}" class="clock">10:00</span><button class="btn ghost sm" type="button" data-wtimer="${bid}">Start timer</button></div>`:''}
+  <textarea id="w-${bid}" data-w="${bid}" rows="8" placeholder="Write your paragraph here" aria-label="Your paragraph"></textarea>
+  <div class="wmeta"><span id="wc-${bid}">0 words</span><span class="muted">target ${cfg.min}–${cfg.max}</span><span class="muted" id="wf2-${bid}"></span></div>
+  <ul class="chk" id="wk-${bid}"></ul>
+  <div class="actions"><button class="btn" type="button" data-wcheck="${bid}">Check my paragraph</button><button class="btn ghost" type="button" data-wcopy="${bid}">Copy text</button><button class="btn ghost" type="button" data-wmodel="${bid}">Show a model</button><span class="sum" id="ws-${bid}"></span></div>
+  <div class="model" id="wm-${bid}" hidden></div>
+  <p class="note" style="margin-top:10px">Copy your paragraph and paste it into the writing task that follows this lesson, so your teacher can give feedback.</p></div>`;
+}
+function updW(bid){
+  const c=WB[bid].cfg,t=$('#w-'+bid).value,d=detect(t);
+  $('#wc-'+bid).textContent=d.words+' words';
+  const found=[...d.s].map(k=>NAMES[k]).join(', ');
+  $('#wf2-'+bid).textContent=found?'found: '+found:'';
+  const L=[[d.words>=c.min,`At least ${c.min} words`]];
+  if(c.req){c.req.forEach(r=>L.push([r.k.some(k=>d.s.has(k)),r.l]))}
+  else L.push([[...d.s].length>=2,'At least two different concession structures']);
+  const rows=L.map(([y,l])=>`<li class="${y?'y':''}">${l}</li>`);
+  if(d.warns.length)rows.push(`<li class="w">${d.warns[0]}</li>`);else if(d.words>5)rows.push('<li class="y">No common mistakes found</li>');
+  $('#wk-'+bid).innerHTML=rows.join('');
+  return{d,L};
+}
+
+/* ---------- content ---------- */
+const STRUCT=['Admittedly … Nevertheless','Although / Even though','Despite','In spite of','While / Whilst'];
+const TBL=[
+ ['Concession with a noun phrase'],
+ ['Despite','Despite + noun phrase, main clause','Admit a counter-argument briefly at the start of the sentence','<b>Despite</b> the rising cost of tuition fees, more students than ever are choosing to go to university.','After despite use a noun phrase. Test: Despite THIS. Never “despite of”.'],
+ ['In spite of','In spite of + noun phrase, main clause','Same job, more formal. Use it when despite has already appeared','<b>In spite of</b> repeated public health campaigns, smoking rates among teenagers remain stubbornly high.','Three words: in spite of. Never “in spite” and never “despite of”. Noun phrase only.'],
+ ['Concession with a clause'],
+ ['Although / Even though','Although / Even though + clause, main clause','Keep a full clause as it is. Even though sounds stronger','<b>Even though</b> most schools now offer some digital literacy training, many students still struggle to identify misleading information online.','Needs a subject and a verb. Do not add but or however in the main clause. Even though = a true fact. Even if = a possibility.'],
+ ['While / Whilst','While / Whilst + clause, main clause','Set two ideas side by side, softly','<b>While</b> a university degree can open doors, it no longer guarantees a stable career.','While can also mean “at the same time”. If the meaning is unclear, use although.'],
+ ['Two-step concession'],
+ ['Admittedly … Nevertheless','Admittedly + clause | Nevertheless + clause','Admit a strong point from the other side, then return to your own. Good before a conclusion','<b>Admittedly</b>, working from home can blur the line between personal and professional life. <b>However</b>, for many parents, it has made balancing a career and family life far more manageable.','Two separate sentences: full stop (or semicolon) before Nevertheless. Never a comma. The point you admit must be a real argument.']
+];
+const UP=[
+ ['Despite','Remote working offers clear benefits for employees. However, many still report feeling isolated from their colleagues.','Despite its clear benefits for employees, remote working often leaves people feeling isolated from their colleagues.'],
+ ['In spite of','Cities have invested heavily in public transport. Even so, traffic congestion keeps getting worse.','In spite of heavy investment in public transport, traffic congestion in most cities continues to worsen.'],
+ ['Although','Social media connects people around the world. It can also make users feel more isolated.','Although social media connects people across the world, it can leave users feeling more isolated than ever.'],
+ ['While','Public transport in the capital has improved. It’s still unreliable in smaller towns.','While public transport in the capital has improved considerably, services in smaller towns remain unreliable.'],
+ ['Admittedly … Nevertheless','Online learning is convenient. But it doesn’t suit every student.','Admittedly, online learning offers a level of flexibility that traditional classrooms cannot match. Nevertheless, it does not suit every type of learner, particularly those who need face-to-face support.']
+];
+const BANKS=[
+ ['Technology',[['widespread use of smartphones','many people use them'],['growing dependence on technology','needing it more and more'],['online privacy risks','dangers for personal data'],['misleading information','false or unclear news'],['improved digital skills','better computer and internet skills'],['widespread concern about screen time','many people worry about it']]],
+ ['Work and education',[['rising tuition fees','university costs going up'],['job insecurity','fear of losing a job'],['the long working hours','many hours at work'],['work–life balance','time for work and for life'],['their high qualifications','their degrees and certificates'],['tough competition for places','many people, few places']]],
+ ['Cities and environment',[['traffic congestion','too many vehicles on the road'],['strict traffic regulations','tough rules for drivers'],['heavy investment in public transport','a lot of money spent on it'],['growing awareness of climate change','more people understand it'],['the rapid growth of online shopping','shopping online increasing fast'],['plastic waste','used plastic rubbish']]]
+];
+function build(){
+  Object.keys(ST).forEach(k=>delete ST[k]);
+  /* warm-up */
+  const W=[
+   ['Despite technology has changed communication, face-to-face contact still matters.',['Despite the rise of technology, face-to-face contact still matters.','Despite technology has changed communication, face-to-face contact still matters.','Despite of the rise of technology, face-to-face contact still matters.'],'After despite use a noun phrase: <b>Despite the rise of technology</b>. Test: Despite THIS.'],
+   ['In spite the high prices, many people still buy brand-name clothes.',['In spite of the high prices, many people still buy brand-name clothes.','In spite the high prices, many people still buy brand-name clothes.','Despite of the high prices, many people still buy brand-name clothes.'],'The phrase has three words: <b>in spite of</b>.'],
+   ['Although the government has promised new homes, but prices keep rising.',['Although the government has promised new homes, prices keep rising.','Although the government has promised new homes, but prices keep rising.','Although the government has promised new homes, however prices keep rising.'],'Do not add <b>but</b> or <b>however</b> in the main clause after although.'],
+   ['Although the high cost of living, many young people move to big cities.',['Despite the high cost of living, many young people move to big cities.','Although the high cost of living, many young people move to big cities.','Although despite the high cost of living, many young people move to big cities.'],'Although needs a clause. A noun phrase needs <b>despite</b>.'],
+   ['Admittedly, online learning is flexible, nevertheless it does not suit everyone.',['Admittedly, online learning is flexible. Nevertheless, it does not suit everyone.','Admittedly, online learning is flexible, nevertheless it does not suit everyone.','Admittedly, online learning is flexible nevertheless, it does not suit everyone.'],'Use a full stop (or semicolon) before <b>Nevertheless</b>, never a comma.'],
+   ['In spite of the city has invested heavily in transport, congestion is getting worse.',['In spite of heavy investment in transport, congestion is getting worse.','In spite of the city has invested heavily in transport, congestion is getting worse.','In spite of that the city has invested heavily in transport, congestion is getting worse.'],'After in spite of use a noun phrase: <b>heavy investment in transport</b>.']
+  ];
+  $('#m-w').innerHTML=W.map((w,i)=>mcq('w'+(i+1),'w','Warm-up '+(i+1),`<span class="wrongs">${w[0]}</span><br>Choose the correct version.`,w[1],0,w[2])).join('');
+  /* input */
+  const fmt=f=>{const bar=f.indexOf(' | ');if(bar>=0)return `<span class="c1">${f.slice(0,bar)}</span><span class="sep">.</span><span class="c2">${f.slice(bar+3)}</span>`;const i=f.indexOf(', ');return i<0?`<span class="c1">${f}</span>`:`<span class="c1">${f.slice(0,i)}</span><span class="sep">,</span><span class="c2">${f.slice(i+2)}</span>`};
+  $('#tbl').innerHTML=TBL.map(r=>r.length===1?`<div class="grp">${r[0]}</div>`:`<div class="tr"><div class="st">${r[0]}</div><div class="fm">${fmt(r[1])}</div><div class="uj"><strong>Use it to:</strong> ${r[2]}</div><div class="exs">${r[3]}</div><div class="wo"><strong>Watch out:</strong> ${r[4]}</div></div>`).join('');
+  $('#up').innerHTML=UP.map(u=>`<div class="flip"><div><small>Band 5–6</small>${u[1]}</div><div class="ar">→</div><div class="to"><small>Band 7+ · ${u[0]}</small>${u[2]}</div></div>`).join('');
+  $('#m-i').innerHTML=gapBlock('i','i','Sort',[
+   {s:'“Despite growing public awareness of climate change, many governments continue to subsidise fossil fuels.”',a:'Despite',e:'A noun phrase follows despite.'},
+   {s:'“In spite of the obvious risks, many young people continue to share personal information online without a second thought.”',a:'In spite of',e:'A noun phrase follows in spite of.'},
+   {s:'“Although the government has promised to build more affordable housing, prices in major cities keep rising.”',a:'Although / Even though',e:'A full clause follows although.'},
+   {s:'“Whilst tourism brings valuable income to coastal towns, it also places serious strain on local infrastructure.”',a:'While / Whilst',e:'Whilst + clause: a soft contrast.'},
+   {s:'“Admittedly, nuclear power produces far lower emissions than fossil fuels. Nevertheless, the problem of long-term radioactive waste storage remains unresolved.”',a:'Admittedly … Nevertheless',e:'Two sentences: admit a point, then argue back.'},
+   {s:'“Despite their low running costs, electric cars remain out of reach for many families.”',a:'Despite',e:'<b>Their low running costs</b> is a noun phrase.'},
+   {s:'“In spite of a shortage of nurses, the hospital has kept all of its departments open.”',a:'In spite of',e:'<b>A shortage of nurses</b> is a noun phrase.'},
+   {s:'“Even though the exam is stressful, most students agree that it is fair.”',a:'Although / Even though',e:'<b>The exam is stressful</b> is a full clause.'},
+   {s:'“While remote work saves commuting time, it can weaken team spirit.”',a:'While / Whilst',e:'While + clause, then the main point.'},
+   {s:'“Admittedly, fast food is cheap and convenient. However, it is a major cause of obesity.”',a:'Admittedly … Nevertheless',e:'However can replace Nevertheless.'}
+  ],{mode:'select',bank:STRUCT});
+  /* practice A: this test */
+  const PA=[
+   ['Despite the heavy investment in schools, results have not improved.',0,'Noun phrase: <b>the heavy investment in schools</b>. Despite THIS works.'],
+   ['Despite the investment in schools was heavy, results have not improved.',1,'A clause (<i>the investment was heavy</i>) cannot follow despite. Use although, or a noun phrase.'],
+   ['Despite working long hours, many nurses earn low salaries.',0,'An -ing form works after despite.'],
+   ['Despite many nurses work long hours, they earn low salaries.',1,'A clause follows despite. Use <b>Although</b> or <b>Despite working long hours</b>.'],
+   ['Despite of the high prices, people keep buying new phones.',1,'Never “despite of”. Say <b>despite</b> or <b>in spite of</b>.'],
+   ['Despite its low price, the product sold badly.',0,'<b>Its low price</b> is a noun phrase.']
+  ];
+  $('#m-pa').innerHTML=PA.map((q,i)=>mcq('pa'+(i+1),'p','A'+(i+1),`<i>${q[0]}</i>`,['Correct','Wrong'],q[1],q[2])).join('');
+  const PB=[
+   ['___ the high cost of living, many young people still move to big cities.',['Despite','Although','While','Admittedly'],'A noun phrase follows: <b>the high cost of living</b>. Test: Despite THIS.'],
+   ['___ the city has invested heavily in public transport, congestion keeps growing.',['Although','Despite','In spite of','Nevertheless'],'A full clause (subject + verb) follows, so use <b>Although</b>.'],
+   ['In spite ___ repeated warnings, many drivers still use their phones.',['of','for','to','with'],'The phrase is <b>in spite of</b>.'],
+   ['Despite ___, many students still prefer paper books.',['the popularity of tablets','tablets are popular','that tablets are popular','of tablets popular'],'After despite: a noun phrase, <b>the popularity of tablets</b>.'],
+   ['___ cycling is cheap and healthy, it is not safe on many busy roads.',['While','Despite','In spite of','Nevertheless'],'While + clause: a soft contrast between two ideas.'],
+   ['Admittedly, cars are convenient. ___, they cause serious air pollution.',['Nevertheless','Although','Despite','While'],'Nevertheless starts a new sentence. Although and while join clauses inside one sentence.']
+  ];
+  let h=PB.map((q,i)=>mcq('pb'+(i+1),'p','B'+(i+1),q[0].replace('___','<b>______</b>'),q[1],0,q[2])).join('');
+  h+=mcq('pb7','p','B7','Which sentence is correct?',['Although fuel prices have risen, many people still drive to work.','Although fuel prices have risen, but many people still drive to work.','Despite fuel prices have risen, many people still drive to work.'],0,'Although + full clause, and no but in the main clause.');
+  h+=mcq('pb8','p','B8','Which sentence is correct?',['In spite of strict laws, illegal dumping remains a serious problem.','Despite of strict laws, illegal dumping remains a serious problem.','In spite of strict laws exist, illegal dumping remains a serious problem.'],0,'In spite of + noun phrase. Never “despite of”.');
+  $('#m-pb').innerHTML=h;
+  /* practice C typed */
+  const CONJ=['although','even though','while','whilst'];
+  $('#m-pc').innerHTML=gapBlock('pc','p','C',[
+   {s:'___ rising prices, demand for electric cars keeps growing.',h:'(+ noun phrase)',a:['Despite','In spite of'],w:10,e:'Noun phrase: <b>rising prices</b>.'},
+   {s:'___ many people dislike commuting, remote work does not suit everyone.',h:'(+ clause)',a:['Although','Even though','While','Whilst'],w:10,e:'A full clause follows. Although, even though and while all work.'},
+   {s:'In spite ___ the risks of overwork, many employees refuse to take holidays.',h:'(one word)',a:'of',w:4,e:'In spite <b>of</b>.'},
+   {s:'Admittedly, electric cars are expensive to buy. ___, they are cheaper to run.',h:'(linking word)',a:['Nevertheless','However','Nonetheless'],w:12,e:'A new sentence that returns to your main point.'},
+   {s:'___ some jobs pay very well, they often leave little time for family life.',h:'(+ clause)',a:['Although','Even though','While','Whilst'],w:10,e:'A full clause follows.'},
+   {s:'___ solar panels are expensive to install, they pay for themselves within a few years.',h:'(+ clause)',a:['Although','Even though','While','Whilst'],w:10,e:'A full clause follows.'}
+  ],{mode:'type'});
+  $('#m-pd').innerHTML=selfBlock('pd','p','D',[
+   {p:'Renewable energy is becoming cheaper every year. It still makes up a small share of global energy production.',t:'Although / Even though',m:'<b>Although</b> renewable energy is becoming cheaper every year, it still makes up only a small share of global energy production.'},
+   {p:'Many people are fully aware of the health risks linked to a poor diet. Fast food consumption keeps rising.',t:'Despite + noun phrase',m:'<b>Despite</b> widespread awareness of the health risks linked to a poor diet, fast food consumption keeps rising.',n:'Turn “are aware” into the noun phrase “awareness of”.'},
+   {p:'City life offers far more job opportunities. Many people report feeling lonelier there than in the countryside.',t:'While / Whilst',m:'<b>While</b> city life offers far more job opportunities, many people report feeling lonelier there than in the countryside.'},
+   {p:'Cities have built more cycle lanes. Many people still drive to work.',t:'In spite of + noun phrase',m:'<b>In spite of</b> the new cycle lanes built in many cities, many people still drive to work.'},
+   {p:'Online shopping is very convenient. It harms small local businesses.',t:'Admittedly … Nevertheless',m:'<b>Admittedly</b>, online shopping is very convenient. <b>Nevertheless</b>, it harms small local businesses.',n:'Two sentences. Full stop before Nevertheless.'},
+   {p:'Schools teach digital skills. Many students still believe fake news.',t:'Even though',m:'<b>Even though</b> schools teach digital skills, many students still believe fake news.'},
+   {p:'Young people use social media for many hours a day. They say they feel lonely.',t:'Despite + noun phrase',m:'<b>Despite</b> their many hours on social media each day, young people say they feel lonely.',n:'An -ing form also works: Despite spending many hours on social media …'},
+   {p:'Public libraries offer free books and internet. Fewer people visit them every year.',t:'In spite of + noun phrase',m:'<b>In spite of</b> the free books and internet they offer, fewer people visit public libraries every year.'}
+  ]);
+  $('#m-pe').innerHTML=selfBlock('pe','p','E',[
+   {p:'Although prices have risen sharply, demand has not fallen.',t:'Despite',m:'<b>Despite</b> the sharp rise in prices, demand has not fallen.',n:'prices have risen sharply → the sharp rise in prices'},
+   {p:'Even though unemployment has fallen, many graduates cannot find jobs.',t:'Despite',m:'<b>Despite</b> the fall in unemployment, many graduates cannot find jobs.'},
+   {p:'Although the government has spent more on health care, waiting lists keep growing.',t:'In spite of',m:'<b>In spite of</b> increased government spending on health care, waiting lists keep growing.'},
+   {p:'Although many people use public transport, car ownership is also rising.',t:'In spite of',m:'<b>In spite of</b> the widespread use of public transport, car ownership is also rising.'},
+   {p:'Although the company is growing quickly, it still loses money.',t:'Despite',m:'<b>Despite</b> its rapid growth, the company still loses money.'},
+   {p:'Although smoking is banned in public places, many teenagers still smoke.',t:'Despite',m:'<b>Despite</b> the ban on smoking in public places, many teenagers still smoke.'}
+  ]);
+  /* reading */
+  const RK=(id,items)=>gapBlock(id,'r','Reading '+id.slice(1),items,{mode:'select',bank:STRUCT});
+  $('#m-r1').innerHTML=RK('r1',[
+   {s:'Sentence A: “Despite the high cost to taxpayers …”',a:'Despite',e:'A noun phrase follows despite.'},
+   {s:'Sentence B: “Although graduates earn more on average …”',a:'Although / Even though',e:'A full clause follows although.'},
+   {s:'Sentence C: “While student loans help some families …”',a:'While / Whilst',e:'While + clause.'},
+   {s:'Sentence D: “Admittedly, fully free education would be expensive. Nevertheless …”',a:'Admittedly … Nevertheless',e:'Two sentences: admit, then argue back.'}
+  ]);
+  $('#m-r1q').innerHTML=mcq('r1q','r','Reading 1 (job)','In sentence D, what does <b>Nevertheless</b> do?',['It returns to the writer’s main argument after admitting a point','It adds another example','It introduces the conclusion about cost'],0,'The writer admits that free education is expensive, then <b>Nevertheless</b> returns to the main argument.');
+  $('#m-r2').innerHTML=RK('r2',[
+   {s:'Sentence A: “In spite of the inconvenience for some drivers …”',a:'In spite of',e:'A noun phrase follows in spite of.'},
+   {s:'Sentence B: “Even though shop owners fear losing customers …”',a:'Although / Even though',e:'A full clause follows even though.'},
+   {s:'Sentence C: “Whilst people with disabilities must still be able to reach the centre …”',a:'While / Whilst',e:'Whilst + clause.'}
+  ]);
+  $('#m-r2q').innerHTML=mcq('r2q','r','Reading 2 (concession)','In sentence A, which part is the point the writer <b>admits</b>?',['the inconvenience for some drivers','cleaner air and quieter streets','benefit everyone'],0,'The admitted point comes after <b>In spite of</b>. The main point comes after the comma.');
+  /* vocabulary */
+  $('#banks').innerHTML=BANKS.map(b=>`<div class="bank"><h3>${b[0]}</h3><ul>${b[1].map(x=>`<li><b>${x[0]}</b><br><span class="muted">${x[1]}</span></li>`).join('')}</ul></div>`).join('');
+  const VB=['growing awareness of climate change','heavy investment in public transport','improved digital skills','rising tuition fees','strict traffic regulations','the long working hours','the rapid growth of online shopping','their high qualifications','tough competition for places','widespread concern about screen time'];
+  $('#wb-v').innerHTML=VB.map(x=>`<span>${x}</span>`).join('');
+  $('#m-v').innerHTML=gapBlock('v','v','Vocabulary',[
+   {s:'Despite ___, many universities report a record number of applications.',a:'rising tuition fees',e:'Costs go up, yet students still apply.'},
+   {s:'In spite of ___, many people still prefer local markets.',a:'the rapid growth of online shopping',e:'Online shopping grows, yet markets stay popular.'},
+   {s:'Despite ___, air quality in many large cities is still poor.',a:'strict traffic regulations',e:'Rules exist, yet the air is still poor.'},
+   {s:'Despite ___, global emissions are still rising.',a:'growing awareness of climate change',e:'People understand more, yet emissions rise.'},
+   {s:'In spite of ___, many rural areas still have poor bus services.',a:'heavy investment in public transport',e:'Money is spent, yet rural buses are poor.'},
+   {s:'Despite ___, many parents allow young children to use tablets for hours.',a:'widespread concern about screen time',e:'Parents worry, yet children still use tablets.'},
+   {s:'In spite of ___, many nurses love their work.',a:'the long working hours',e:'The hours are long, yet nurses love the job.'},
+   {s:'Despite ___, many teenagers are still unable to spot fake news.',a:'improved digital skills',e:'Skills improve, yet fake news still works.'},
+   {s:'In spite of ___, many young graduates struggle to find stable jobs.',a:'their high qualifications',e:'They are well qualified, yet jobs are hard to find.'}
+  ],{mode:'select',bank:VB});
+  /* production */
+  $('#m-oa').innerHTML=selfBlock('oa','o','Own sentence',[
+   {p:'Topic: technology.',t:'Despite + noun phrase',m:'<b>Despite</b> the many benefits of smartphones, heavy use can harm concentration and sleep.'},
+   {p:'Topic: health.',t:'In spite of + noun phrase',m:'<b>In spite of</b> widespread health warnings, many people still choose fast food every day.'},
+   {p:'Topic: education.',t:'Even though',m:'<b>Even though</b> exams create stress, they remain the fairest way to compare students.'},
+   {p:'Topic: the environment.',t:'While / Whilst',m:'<b>Whilst</b> recycling schemes have improved, most plastic waste still ends up in landfill.'},
+   {p:'Topic: work.',t:'Admittedly … Nevertheless',m:'<b>Admittedly</b>, long working hours can raise a company’s output. <b>Nevertheless</b>, they often damage employees’ health and motivation.'},
+   {p:'Topic: city life.',t:'Despite + noun phrase',m:'<b>Despite</b> the lively culture of big cities, many residents struggle with noise and stress.'},
+   {p:'Topic: transport.',t:'Although',m:'<b>Although</b> electric cars are better for the environment, they are still too expensive for many families.'},
+   {p:'Topic: government.',t:'In spite of + noun phrase',m:'<b>In spite of</b> repeated promises, governments have done little to reduce plastic waste.'}
+  ]);
+  const MA={
+   a:'Many parents believe that children should begin a foreign language early. Despite the pressure of other subjects, young learners absorb sounds and vocabulary quickly. Although some teachers argue that younger children get confused, many studies suggest that bilingual children develop stronger concentration. Admittedly, a late start can still succeed with motivated students. Nevertheless, early exposure gives learners more time to practise. For these reasons, I believe primary schools should introduce a second language.',
+   b:'Online study offers clear advantages. In spite of the lack of face-to-face contact, students can learn at their own pace and from any location. While traditional classrooms provide immediate support, online platforms give access to teachers and materials around the world. Admittedly, online learners need strong self-discipline. Nevertheless, this skill is valuable in later working life. Overall, the advantages outweigh the disadvantages for most learners.'};
+  $('#m-ob').innerHTML=writeBlock('wa','o','Paragraph',{min:60,max:90,prompts:[
+   {tab:'Discuss both views',t:'Some people think children should start learning a foreign language at primary school. Others think it is better to wait until secondary school. Discuss both views and give your opinion.',m:MA.a},
+   {tab:'Advantages / disadvantages',t:'More people are choosing to study online instead of attending a classroom. Do the advantages outweigh the disadvantages?',m:MA.b}]});
+  /* exit */
+  $('#m-e').innerHTML=[
+   mcq('e1','e','Exit 1','Which sentence is correct?',['Despite the high prices, people keep buying new phones.','Despite the prices are high, people keep buying new phones.','Despite of the high prices, people keep buying new phones.'],0,'Despite + noun phrase. Test: Despite THIS.'),
+   mcq('e2','e','Exit 2','Which sentence is correct?',['Although the road is dangerous, many drivers ignore the speed limit.','Although the road is dangerous, but many drivers ignore the speed limit.','Although dangerous road, many drivers ignore the speed limit.'],0,'Although + full clause, and no but in the main clause.'),
+   mcq('e3','e','Exit 3','Which version is punctuated correctly?',['Admittedly, cars are convenient. Nevertheless, they pollute the air.','Admittedly, cars are convenient, nevertheless they pollute the air.','Admittedly cars are convenient nevertheless they pollute the air.'],0,'Full stop (or semicolon) before Nevertheless, and a comma after it.')
+  ].join('');
+  /* stretch */
+  $('#m-s1').innerHTML=selfBlock('s1','s','S1',[
+   {p:'Despite the fact that prices have risen, demand is strong.',t:'Despite + noun phrase',m:'<b>Despite</b> rising prices, demand is strong.'},
+   {p:'Despite the fact that the government has invested heavily, many schools are still short of teachers.',t:'Despite + noun phrase',m:'<b>Despite</b> heavy government investment, many schools are still short of teachers.'},
+   {p:'Despite the fact that students use technology every day, many cannot judge online information.',t:'Despite + noun phrase',m:'<b>Despite</b> their daily use of technology, many students cannot judge online information.'}
+  ]);
+  $('#m-s2').innerHTML=selfBlock('s2','s','S2',[
+   {p:'Despite of the high cost, many families buy a second car.',m:'<b>Despite</b> the high cost, many families buy a second car.'},
+   {p:'Although the policy is popular, but it has failed to reduce crime.',m:'<b>Although</b> the policy is popular, it has failed to reduce crime.',n:'Remove but.'},
+   {p:'In spite of cities have more buses, traffic is getting worse.',m:'<b>In spite of</b> the increase in the number of buses, traffic is getting worse. (or: <b>Although</b> cities have more buses, traffic is getting worse.)'},
+   {p:'Admittedly, the plan is expensive, however it will save money in the long term.',m:'Admittedly, the plan is expensive. <b>However</b>, it will save money in the long term.',n:'Full stop before However.'}
+  ]);
+  $('#m-s3').innerHTML=selfBlock('s3','s','S3',[
+   {p:'Cycling is cheap. It is not safe on busy roads.',t:'Admittedly …; nevertheless, …',m:'Admittedly, cycling is cheap; nevertheless, it is not safe on busy roads.'},
+   {p:'Nuclear power is clean. Its waste is hard to store.',t:'Admittedly …; nevertheless, …',m:'Admittedly, nuclear power is clean; nevertheless, its waste is hard to store.'},
+   {p:'Tourism creates jobs. It damages fragile landscapes.',t:'Admittedly …; nevertheless, …',m:'Admittedly, tourism creates jobs; nevertheless, it damages fragile landscapes.'}
+  ]);
+  $('#m-s4').innerHTML=writeBlock('wc','s','Ten-minute paragraph',{min:60,max:90,timer:600,req:[{k:['despite','inspite'],l:'Uses Despite or In spite of + noun phrase'},{k:['although','while'],l:'Uses Although, Even though or While'},{k:['admittedly'],l:'Uses Admittedly … Nevertheless'}],prompts:[
+   {tab:'Opinion',t:'Some people think that governments should ban fast food advertising. To what extent do you agree? Write one body paragraph using one noun-phrase structure, one clause structure and Admittedly … Nevertheless.',m:'I largely agree that fast food advertising should be banned. Despite the commercial freedom of food companies, advertising aimed at children harms public health. Although adults can make their own choices, constant advertising makes unhealthy food seem normal. Admittedly, a ban would reduce company profits. Nevertheless, the cost of obesity to health services is far greater.'}]});
+  buildChips();restore();refresh();
+}
+function buildChips(){$('#chips').innerHTML=SECS.map(s=>`<a class="chip" href="#s-${s[0]}" data-s="${s[0]}">${s[1]}<small>${s[2]}</small></a>`).join('')+`<a class="chip" href="#s-s" data-s="s">Stretch</a><a class="chip" href="#s-x" data-s="x">Review</a>`}
+function refresh(){
+  const all=Object.entries(ST),core=all.filter(([k,v])=>v.sec!=='s'),tot=core.length;
+  const ans=core.filter(([k,v])=>v.first!==null).length,cor=core.filter(([k,v])=>v.first===true).length;
+  $('#st-a').textContent=ans+'/'+tot;$('#st-c').textContent=cor;$('#st-p').textContent=ans?Math.round(cor/ans*100)+'%':'–';
+  $('#bar-f').style.width=(tot?ans/tot*100:0)+'%';
+  const st=all.filter(([k,v])=>v.sec==='s'),sa=st.filter(([k,v])=>v.first!==null).length;
+  $('#st-s').textContent=sa?`Stretch ${sa}/${st.length}`:'';
+  SECS.concat([['s']]).forEach(s=>{const its=all.filter(([k,v])=>v.sec===s[0]);const c=document.querySelector(`.chip[data-s="${s[0]}"]`);if(c)c.classList.toggle('done',its.length>0&&its.every(([k,v])=>v.first!==null))});
+  const miss=all.filter(([k,v])=>v.first===false);
+  $('#rv').innerHTML=!ans?'<p class="muted">Nothing to review yet.</p>':miss.length?`<p>${miss.length} to review:</p><ul>${miss.map(([k,v])=>`<li>${v.label}</li>`).join('')}</ul>`:'<p>No first-try mistakes so far.</p>';refreshSheet();
+}
+
+/* ---------- events ---------- */
+document.addEventListener('click',e=>{
+  const t=e.target;
+  const o=t.closest('.opt');
+  if(o&&o.dataset.q){
+    const q=o.dataset.q,M=MQ[q],li=document.getElementById(q);if(!M||li.dataset.done)return;
+    const i=+o.dataset.i,good=i===M.c;rec(q,good);const sv=SAVE.mcq[q]||(SAVE.mcq[q]={w:[],d:0});if(good)sv.d=1;else sv.w.push(i);mcqApply(q,i,good);persist();
+    return}
+  const chk=t.closest('[data-check]');if(chk){checkGap(chk.dataset.check);return}
+  const sh=t.closest('[data-show]');
+  if(sh){const id=sh.dataset.show,v=$('#c-'+id).value.trim().split(/\s+/).filter(Boolean).length;
+    if(v<3){$('#n-'+id).hidden=false;return}$('#n-'+id).hidden=true;$('#m-'+id).hidden=false;sh.hidden=true;SAVE.shown[id]=1;persist();return}
+  const ra=t.closest('[data-rate]');
+  if(ra){const id=ra.dataset.rate,good=ra.dataset.v==='1';rec(id,good);SAVE.rated[id]=ra.dataset.v;persist();rateText(id,good);return}
+  const wp=t.closest('[data-wpick]');
+  if(wp){const b=wp.dataset.wpick,i=+wp.dataset.i;WB[b].pi=i;SAVE.pi[b]=i;persist();wp.parentNode.querySelectorAll('.segb').forEach(x=>x.classList.toggle('on',x===wp));$('#wp-'+b).innerHTML=WB[b].cfg.prompts[i].t;$('#wm-'+b).hidden=true;return}
+  const wc=t.closest('[data-wcheck]');
+  if(wc){const b=wc.dataset.wcheck,r=updW(b),good=r.L.every(x=>x[0])&&r.d.warns.length===0;
+    rec(b,good);
+    $('#ws-'+b).textContent=r.d.words<10?'Write your paragraph first.':good?'All checks passed.':'Some checks are not complete yet. See the list.';return}
+  const cp=t.closest('[data-wcopy]');
+  if(cp){const ta=$('#w-'+cp.dataset.wcopy);const done=()=>{$('#ws-'+cp.dataset.wcopy).textContent='Copied.'};
+    try{navigator.clipboard.writeText(ta.value).then(done,()=>{ta.select();$('#ws-'+cp.dataset.wcopy).textContent='Text selected. Press Ctrl+C.'})}catch(err){ta.select();$('#ws-'+cp.dataset.wcopy).textContent='Text selected. Press Ctrl+C.'}return}
+  const wm=t.closest('[data-wmodel]');
+  if(wm){const b=wm.dataset.wmodel,m=$('#wm-'+b);if(updW(b).d.words<20){$('#ws-'+b).textContent='Write at least 20 words before opening the model.';return}
+    m.hidden=false;m.innerHTML=`<p><b>Model:</b> ${WB[b].cfg.prompts[WB[b].pi].m}</p><p class="note">Compare: which structures did the model use for which job?</p>`;return}
+  const tm=t.closest('[data-wtimer]');
+  if(tm){const b=tm.dataset.wtimer;if(WB[b].iv){clearInterval(WB[b].iv);WB[b].iv=null;tm.textContent='Start timer';return}
+    let s=WB[b].cfg.timer;tm.textContent='Stop timer';
+    WB[b].iv=setInterval(()=>{s--;const el=$('#wt-'+b);el.textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');if(s<=0){clearInterval(WB[b].iv);WB[b].iv=null;tm.textContent='Start timer';el.textContent='Time is up'}},1000);return}
+  const ch=t.closest('.chip');
+  if(ch){e.preventDefault();const el=document.getElementById('s-'+ch.dataset.s);if(el)el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});return}
+  if(t.id==='reset'){if(!t.dataset.arm){t.dataset.arm='1';t.textContent='Click again to erase all my answers';setTimeout(()=>{delete t.dataset.arm;t.textContent='Start again'},4000);return}
+    delete t.dataset.arm;t.textContent='Start again';SAVE=EMPTY();try{localStorage.removeItem(KEY)}catch(err){}build();window.scrollTo(0,0);return}
+  if(t.id==='copysheet'){const ta=$('#sheet'),m=$('#sheet-s');const f=()=>{ta.select();m.textContent='Text selected. Press Ctrl+C.'};try{navigator.clipboard.writeText(ta.value).then(()=>{m.textContent='Copied.'},f)}catch(err){f()}return}
+});
+function onVal(e){const t=e.target;if(!t||!t.id)return;
+  if(/^(c|w)-/.test(t.id)&&/^(TEXTAREA|INPUT|SELECT)$/.test(t.tagName)){SAVE.vals[t.id]=t.value;persist()}
+  if(t.dataset&&t.dataset.w)updW(t.dataset.w);
+  refreshSheet()}
+document.addEventListener('input',onVal);document.addEventListener('change',onVal);
+loadSave();build();
+try{localStorage.setItem('conc-t','1');localStorage.removeItem('conc-t');$('#st-save').textContent='Answers save automatically on this device'}catch(e){$('#st-save').textContent='Auto-save is off here. Use “Copy my answers” at the end.'}
+})();
+</script>
+
+<!-- === Grammar for IELTS Writing · site integration === -->
+<script>
+(function(){
+"use strict";
+var LKEY="conc-state-v1", LTITLE="Concession in Task 2", LFILE="concession.html";
+/* ---- styles ---- */
+var st=document.createElement("style");
+st.textContent=[
+".gsitebar{position:static;z-index:999;background:#14532d;color:#fff;display:flex;align-items:center;gap:6px;padding:6px 12px;font:500 13px/1.2 -apple-system,'Segoe UI',Roboto,Arial,sans-serif;box-shadow:0 2px 10px rgba(0,0,0,.25);flex-wrap:wrap}",
+".gsitebar a{color:#fff;text-decoration:none;padding:7px 11px;border-radius:8px;min-height:36px;display:inline-flex;align-items:center;white-space:nowrap}",
+".gsitebar a:hover{background:rgba(255,255,255,.15)}",
+".gsitebar .gbrand{font-weight:800;letter-spacing:.3px;margin-right:4px}",
+".gsitebar .gbrand b{background:#84cc16;color:#14532d;border-radius:6px;padding:2px 7px;margin-right:7px}",
+".gsitebar .gsp{flex:1}",
+".gsitebar .gcur{background:rgba(255,255,255,.18)}",
+".bar{top:env(safe-area-inset-top,0px)!important}",
+".sec{scroll-margin-top:118px!important}",
+".gexp{display:inline-flex;gap:8px;margin-left:8px;flex-wrap:wrap}",
+".gexp button{font:500 14px -apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:#166534;color:#fff;border:1px solid #166534;border-radius:6px;padding:8px 14px;cursor:pointer;min-height:40px}",
+".gexp button:hover{background:#14532d}",
+"@media(max-width:900px){.gsitebar .gbrand{display:none}}@media(max-width:640px){.gsitebar a{padding:7px 8px;font-size:12px}}"
+].join("\n");
+document.head?document.head.appendChild(st):document.documentElement.appendChild(st);
+/* ---- bar ---- */
+var bar=document.createElement("div");
+bar.className="gsitebar";
+bar.innerHTML='<span class="gbrand"><b>GF</b>Grammar for IELTS Writing</span>'+
+ '<a href="index.html">← All lessons</a>'+
+ '<span class="gsp"></span>'+
+ '<a href="gym.html">Paraphrase Gym</a>'+
+ '<a href="task1.html">Task 1 Lab</a>'+
+ '<a href="mywork.html">My Work</a>';
+document.body.insertBefore(bar,document.body.firstChild);
+/* ---- docx/doc builders ---- */
+function crc32(buf){if(!crc32.t){crc32.t=[];for(var n=0;n<256;n++){var c=n;for(var k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;crc32.t[n]=c>>>0}}var c=0xFFFFFFFF;for(var i=0;i<buf.length;i++)c=crc32.t[(c^buf[i])&255]^(c>>>8);return(c^0xFFFFFFFF)>>>0}
+function buildZip(files){var enc=new TextEncoder(),parts=[],central=[],off=0;files.forEach(function(f){var nm=enc.encode(f.name),d=f.data,crc=crc32(d);var h=new DataView(new ArrayBuffer(30));h.setUint32(0,0x04034b50,true);h.setUint16(4,20,true);h.setUint32(14,crc,true);h.setUint32(18,d.length,true);h.setUint32(22,d.length,true);h.setUint16(26,nm.length,true);parts.push(new Uint8Array(h.buffer),nm,d);var cv=new DataView(new ArrayBuffer(46));cv.setUint32(0,0x02014b50,true);cv.setUint16(4,20,true);cv.setUint16(6,20,true);cv.setUint32(16,crc,true);cv.setUint32(20,d.length,true);cv.setUint32(24,d.length,true);cv.setUint16(28,nm.length,true);cv.setUint32(42,off,true);central.push(new Uint8Array(cv.buffer),nm);off+=30+nm.length+d.length});var cdStart=off,cdSize=0;central.forEach(function(u){cdSize+=u.length});var e=new DataView(new ArrayBuffer(22));e.setUint32(0,0x06054b50,true);e.setUint16(8,files.length,true);e.setUint16(10,files.length,true);e.setUint32(12,cdSize,true);e.setUint32(16,cdStart,true);parts.push.apply(parts,central);parts.push(new Uint8Array(e.buffer));return new Blob(parts,{type:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"})}
+function xesc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function docxFromText(title,text){
+  var enc=new TextEncoder();
+  var para=function(s,bold,size){return '<w:p><w:r><w:rPr>'+(bold?'<w:b/>':'')+'<w:sz w:val="'+(size||22)+'"/></w:rPr><w:t xml:space="preserve">'+xesc(s)+'</w:t></w:r></w:p>'};
+  var today=new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});
+  var body=para("Grammar for IELTS Writing — "+title,true,32)+para("Date: "+today,false,20)+para("",false,20);
+  text.split(/\n/).forEach(function(line){body+=para(line,line.length&&line.indexOf(':')===-1&&line===line.toUpperCase()?false:false,24)});
+  var doc='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>'+body+'<w:sectPr/></w:body></w:document>';
+  var ct='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>';
+  var rels='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>';
+  return buildZip([{name:"[Content_Types].xml",data:enc.encode(ct)},{name:"_rels/.rels",data:enc.encode(rels)},{name:"word/document.xml",data:enc.encode(doc)}]);
+}
+function docFromText(title,text){
+  var today=new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});
+  var paras=text.split(/\n/).map(function(l){return '<p style="font-family:Georgia;font-size:12pt">'+xesc(l||' ')+'</p>'}).join('');
+  var html='<html xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="UTF-8"></head><body><h2 style="font-family:Arial">'+xesc(title)+'</h2><p style="font-family:Arial;color:#666;font-size:11px">'+today+'</p>'+paras+'</body></html>';
+  return new Blob([html],{type:"application/msword"});
+}
+window.GDL=function(blob,fname){var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=fname;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},600)};
+window.GDOCX=docxFromText;window.GDOC=docFromText;
+/* ---- export buttons next to Copy my answers ---- */
+function addExport(){
+  var cp=document.getElementById("copysheet");if(!cp||document.getElementById("gexp"))return;
+  var wrap=document.createElement("span");wrap.className="gexp";wrap.id="gexp";
+  var b1=document.createElement("button");b1.type="button";b1.textContent="⬇ .docx";
+  var b2=document.createElement("button");b2.type="button";b2.textContent="⬇ .doc";
+  function grab(){var ta=document.getElementById("sheet");var t=ta?ta.value.trim():"";
+    if(!t){var s=document.getElementById("sheet-s");if(s)s.textContent="Nothing to download yet — answer some tasks first.";return null}return t}
+  b1.addEventListener("click",function(){var t=grab();if(t)window.GDL(window.GDOCX(LTITLE,t),LFILE.replace(/\.html$/,"")+"_my_answers.docx")});
+  b2.addEventListener("click",function(){var t=grab();if(t)window.GDL(window.GDOC(LTITLE,t),LFILE.replace(/\.html$/,"")+"_my_answers.doc")});
+  wrap.appendChild(b1);wrap.appendChild(b2);
+  cp.parentNode.insertBefore(wrap,cp.nextSibling);
+}
+addExport();setTimeout(addExport,800);
+/* ---- sheet watcher → shared store for My Work ---- */
+var lastVal=null;
+setInterval(function(){
+  var ta=document.getElementById("sheet");if(!ta)return;
+  var v=ta.value;
+  if(v===lastVal)return;lastVal=v;
+  if(!v.trim())return;
+  try{
+    var all=JSON.parse(localStorage.getItem("gram_sheets")||"{}");
+    all[LKEY]={title:LTITLE,text:v,updated:Date.now()};
+    localStorage.setItem("gram_sheets",JSON.stringify(all));
+  }catch(e){}
+},1500);
+})();
+</script>

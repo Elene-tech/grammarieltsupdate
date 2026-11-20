@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#14532d">
+<title>Task 1 Lab — Grammar for IELTS Writing</title>
+<style>
+:root{
+  --bg:#f4f7ec; --paper:#ffffff; --ink:#1c2a17; --muted:#5f6d5a;
+  --line:#dde6cf; --brand:#166534; --brand-deep:#14532d; --brand-soft:#e3f5d4;
+  --lime:#65a30d; --lime-hot:#84cc16; --lime-soft:#ecfccb;
+  --amber:#b45309; --amber-soft:#fef3c7; --orange:#c2410c; --orange-soft:#ffedd5;
+  --ok:#15803d; --ok-soft:#e8f7ee; --bad:#b91c1c; --bad-soft:#fdeaea;
+  --radius:14px; --shadow:0 2px 10px rgba(28,42,23,.08);
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg); color:var(--ink); font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif; line-height:1.55;}
+button{font:inherit; cursor:pointer; -webkit-tap-highlight-color:transparent;}
+button:focus-visible,a:focus-visible,textarea:focus-visible,input:focus-visible{outline:3px solid #a3e635; outline-offset:2px;}
+.serif{font-family:Georgia,"Times New Roman",serif;}
+.topbar{position:sticky; top:0; z-index:50; background:rgba(255,255,255,.94); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+.topbar-in{max-width:1180px; margin:0 auto; padding:10px 16px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+.logo{display:flex; align-items:center; gap:10px; font-weight:800; font-size:16.5px; text-decoration:none; color:var(--ink);}
+.logo-badge{background:var(--brand-deep); color:#fff; border-radius:9px; padding:4px 9px; font-size:13px;}
+.logo-badge b{color:var(--lime-hot);}
+.nav{margin-left:auto; display:flex; gap:6px; flex-wrap:wrap;}
+.nav a{text-decoration:none; color:var(--ink); font-weight:600; font-size:14px; padding:9px 13px; border-radius:10px; min-height:44px; display:inline-flex; align-items:center;}
+.nav a:hover{background:var(--brand-soft);}
+.nav a.active{background:var(--brand); color:#fff;}
+.wrap{max-width:960px; margin:0 auto; padding:22px 16px calc(90px + env(safe-area-inset-bottom));}
+.hero{background:linear-gradient(120deg,#14532d 0%,#166534 45%,#65a30d 82%,#84cc16 100%); color:#fff; border-radius:20px; padding:30px 26px; margin-bottom:24px; box-shadow:0 6px 22px rgba(20,83,45,.28);}
+.hero h1{font-size:clamp(23px,3.6vw,32px); margin-bottom:8px;}
+.hero h1::after{content:""; display:block; width:90px; height:5px; border-radius:99px; margin-top:12px; background:linear-gradient(90deg,#fbbf24,#fb923c);}
+.hero p{opacity:.92; max-width:660px; font-size:15px;}
+.pbar2{position:sticky; top:64px; z-index:40; background:rgba(255,255,255,.95); border:1px solid var(--line); border-radius:12px; padding:10px 14px; display:flex; gap:14px; align-items:center; margin-bottom:20px; backdrop-filter:blur(8px);}
+.pbar2 .track{flex:1; height:8px; background:#e4ebd6; border-radius:99px; overflow:hidden;}
+.pbar2 .fill{height:100%; width:0; background:linear-gradient(90deg,var(--lime),var(--lime-hot)); transition:width .3s;}
+.pbar2 .lab{font-size:13px; font-weight:700; color:var(--muted); white-space:nowrap;}
+.section{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px; margin-bottom:18px;}
+.section h2{font-size:19px; margin-bottom:10px; display:flex; align-items:center; gap:9px;}
+.section h2 .ico{width:30px; height:30px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; font-size:15px; background:var(--brand-soft); flex-shrink:0;}
+.scard{border:1px solid var(--line); border-left:5px solid var(--brand); border-radius:11px; padding:15px 17px; margin-bottom:12px; background:#fbfdf4;}
+.scard h3{font-size:15.5px; margin-bottom:6px; color:var(--brand-deep);}
+.scard .formula{font-family:ui-monospace,Menlo,Consolas,monospace; font-size:13.5px; background:var(--lime-soft); border:1px solid #d9f99d; border-radius:8px; padding:7px 11px; margin:6px 0;}
+.scard .ex{font-family:Georgia,serif; font-size:15.5px; margin:5px 0;}
+.scard .ex b{background:linear-gradient(transparent 62%, #fde68a 62%); padding:0 1px;}
+.scard .watch{font-size:13.5px; color:var(--orange); background:var(--orange-soft); border-radius:8px; padding:7px 11px; margin-top:6px;}
+.map-row{display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:11px 0; border-bottom:1px dashed var(--line);}
+.map-row:last-child{border-bottom:none;}
+.map-row .l{font-weight:700;}
+.map-row .r{font-family:ui-monospace,Menlo,monospace; font-size:13px; color:var(--brand);}
+.q{border:1px solid var(--line); border-radius:12px; padding:14px 15px; margin-bottom:11px; background:#fbfdf4;}
+.q .qp{font-family:Georgia,serif; font-size:15.5px; margin-bottom:9px;}
+.opt{display:block; width:100%; text-align:left; background:#fff; border:1.5px solid var(--line); border-radius:9px; padding:9px 13px; font-size:14.5px; margin-bottom:6px; min-height:44px;}
+.opt:hover:not(:disabled){border-color:var(--brand);}
+.opt.ok{background:var(--ok-soft); border-color:var(--ok); color:var(--ok); font-weight:600;}
+.opt.bad{background:var(--bad-soft); border-color:var(--bad); color:var(--bad);}
+.fb{font-size:13.5px; margin-top:8px; padding:8px 11px; border-radius:8px; display:none;}
+.fb.show{display:block;}
+.fb.ok{background:var(--ok-soft); color:var(--ok);}
+.fb.bad{background:var(--bad-soft); color:var(--bad);}
+.gapq input{font:inherit; border:1.5px solid var(--line); border-bottom:2.5px solid var(--brand); border-radius:7px; padding:6px 9px; min-height:40px; min-width:130px; background:#fff; color:var(--ink);}
+.gapq .hint{font-size:12.5px; color:var(--orange); background:var(--orange-soft); padding:2px 9px; border-radius:99px; margin-left:7px; white-space:nowrap;}
+.btn{border:none; border-radius:10px; padding:10px 17px; font-weight:700; font-size:14px; min-height:44px; display:inline-flex; align-items:center; gap:7px;}
+.btn-primary{background:var(--brand); color:#fff;}
+.btn-ghost{background:#fff; color:var(--ink); border:1.5px solid var(--line);}
+.btn-ghost:hover{border-color:var(--brand); color:var(--brand);}
+.btn-sm{min-height:38px; padding:7px 12px; font-size:13px;}
+textarea{width:100%; border:1.5px solid var(--line); border-radius:10px; padding:12px; font-family:Georgia,serif; font-size:15.5px; line-height:1.7; resize:vertical; background:#fdfff8; color:var(--ink); margin-top:8px;}
+textarea:focus{border-color:var(--brand); outline:none; box-shadow:0 0 0 3px var(--brand-soft);}
+.model{display:none; margin-top:10px; background:var(--brand-deep); color:#eef5e9; border-radius:11px; padding:14px 16px; font-family:Georgia,serif; font-size:15px; line-height:1.65;}
+.model.show{display:block;}
+.model b{color:#fde68a;}
+.model .ml{font:600 11px ui-monospace,Menlo,monospace; letter-spacing:.1em; text-transform:uppercase; color:#a3e635; display:block; margin-bottom:5px; font-family:ui-monospace,Menlo,monospace;}
+.model .note{font-size:13px; color:#c7dcc4; margin-top:8px; font-family:-apple-system,"Segoe UI",Arial,sans-serif;}
+.rate{display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;}
+.wc{font-size:13px; font-weight:700; color:var(--muted); margin-top:6px;}
+.wc.ok{color:var(--ok);}
+.chartbox{background:#fff; border:1.5px dashed var(--brand); border-radius:11px; padding:14px 16px; margin:10px 0; font-size:14.5px;}
+.chartbox b{color:var(--brand-deep);}
+.foot{color:var(--muted); font-size:13px; margin-top:20px;}
+@media(max-width:640px){.map-row{grid-template-columns:1fr; gap:3px;} .section{padding:16px;} .pbar2{top:110px;}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <span class="logo"><span class="logo-badge"><b>GF</b></span> Grammar for IELTS Writing</span>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="gym.html">Paraphrase Gym</a>
+    <a href="task1.html" class="active">Task 1 Lab</a>
+    <a href="mywork.html">My Work</a>
+  </nav>
+</div></header>
+<main class="wrap">
+<div class="hero">
+  <h1>📊 Task 1 Lab — reports, graphs and processes</h1>
+  <p>The same grammar that wins marks in Task 2 works differently in a report. Here you will learn to describe trends with participles, write overviews with nominalisation, compare data precisely, and handle process diagrams with the passive.</p>
+</div>
+<div class="pbar2"><div class="track"><div class="fill" id="fill"></div></div><div class="lab" id="lab">0 answered</div></div>
+
+<div class="section">
+  <h2><span class="ico">🗺️</span>What Task 1 needs</h2>
+  <p style="margin-bottom:10px">Task 1 is a <b>report</b>, not an argument: no opinions, no “I believe”. Your grammar score comes from describing data accurately and grouping it clearly.</p>
+  <div class="map-row"><div class="l">Line / bar / pie charts (changes &amp; comparisons)</div><div class="r">participles · comparatives · nominalisation</div></div>
+  <div class="map-row"><div class="l">Process diagrams (how something is made)</div><div class="r">passives · sequencers</div></div>
+  <div class="map-row"><div class="l">Maps (how a place changed)</div><div class="r">passives · there is / there was</div></div>
+  <div class="map-row"><div class="l">The overview (the most important paragraph!)</div><div class="r">nominalisation · overall, …</div></div>
+</div>
+
+<div class="section">
+  <h2><span class="ico">🧰</span>The five tools</h2>
+
+  <div class="scard">
+    <h3>1 · Participles for trends</h3>
+    <div class="formula">verb + adverb, -ing + noun / number</div>
+    <div class="ex">“The price of petrol <b>rose sharply between 2000 and 2010, peaking at</b> $1.60 per litre.”</div>
+    <div class="ex">“Car use <b>fell steadily, ending the period at</b> just 20%.”</div>
+    <div class="watch">Watch out: the participle must describe the same subject. “The price rose, peaking at…” ✓ — the price peaks, not the writer.</div>
+  </div>
+
+  <div class="scard">
+    <h3>2 · Nominalisation for overviews</h3>
+    <div class="formula">there was a + adjective + noun + in …</div>
+    <div class="ex">“Overall, <b>there was a significant increase in</b> car ownership, <b>while bus use saw a steady decline</b>.”</div>
+    <div class="ex">“<b>The most dramatic change was</b> the growth of online shopping.”</div>
+    <div class="watch">Watch out: one idea per noun phrase. “a sharp rise in prices” ✓ — not “a sharp rise in prices was happened”.</div>
+  </div>
+
+  <div class="scard">
+    <h3>3 · Precise comparison</h3>
+    <div class="formula">twice / three times as … as · far / marginally + comparative</div>
+    <div class="ex">“In 2010, <b>twice as many</b> people travelled by train <b>as</b> by bus.”</div>
+    <div class="ex">“Spending on books was <b>marginally higher than</b> spending on magazines.”</div>
+    <div class="watch">Watch out: “more higher” ✗ — never double the comparative.</div>
+  </div>
+
+  <div class="scard">
+    <h3>4 · Passives for processes</h3>
+    <div class="formula">is / are + past participle · is then + past participle</div>
+    <div class="ex">“First, the beans <b>are harvested</b> and <b>dried</b> in the sun. They <b>are then roasted</b> at high temperatures.”</div>
+    <div class="watch">Watch out: in a process we usually do not know or care WHO does it — that is why the passive fits. Keep it; do not invent “workers” or “people”.</div>
+  </div>
+
+  <div class="scard">
+    <h3>5 · Sequencers that sound academic</h3>
+    <div class="formula">initially → subsequently → at the next stage → finally</div>
+    <div class="ex">“<b>Initially</b>, the mixture is heated. <b>Subsequently</b>, it is cooled and filtered. <b>At the final stage</b>, the product is packaged.”</div>
+    <div class="watch">Watch out: vary your sequencers — “then … then … then” reads as Band 5.</div>
+  </div>
+</div>
+
+<div class="section" id="practice">
+  <h2><span class="ico">🎯</span>Practice A — choose the accurate sentence</h2>
+  <div id="mA"></div>
+</div>
+
+<div class="section">
+  <h2><span class="ico">✏️</span>Practice B — write the correct form</h2>
+  <div id="mB"></div>
+  <div style="margin-top:10px; display:flex; gap:9px; flex-wrap:wrap; align-items:center;">
+    <button class="btn btn-primary" type="button" id="checkB">Check answers</button>
+    <span class="wc" id="sumB"></span>
+  </div>
+</div>
+
+<div class="section">
+  <h2><span class="ico">⬆️</span>Practice C — upgrade Band 5–6 sentences</h2>
+  <p style="color:var(--muted); font-size:14px; margin-bottom:10px">Write your version first, then open the model and compare. Your sentence can be different — check the structure, not the words.</p>
+  <div id="mC"></div>
+</div>
+
+<div class="section">
+  <h2><span class="ico">🏆</span>Final task — write the overview</h2>
+  <p style="color:var(--muted); font-size:14px">The overview is the highest-value paragraph in Task 1. Without one, Task Achievement is capped at Band 5.</p>
+  <div class="chartbox">
+    <b>The chart (imagined):</b> In 2000, 40% of households had internet access; by 2020 the figure was 92%. Over the same period, landline telephones fell from 95% of households to 30%. Mobile phones rose from 20% to 97%.
+  </div>
+  <p style="font-size:14.5px">Write a 2-sentence <b>overview</b> (main trends only — no numbers!). Use nominalisation: <i>there was a … rise / decline in …</i></p>
+  <textarea id="ovText" rows="4" placeholder="Overall, there was a …"></textarea>
+  <div class="wc" id="ovWc">0 words · target 30–45</div>
+  <div class="rate">
+    <button class="btn btn-primary btn-sm" type="button" id="ovModel">Show model overview</button>
+  </div>
+  <div class="model" id="ovModelBox">
+    <span class="ml">Model · Band 7.5</span>
+    Overall, <b>there was a dramatic rise in internet access and mobile phone ownership</b>, <b>while landline use saw a steep decline</b>. By the end of the period, mobile phones and the internet had become almost universal, <b>with both technologies present in over nine out of ten households</b>.
+    <div class="note">Note: two trends named, no data in the first sentence, one precise figure only in support. Nominalisation does the heavy lifting.</div>
+  </div>
+</div>
+
+<div class="section">
+  <h2><span class="ico">📥</span>My answers</h2>
+  <p style="color:var(--muted); font-size:14px; margin-bottom:10px">Everything you typed in this lab, in one file — send it to your teacher or keep it for revision.</p>
+  <div style="display:flex; gap:9px; flex-wrap:wrap;">
+    <button class="btn btn-primary" type="button" id="dlDocx">⬇ Download (.docx)</button>
+    <button class="btn btn-ghost" type="button" id="dlDoc">⬇ Download (.doc)</button>
+    <span class="wc" id="dlMsg"></span>
+  </div>
+</div>
+<p class="foot">Grammar for IELTS Writing · Task 1 Lab. Your answers are saved in this browser only.</p>
+</main>
+<script>
+"use strict";
+/* ================= state ================= */
+var KEY="t1lab-state-v1";
+function load(){try{var s=JSON.parse(localStorage.getItem(KEY)||"null");if(s&&s.first)return s}catch(e){}return{first:{},a:{},b:{},c:{},ov:""}}
+var S=load();
+if(!S.a)S.a={};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+
+/* ================= content ================= */
+var QA=[
+ {id:"a1",prompt:"Which sentence describes the trend accurately?",
+  opts:["The price of oil rose sharply, peaking at $120 per barrel in 2008.",
+        "The price of oil rose sharply, peaked at $120 per barrel in 2008.",
+        "The price of oil was rose sharply, peaking at $120 per barrel in 2008."],
+  ans:0,why:"Use the -ing participle to attach the result to the same subject: “rose …, peaking at …”.",
+  no:["","“peaked” after a comma creates a run-on — two full verbs with no linker.","“was rose” mixes passive and past simple — never possible."]},
+ {id:"a2",prompt:"Which overview sentence is accurate?",
+  opts:["Overall, car ownership was a significant increase.",
+        "Overall, there was a significant increase in car ownership.",
+        "Overall, there was significantly increased in car ownership."],
+  ans:1,why:"Nominalisation formula: there was a + adjective + noun + in …",
+  no:["The trend is the increase — ownership cannot “be” an increase.","","“there was + past participle” breaks the pattern: you need a noun (increase), not a verb."]},
+ {id:"a3",prompt:"Which comparison is correct?",
+  opts:["Twice as many people used trains as buses.",
+        "Twice more people used trains than buses.",
+        "People used trains twice as many as buses."],
+  ans:0,why:"The pattern is twice as many + noun … as …",
+  no:["","In formal British English “twice more” is considered incorrect — say “twice as many”.","“twice as many” must sit before the noun it quantifies."]},
+ {id:"a4",prompt:"Which sentence describes a process stage correctly?",
+  opts:["First, the workers are harvesting the beans and dry them.",
+        "First, the beans harvest and dry in the sun.",
+        "First, the beans are harvested and dried in the sun."],
+  ans:2,why:"Process diagrams use the present passive: are harvested, are dried — the doer is unknown or unimportant.",
+  no:["A process report does not invent “workers”; keep the passive.","“beans harvest” makes the beans the doer — impossible. ",""]},
+ {id:"a5",prompt:"Which sentence sequences the stages correctly?",
+  opts:["Subsequently, the mixture is cooling and filtered.",
+        "Subsequently, the mixture is cooled and filtered.",
+        "Subsequently, the mixture cools and is filter."],
+  ans:1,why:"Both verbs stay passive: is cooled and (is) filtered.",
+  no:["“is cooling” is active — the mixture does not cool itself in a process description.","","“is filter” — a participle (filtered) is required after “is”."]},
+ {id:"a6",prompt:"Which sentence attaches the final figure correctly?",
+  opts:["Car use fell steadily, ending the period at just 20%.",
+        "Car use fell steadily, ended the period at just 20%.",
+        "Car use fell steadily, which ending the period at just 20%."],
+  ans:0,why:"Comma + -ing participle adds the final result: “ending the period at …”.",
+  no:["","“ended” after a comma is a run-on — no subject for the second verb.","“which ending” is impossible — after which you need a full verb: which ended."]},
+ {id:"a7",prompt:"Which comparison is grammatically correct?",
+  opts:["Spending on books was more higher than spending on magazines.",
+        "Spending on books was marginally higher that spending on magazines.",
+        "Spending on books was marginally higher than spending on magazines."],
+  ans:2,why:"“marginally / far / slightly + comparative + than” — and never double the comparative.",
+  no:["“more higher” doubles the comparative — choose one: higher OR more interesting.","Comparisons take “than”, never “that”.",""]},
+ {id:"a8",prompt:"Which is a proper Task 1 overview sentence?",
+  opts:["Overall, the chart shows a line graph about internet access in households.",
+        "Overall, the most dramatic change was the growth of internet access.",
+        "Overall, I believe internet access will continue to grow in the future."],
+  ans:1,why:"An overview names the main trend with nominalisation — no data, no opinions, no predictions.",
+  no:["This describes the chart itself, not the trend — it reports nothing.","","A report never gives opinions or predictions — only what the data shows."]}
+];
+
+var QB=[
+ {id:"b1",pre:"The number of visitors rose steadily,",hint:"peak",post:"at 2.4 million in August.",accept:["peaking"]},
+ {id:"b2",pre:"Overall, there was a",hint:"drama",post:"increase in mobile phone use.",accept:["dramatic"]},
+ {id:"b3",pre:"First, the beans",hint:"harvest",post:"and then dried in the sun.",accept:["are harvested"]},
+ {id:"b4",pre:"",hint:"initial",post:", the mixture is heated to 90°C.",accept:["initially"]},
+ {id:"b5",pre:"Spending on books was",hint:"margin",post:"higher than spending on magazines.",accept:["marginally"]},
+ {id:"b6",pre:"",hint:"two",post:"as many households had internet access in 2020 as in 2000.",accept:["twice"]},
+ {id:"b7",pre:"The figure for trains was",hint:"significant",post:"higher than that for buses.",accept:["significantly"]},
+ {id:"b8",pre:"At the final stage, the product",hint:"package",post:"and sent to shops.",accept:["is packaged"]}
+];
+
+var QC=[
+ {id:"c1",src:"“The chart shows internet use went up a lot and landlines went down a lot.”",
+  model:"There was a dramatic rise in internet use, while landline subscriptions saw a steep decline.",
+  why:"Replace “went up a lot” with nominalisation (a dramatic rise) and join the two trends with “while” — no “the chart shows”, no vague “a lot”."},
+ {id:"c2",src:"“In 2010, 80% of people used mobiles. In 2000, only 20% of people used mobiles.”",
+  model:"Mobile phone use rose sharply from just 20% in 2000 to 80% in 2010, quadrupling over the decade.",
+  why:"One sentence instead of two: from … to … carries the numbers, and a participle (quadrupling) adds the meaning of the change."},
+ {id:"c3",src:"“Then the water is heated. Then it turns into steam. Then the steam goes through pipes.”",
+  model:"Once the water has been heated, it turns into steam, which is then channelled through pipes.",
+  why:"Vary the sequencers (once … then) and merge stages with a relative clause — three flat “then” sentences read as Band 5."},
+ {id:"c4",src:"“More people travelled by train than by bus in 2010. The difference was very big.”",
+  model:"Far more people travelled by train than by bus in 2010 — nearly twice as many, in fact.",
+  why:"“Far + comparative” and “twice as … as” make the size of the difference precise instead of the empty “very big”."}
+];
+
+/* pre-fill progress keys so the hub bar knows the total */
+QA.forEach(function(q){if(!(q.id in S.first))S.first[q.id]=null});
+QB.forEach(function(q){if(!(q.id in S.first))S.first[q.id]=null});
+QC.forEach(function(q){if(!(q.id in S.first))S.first[q.id]=null});
+if(!("ov" in S.first))S.first.ov=null;
+save();
+
+var TOTAL=Object.keys(S.first).length;
+function answered(){var n=0;for(var k in S.first){if(S.first[k]!==null)n++}return n}
+function updateProgress(){
+  var a=answered();
+  document.getElementById("fill").style.width=Math.round(a/TOTAL*100)+"%";
+  document.getElementById("lab").textContent=a+" / "+TOTAL+" answered";
+}
+
+/* ================= Practice A — MCQ ================= */
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+(function buildA(){
+  var host=document.getElementById("mA"),html="";
+  QA.forEach(function(q,i){
+    html+='<div class="q" data-q="'+q.id+'"><div class="qp"><b>A'+(i+1)+'.</b> '+esc(q.prompt)+'</div>';
+    q.opts.forEach(function(o,j){
+      html+='<button type="button" class="opt" data-i="'+j+'">'+String.fromCharCode(97+j)+') '+esc(o)+'</button>';
+    });
+    html+='<div class="fb" id="fb-'+q.id+'"></div></div>';
+  });
+  host.innerHTML=html;
+  host.querySelectorAll(".opt").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var card=btn.closest(".q"),qid=card.dataset.q;
+      var q=QA.filter(function(x){return x.id===qid})[0];
+      if(S.first[qid]!==null)return; /* locked after first attempt */
+      var pick=+btn.dataset.i, ok=pick===q.ans;
+      S.first[qid]=ok;S.a[qid]=pick;save();
+      card.querySelectorAll(".opt").forEach(function(b){
+        b.disabled=true;
+        if(+b.dataset.i===q.ans)b.classList.add("ok");
+      });
+      if(!ok)btn.classList.add("bad");
+      var fb=document.getElementById("fb-"+qid);
+      fb.className="fb show "+(ok?"ok":"bad");
+      var wrongs=q.no.map(function(n,j){return n?'<div style="margin-top:3px">✗ <b>'+String.fromCharCode(97+j)+')</b> '+esc(n)+'</div>':""}).join("");
+      fb.innerHTML=(ok?"✅ Correct! ":"❌ Not quite. ")+esc(q.why)+wrongs;
+      updateProgress();syncSheet();
+    });
+  });
+  /* restore answered questions on reload */
+  QA.forEach(function(q){
+    if(S.first[q.id]===null)return;
+    var card=host.querySelector('.q[data-q="'+q.id+'"]');if(!card)return;
+    var pick=S.a[q.id];
+    card.querySelectorAll(".opt").forEach(function(b){
+      b.disabled=true;
+      if(+b.dataset.i===q.ans)b.classList.add("ok");
+      else if(+b.dataset.i===pick)b.classList.add("bad");
+    });
+    var fb=document.getElementById("fb-"+q.id);
+    fb.className="fb show "+(S.first[q.id]?"ok":"bad");
+    var wrongs=q.no.map(function(n,j){return n?'<div style="margin-top:3px">✗ <b>'+String.fromCharCode(97+j)+')</b> '+esc(n)+'</div>':""}).join("");
+    fb.innerHTML=(S.first[q.id]?"✅ Correct! ":"❌ Not quite. ")+esc(q.why)+wrongs;
+  });
+})();
+
+/* ================= Practice B — gap fill ================= */
+(function buildB(){
+  var host=document.getElementById("mB"),html="";
+  QB.forEach(function(q,i){
+    var val=S.b[q.id]||"";
+    html+='<div class="q gapq" data-q="'+q.id+'"><div class="qp"><b>B'+(i+1)+'.</b> '+esc(q.pre)+' '+
+      '<input type="text" id="in-'+q.id+'" value="'+esc(val)+'" autocomplete="off" autocapitalize="off" spellcheck="false"><span class="hint">'+esc(q.hint)+'</span> '+esc(q.post)+
+      '</div><div class="fb" id="fb-'+q.id+'"></div></div>';
+  });
+  host.innerHTML=html;
+  QB.forEach(function(q){
+    document.getElementById("in-"+q.id).addEventListener("input",function(e){
+      S.b[q.id]=e.target.value;save();syncSheet();
+    });
+  });
+})();
+function norm(s){return s.trim().toLowerCase().replace(/\s+/g," ").replace(/[.,;]$/,"")}
+document.getElementById("checkB").addEventListener("click",function(){
+  var right=0;
+  QB.forEach(function(q){
+    var inp=document.getElementById("in-"+q.id),fb=document.getElementById("fb-"+q.id);
+    var ok=q.accept.indexOf(norm(inp.value))!==-1;
+    if(ok)right++;
+    inp.style.borderColor=ok?"var(--ok)":"var(--bad)";
+    inp.style.background=ok?"var(--ok-soft)":"var(--bad-soft)";
+    fb.className="fb show "+(ok?"ok":"bad");
+    fb.innerHTML=ok?"✅ Correct!":"❌ Answer: <b>"+esc(q.accept[0])+"</b>";
+    if(S.first[q.id]===null)S.first[q.id]=ok;
+  });
+  var sum=document.getElementById("sumB");
+  sum.textContent=right+" / "+QB.length+" correct";
+  sum.className="wc "+(right===QB.length?"ok":"");
+  save();updateProgress();syncSheet();
+});
+
+/* ================= Practice C — upgrades ================= */
+(function buildC(){
+  var host=document.getElementById("mC"),html="";
+  QC.forEach(function(q,i){
+    var val=S.c[q.id]||"";
+    html+='<div class="q" data-q="'+q.id+'"><div class="qp"><b>C'+(i+1)+' · Band 5–6:</b><br>'+esc(q.src)+'</div>'+
+      '<textarea rows="3" id="ta-'+q.id+'" placeholder="Write your upgraded sentence here …">'+esc(val)+'</textarea>'+
+      '<div class="rate"><button type="button" class="btn btn-ghost btn-sm" id="sh-'+q.id+'">Show model</button>'+
+      '<span class="wc" id="wm-'+q.id+'"></span></div>'+
+      '<div class="model" id="md-'+q.id+'"><span class="ml">Model · Band 7.5</span>'+esc(q.model)+'<div class="note">'+esc(q.why)+'</div></div></div>';
+  });
+  host.innerHTML=html;
+  QC.forEach(function(q){
+    var ta=document.getElementById("ta-"+q.id);
+    ta.addEventListener("input",function(){S.c[q.id]=ta.value;save();syncSheet()});
+    document.getElementById("sh-"+q.id).addEventListener("click",function(){
+      var words=ta.value.trim().split(/\s+/).filter(Boolean).length;
+      var wm=document.getElementById("wm-"+q.id);
+      if(words<3){wm.textContent="Write your own version first — even a rough one.";wm.className="wc";return}
+      wm.textContent="";
+      document.getElementById("md-"+q.id).classList.add("show");
+      if(S.first[q.id]===null){S.first[q.id]=true;save();updateProgress()}
+      syncSheet();
+    });
+    /* restore open models on reload */
+    if(S.first[q.id]!==null)document.getElementById("md-"+q.id).classList.add("show");
+  });
+})();
+
+/* ================= final task — overview ================= */
+var ovTa=document.getElementById("ovText");
+ovTa.value=S.ov||"";
+function ovCount(){
+  var n=ovTa.value.trim().split(/\s+/).filter(Boolean).length;
+  var el=document.getElementById("ovWc");
+  el.textContent=n+" words · target 30–45";
+  el.className="wc"+((n>=25&&n<=55)?" ok":"");
+  return n;
+}
+ovTa.addEventListener("input",function(){S.ov=ovTa.value;save();ovCount();syncSheet()});
+document.getElementById("ovModel").addEventListener("click",function(){
+  var n=ovCount();
+  if(n<20){document.getElementById("ovWc").textContent=n+" words — write at least 20 before peeking at the model.";return}
+  document.getElementById("ovModelBox").classList.add("show");
+  if(S.first.ov===null){S.first.ov=true;save();updateProgress()}
+});
+if(S.first.ov!==null)document.getElementById("ovModelBox").classList.add("show");
+ovCount();
+
+/* ================= compile + export ================= */
+function compileText(){
+  var L=[];
+  L.push("TASK 1 LAB — MY ANSWERS");
+  L.push("");
+  L.push("PRACTICE A — choose the accurate sentence");
+  QA.forEach(function(q,i){
+    var st=S.first[q.id];
+    L.push("A"+(i+1)+". "+q.prompt+"  ["+(st===null?"not answered":(st?"first try: correct":"first try: wrong"))+"]");
+  });
+  L.push("");
+  L.push("PRACTICE B — write the correct form");
+  QB.forEach(function(q,i){
+    var v=(S.b[q.id]||"").trim();
+    var ok=q.accept.indexOf(norm(v))!==-1;
+    L.push("B"+(i+1)+". "+(q.pre+" ___ "+q.post).trim());
+    L.push("    My answer: "+(v||"—")+(v?(ok?"  (correct)":"  (target: "+q.accept[0]+")"):""));
+  });
+  L.push("");
+  L.push("PRACTICE C — upgraded sentences");
+  QC.forEach(function(q,i){
+    L.push("C"+(i+1)+". Original: "+q.src.replace(/[“”]/g,""));
+    L.push("    My upgrade: "+((S.c[q.id]||"").trim()||"—"));
+    L.push("    Model: "+q.model);
+  });
+  L.push("");
+  L.push("FINAL TASK — MY OVERVIEW");
+  L.push("Chart: internet access 40%→92%, landlines 95%→30%, mobiles 20%→97% (2000–2020).");
+  L.push((S.ov||"").trim()||"—");
+  L.push("");
+  L.push("Model overview: Overall, there was a dramatic rise in internet access and mobile phone ownership, while landline use saw a steep decline. By the end of the period, mobile phones and the internet had become almost universal, with both technologies present in over nine out of ten households.");
+  return L.join("\n");
+}
+
+/* ---- docx/doc builders ---- */
+function crc32(buf){if(!crc32.t){crc32.t=[];for(var n=0;n<256;n++){var c=n;for(var k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;crc32.t[n]=c>>>0}}var c=0xFFFFFFFF;for(var i=0;i<buf.length;i++)c=crc32.t[(c^buf[i])&255]^(c>>>8);return(c^0xFFFFFFFF)>>>0}
+function buildZip(files){var enc=new TextEncoder(),parts=[],central=[],off=0;files.forEach(function(f){var nm=enc.encode(f.name),d=f.data,crc=crc32(d);var h=new DataView(new ArrayBuffer(30));h.setUint32(0,0x04034b50,true);h.setUint16(4,20,true);h.setUint32(14,crc,true);h.setUint32(18,d.length,true);h.setUint32(22,d.length,true);h.setUint16(26,nm.length,true);parts.push(new Uint8Array(h.buffer),nm,d);var cv=new DataView(new ArrayBuffer(46));cv.setUint32(0,0x02014b50,true);cv.setUint16(4,20,true);cv.setUint16(6,20,true);cv.setUint32(16,crc,true);cv.setUint32(20,d.length,true);cv.setUint32(24,d.length,true);cv.setUint16(28,nm.length,true);cv.setUint32(42,off,true);central.push(new Uint8Array(cv.buffer),nm);off+=30+nm.length+d.length});var cdStart=off,cdSize=0;central.forEach(function(u){cdSize+=u.length});var e=new DataView(new ArrayBuffer(22));e.setUint32(0,0x06054b50,true);e.setUint16(8,files.length,true);e.setUint16(10,files.length,true);e.setUint32(12,cdSize,true);e.setUint32(16,cdStart,true);parts.push.apply(parts,central);parts.push(new Uint8Array(e.buffer));return new Blob(parts,{type:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"})}
+function docxFromText(title,text){
+  var enc=new TextEncoder();
+  var para=function(s,bold,size){return '<w:p><w:r><w:rPr>'+(bold?'<w:b/>':'')+'<w:sz w:val="'+(size||22)+'"/></w:rPr><w:t xml:space="preserve">'+esc(s)+'</w:t></w:r></w:p>'};
+  var today=new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});
+  var body=para("Grammar for IELTS Writing — "+title,true,32)+para("Date: "+today,false,20)+para("",false,20);
+  text.split(/\n/).forEach(function(line){body+=para(line,false,24)});
+  var doc='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>'+body+'<w:sectPr/></w:body></w:document>';
+  var ct='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>';
+  var rels='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>';
+  return buildZip([{name:"[Content_Types].xml",data:enc.encode(ct)},{name:"_rels/.rels",data:enc.encode(rels)},{name:"word/document.xml",data:enc.encode(doc)}]);
+}
+function docFromText(title,text){
+  var today=new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});
+  var paras=text.split(/\n/).map(function(l){return '<p style="font-family:Georgia;font-size:12pt">'+esc(l||' ')+'</p>'}).join('');
+  var html='<html xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="UTF-8"></head><body><h2 style="font-family:Arial">'+esc(title)+'</h2><p style="font-family:Arial;color:#666;font-size:11px">'+today+'</p>'+paras+'</body></html>';
+  return new Blob([html],{type:"application/msword"});
+}
+function dl(blob,fname){var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=fname;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},600)}
+function doDl(kind){
+  var t=compileText(),msg=document.getElementById("dlMsg");
+  if(S.ov.trim()===""&&Object.keys(S.b).length===0&&Object.keys(S.c).length===0&&answered()===0){
+    msg.textContent="Nothing to download yet — answer some tasks first.";return;
+  }
+  if(kind==="docx")dl(docxFromText("Task 1 Lab",t),"task1_lab_my_answers.docx");
+  else dl(docFromText("Task 1 Lab",t),"task1_lab_my_answers.doc");
+  msg.textContent="Downloaded ✓";msg.className="wc ok";
+  setTimeout(function(){msg.textContent="";msg.className="wc"},3000);
+}
+document.getElementById("dlDocx").addEventListener("click",function(){doDl("docx")});
+document.getElementById("dlDoc").addEventListener("click",function(){doDl("doc")});
+
+/* ---- sync to shared store for My Work ---- */
+function syncSheet(){
+  try{
+    var gs=JSON.parse(localStorage.getItem("gram_sheets")||"{}");
+    gs.t1lab={title:"Task 1 Lab — reports, graphs & processes",text:compileText(),updated:Date.now()};
+    localStorage.setItem("gram_sheets",JSON.stringify(gs));
+  }catch(e){}
+}
+
+updateProgress();
+</script>
+</body>
+</html>

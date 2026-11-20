@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#14532d">
+<title>Grammar for IELTS Writing — Band 7+ Toolkit</title>
+<style>
+:root{
+  --bg:#f4f7ec; --paper:#ffffff; --ink:#1c2a17; --muted:#5f6d5a;
+  --line:#dde6cf; --brand:#166534; --brand-deep:#14532d; --brand-soft:#e3f5d4;
+  --lime:#65a30d; --lime-hot:#84cc16; --lime-soft:#ecfccb;
+  --amber:#b45309; --amber-soft:#fef3c7; --orange:#ea580c;
+  --radius:14px; --shadow:0 2px 10px rgba(28,42,23,.08);
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth; -webkit-text-size-adjust:100%;}
+body{background:var(--bg); color:var(--ink); font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif; line-height:1.55; min-height:100vh;}
+button{font:inherit; cursor:pointer; -webkit-tap-highlight-color:transparent;}
+a:focus-visible,button:focus-visible{outline:3px solid #a3e635; outline-offset:2px;}
+
+.topbar{position:sticky; top:0; z-index:50; background:rgba(255,255,255,.94); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+.topbar-in{max-width:1180px; margin:0 auto; padding:10px 16px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+.logo{display:flex; align-items:center; gap:10px; font-weight:800; font-size:16.5px; text-decoration:none; color:var(--ink);}
+.logo-badge{background:var(--brand-deep); color:#fff; border-radius:9px; padding:4px 9px; font-size:13px;}
+.logo-badge b{color:var(--lime-hot);}
+.nav{margin-left:auto; display:flex; gap:6px; flex-wrap:wrap;}
+.nav a{text-decoration:none; color:var(--ink); font-weight:600; font-size:14px; padding:9px 13px; border-radius:10px; min-height:44px; display:inline-flex; align-items:center;}
+.nav a:hover{background:var(--brand-soft);}
+.nav a.active{background:var(--brand); color:#fff;}
+
+.wrap{max-width:1180px; margin:0 auto; padding:22px 16px calc(90px + env(safe-area-inset-bottom));}
+
+.hero{background:linear-gradient(120deg,#14532d 0%,#166534 45%,#65a30d 82%,#84cc16 100%); color:#fff; border-radius:20px; padding:34px 28px; margin-bottom:26px; box-shadow:0 6px 22px rgba(20,83,45,.28);}
+.hero h1{font-size:clamp(24px,4vw,36px); margin-bottom:8px;}
+.hero h1::after{content:""; display:block; width:90px; height:5px; border-radius:99px; margin-top:12px; background:linear-gradient(90deg,#fbbf24,#fb923c);}
+.hero p{opacity:.92; max-width:680px; font-size:15.5px;}
+.hero .stats{display:flex; gap:14px; margin-top:18px; flex-wrap:wrap;}
+.hero .stat{background:rgba(255,255,255,.14); border-radius:12px; padding:10px 16px; font-size:14px;}
+.hero .stat b{font-size:20px; display:block;}
+
+.sectitle{font-size:20px; margin:28px 0 14px; display:flex; align-items:center; gap:10px;}
+.sectitle::before{content:""; width:8px; height:26px; border-radius:4px; background:linear-gradient(180deg,var(--lime-hot),var(--orange));}
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(330px,1fr)); gap:18px;}
+.card{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px; display:flex; flex-direction:column; gap:10px; text-decoration:none; color:var(--ink); transition:transform .12s, box-shadow .15s;}
+a.card:hover{transform:translateY(-2px); box-shadow:0 8px 22px rgba(20,83,45,.16);}
+.lcard{border-top:5px solid var(--tc,var(--brand));}
+.lcard .top{display:flex; gap:12px; align-items:flex-start;}
+.lcard .num{width:38px; height:38px; border-radius:10px; background:var(--tc,var(--brand)); color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;}
+.lcard h2{font-size:18px;}
+.lcard .sub{color:var(--muted); font-size:13.5px; margin-top:-4px;}
+.tag{display:inline-block; font-size:11px; font-weight:700; letter-spacing:.6px; padding:3px 9px; border-radius:99px; background:var(--brand-soft); color:var(--brand); text-transform:uppercase; width:max-content;}
+.tag.amber{background:var(--amber-soft); color:var(--amber);}
+.progress-line{display:flex; align-items:center; gap:10px; font-size:13px; color:var(--muted);}
+.bar2{flex:1; height:8px; background:#e4ebd6; border-radius:99px; overflow:hidden;}
+.bar2 i{display:block; height:100%; background:linear-gradient(90deg,var(--lime),var(--lime-hot)); border-radius:99px; transition:width .3s;}
+.big-card{background:linear-gradient(135deg,#fff,#f4fbe6); border:2px solid var(--lime);}
+.big-card.gym2{background:linear-gradient(135deg,#fff,#fef9e7); border-color:#f59e0b;}
+.big-card h2{font-size:20px;}
+.big-card .go{margin-top:auto; display:inline-flex; align-items:center; gap:8px; font-weight:800; color:var(--brand);}
+@media (max-width:920px){.grid{grid-template-columns:1fr;}}
+@media (max-width:480px){.wrap{padding:16px 12px calc(90px + env(safe-area-inset-bottom));} .hero{padding:24px 18px; border-radius:16px;}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <span class="logo"><span class="logo-badge"><b>GF</b></span> Grammar for IELTS Writing</span>
+  <nav class="nav">
+    <a href="index.html" class="active">Home</a>
+    <a href="gym.html">Paraphrase Gym</a>
+    <a href="task1.html">Task 1 Lab</a>
+    <a href="mywork.html">My Work</a>
+  </nav>
+</div></header>
+<main class="wrap">
+  <div class="hero">
+    <h1>Grammar that lifts your Writing to Band 7+</h1>
+    <p>Eight deep 90-minute lessons on the structures examiners reward — conditionals, concession, participles, relative clauses, nominalisation, cleft sentences and inversion — plus a paraphrase gym and a Task 1 lab. Your answers are saved in this browser and can be downloaded as Word files.</p>
+    <div class="stats" id="stats">
+      <div class="stat"><b id="stAns">0</b>questions answered</div>
+      <div class="stat"><b id="stAcc">–</b>first-try accuracy</div>
+      <div class="stat"><b>8</b>grammar lessons</div>
+    </div>
+  </div>
+
+  <h2 class="sectitle">Grammar lessons for Writing Task 2</h2>
+  <div class="grid" id="lessons"></div>
+
+  <h2 class="sectitle">Train the skill</h2>
+  <div class="grid">
+    <a class="card big-card gym2" href="gym.html">
+      <span class="tag amber">Paraphrase power</span>
+      <h2>⚡ Paraphrase Gym</h2>
+      <div class="sub">Turn plain Band 5–6 sentences into Band 7+ ones. Three levels: Guided → Mixed → whole-Paragraph upgrades. Try the 15-minute Sprint mode under exam pressure.</div>
+      <div class="progress-line"><div class="bar2"><i id="gymBar" style="width:0%"></i></div><span id="gymLab">0/62</span></div>
+      <span class="go">Open the Gym →</span>
+    </a>
+    <a class="card big-card" href="task1.html">
+      <span class="tag">Writing Task 1</span>
+      <h2>📊 Task 1 Lab</h2>
+      <div class="sub">How the same structures work in reports: participles for trends, passives for processes, comparatives, and nominalisation for a strong overview. With practice and model answers.</div>
+      <div class="progress-line"><div class="bar2"><i id="t1Bar" style="width:0%"></i></div><span id="t1Lab">0/0</span></div>
+      <span class="go">Open the Lab →</span>
+    </a>
+    <a class="card big-card" href="mywork.html" style="border-color:var(--orange); background:linear-gradient(135deg,#fff,#fff4ec);">
+      <span class="tag" style="background:#ffedd5;color:#c2410c">Portfolio</span>
+      <h2>📁 My Work</h2>
+      <div class="sub">Everything you have written across all lessons, the Gym and the Lab — in one place. Download it all as a single Word file for your teacher.</div>
+      <span class="go">See my work →</span>
+    </a>
+  </div>
+
+  <p style="margin-top:26px;color:var(--muted);font-size:13.5px">Tip: answers are stored only in this browser. Download your work regularly — clearing browser data erases it.</p>
+</main>
+<script>
+"use strict";
+const LESSONS=[
+ {f:"conditionals.html", k:"cond-state-v2", n:1, t:"Conditionals", s:"Types 1–3, mixed, Were…to / Had / Should, Unless, Even if", c:"#166534"},
+ {f:"concession.html", k:"conc-state-v1", n:2, t:"Concession", s:"Although, Despite, While, Admittedly… Nevertheless", c:"#65a30d"},
+ {f:"participles.html", k:"part-state-v1", n:3, t:"Participles", s:"-ing results, Having + V3, Faced with…, Not + -ing", c:"#ea580c"},
+ {f:"relative-clauses.html", k:"rel-state-v1", n:4, t:"Relative Clauses", s:"who / which / whose, , which, reduced clauses", c:"#b45309"},
+ {f:"nominalisation.html", k:"nom-state-v1", n:5, t:"Nominalisation", s:"Verbs and adjectives into nouns — instant academic weight", c:"#4d7c0f"},
+ {f:"cleft.html", k:"cleft-state-v1", n:6, t:"Cleft Sentences", s:"It is … that, What … is, The reason why … is that", c:"#ca8a04"},
+ {f:"inversion-1.html", k:"inv1-state-v1", n:7, t:"Inversion · Part 1", s:"Not only, Only by / Only when, Rarely, So … that", c:"#15803d"},
+ {f:"inversion-2.html", k:"inv2-state-v1", n:8, t:"Inversion · Part 2", s:"Hardly… when, Not until, Only after, Such is, Little do", c:"#a16207"},
+];
+function getState(k){try{return JSON.parse(localStorage.getItem(k)||"null")}catch(e){return null}}
+let totA=0, totC=0, totQ=0;
+const cards = LESSONS.map(L=>{
+  const st=getState(L.k); let a=0,c=0,tot=0;
+  if(st&&st.first){const v=Object.values(st.first); a=v.length; c=v.filter(x=>x===true).length;}
+  totA+=a; totC+=c;
+  const pct=a?Math.round(c/a*100):0;
+  const label=a?`${a} answered · ${pct}% first-try`:"not started";
+  const w=a?Math.min(100,Math.round(a/60*100)):0;
+  return `<a class="card lcard" style="--tc:${L.c}" href="${L.f}">
+    <div class="top"><div class="num">${L.n}</div><div><h2>${L.t}</h2><div class="sub">${L.s}</div></div></div>
+    <div class="progress-line"><div class="bar2"><i style="width:${a?Math.max(6,w):0}%"></i></div><span>${label}</span></div>
+  </a>`;
+}).join("");
+document.getElementById("lessons").innerHTML=cards;
+document.getElementById("stAns").textContent=totA;
+document.getElementById("stAcc").textContent=totA?Math.round(totC/totA*100)+"%":"–";
+/* gym progress */
+const g=getState("mix-state-v1");
+const gd=g&&g.done?Object.values(g.done).filter(Boolean).length:0;
+document.getElementById("gymBar").style.width=Math.round(gd/62*100)+"%";
+document.getElementById("gymLab").textContent=gd+"/62";
+/* task1 progress */
+const t=getState("t1lab-state-v1");
+let ta=0,tq=0;
+if(t&&t.first){const v=Object.values(t.first); ta=v.filter(x=>x!==null).length; tq=v.length;}
+document.getElementById("t1Bar").style.width=(tq?Math.round(ta/tq*100):0)+"%";
+document.getElementById("t1Lab").textContent=ta+" answered";
+</script>
+</body>
+</html>

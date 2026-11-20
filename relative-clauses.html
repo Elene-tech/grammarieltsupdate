@@ -1,0 +1,724 @@
+<meta charset="UTF-8">
+<title>Relative Clauses in Task 2</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap">
+<style>
+/* Layout: exam-paper column on graph paper. Brand green hero band, teal IELTS accent, sticky progress bar with section chips. */
+:root{
+  --bg:#FAF6EE;--surface:#FFFEFA;--fg:#16241C;--muted:#566359;--line:#D8D3C2;--grid:rgba(11,110,117,.07);
+  --band:#1B4332;--band-fg:#F3EFE2;--gold:#C9A84C;--warn:#B8420F;--gold-soft:#F6EBC8;--warn-soft:#FCE9DC;
+  --teal:#0B6E75;--teal-soft:#DCEFEF;--ok:#1E6B43;--ok-bg:#E0F1E6;--bad:#A8261E;--bad-bg:#FBE6E3;--mark:#FFF0B8;
+  --f-d:'Source Serif 4',Georgia,serif;--f-b:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;--f-m:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E1914;--surface:#15241D;--fg:#ECEADD;--muted:#A3B0A7;--line:#2A3C33;--grid:rgba(92,200,206,.07);
+  --band:#0A1F16;--band-fg:#F3EFE2;--gold:#D9BC63;--warn:#FF8A52;--gold-soft:#3E3718;--warn-soft:#4A2A18;
+  --teal:#5CC8CE;--teal-soft:#123A3D;--ok:#7AD7A3;--ok-bg:#17402D;--bad:#FF9088;--bad-bg:#432220;--mark:#4A4217;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1914;--surface:#15241D;--fg:#ECEADD;--muted:#A3B0A7;--line:#2A3C33;--grid:rgba(92,200,206,.07);
+  --band:#0A1F16;--band-fg:#F3EFE2;--gold:#D9BC63;--warn:#FF8A52;--gold-soft:#3E3718;--warn-soft:#4A2A18;
+  --teal:#5CC8CE;--teal-soft:#123A3D;--ok:#7AD7A3;--ok-bg:#17402D;--bad:#FF9088;--bad-bg:#432220;--mark:#4A4217;color-scheme:dark}
+
+*{box-sizing:border-box}
+body{margin:0;background-color:var(--bg);color:var(--fg);font:18px/1.6 var(--f-b);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px}
+.wrap{max-width:960px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-d);text-wrap:balance;line-height:1.2;margin:0}
+p{margin:0 0 .8em}
+.muted{color:var(--muted)}
+.mono{font-family:var(--f-m)}
+
+/* hero */
+.hero{background:var(--band);color:var(--band-fg);border-bottom:4px solid var(--gold);padding-block:36px 30px;position:relative;overflow:hidden}
+.hero::after{content:"who · which · whose";position:absolute;right:-10px;bottom:-14px;font:500 74px/1 var(--f-m);color:rgba(243,239,226,.06);white-space:nowrap;pointer-events:none}
+.kicker{font:500 12px/1 var(--f-m);letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.hero h1{font-size:clamp(32px,6vw,52px);font-weight:700;margin-bottom:10px}
+.hero .sub{font-size:18px;max-width:34em;margin-bottom:18px;color:#E4E0D0}
+.meta{display:flex;flex-wrap:wrap;gap:8px 18px;list-style:none;margin:0;padding:0;font:400 13px var(--f-m);color:#CFE6E3}
+.meta li::before{content:"";display:inline-block;width:7px;height:7px;background:var(--gold);margin-right:8px}
+
+/* sticky bar */
+.bar{position:static;z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.barin{display:flex;flex-direction:column;gap:6px;padding-block:8px}
+.stats{display:flex;flex-wrap:wrap;align-items:center;gap:4px 18px;font:400 14px var(--f-m)}
+.stats b{font-weight:500;color:var(--teal)}
+.stats .sp{flex:1}
+.pbar{height:4px;background:var(--line);border-radius:2px;overflow:hidden}
+.pbar i{display:block;height:100%;width:0;background:var(--teal);transition:width .3s}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}
+.chip{flex:none;text-decoration:none;color:var(--fg);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:14px;display:flex;gap:6px;align-items:baseline;background:var(--bg)}
+.chip small{font:400 12px var(--f-m);color:var(--muted)}
+.chip.done{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+.chip.done small{color:var(--ok)}
+.chip:focus-visible,.btn:focus-visible,.opt:focus-visible,.segb:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+
+/* sections */
+main{padding-block:10px 60px}
+.sec{padding-block:38px 6px;border-top:1px solid var(--line);scroll-margin-top:110px}
+.sec:first-child{border-top:0}
+.sec-h{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:baseline;margin-bottom:18px}
+.time{font:500 13px var(--f-m);color:var(--teal);border:1px solid var(--teal);padding:2px 8px;border-radius:3px;grid-row:span 2;align-self:start;margin-top:6px}
+.sec-h h2{font-size:30px}
+.lead{grid-column:2;color:var(--muted);margin:0}
+.sec.stretch .time{color:var(--warn);border-color:var(--warn)}
+.ex{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:20px;margin-bottom:22px}
+.ex>h3{font:500 13px/1.3 var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:6px}
+.ex>.task{font-weight:600;margin-bottom:14px}
+.qs{margin:0;padding:0;list-style:none;counter-reset:q;display:flex;flex-direction:column;gap:14px}
+.qs>li{counter-increment:q;display:grid;grid-template-columns:32px 1fr;gap:0 6px;min-width:0}
+.qs>li::before{content:counter(q);font:500 15px/1.9 var(--f-m);color:var(--muted)}
+.qs>li>*{grid-column:2;min-width:0}
+.qp{margin-bottom:8px}
+.wrongs{background:var(--bad-bg);border-radius:4px;padding:1px 6px;text-decoration:line-through;text-decoration-color:var(--bad)}
+.opts{display:grid;gap:6px}
+.opt{text-align:left;font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px 12px;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--teal);background:var(--teal-soft)}
+.opt.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:500}
+.opt.bad{background:var(--bad-bg);border-color:var(--bad);color:var(--bad);opacity:.8}
+.fb{font-size:16px;margin:8px 0 0;padding:7px 10px;border-radius:6px;background:var(--teal-soft)}
+.fb.ok{background:var(--ok-bg);color:var(--ok)}.fb.bad{background:var(--bad-bg);color:var(--bad)}
+.gi{padding:8px 10px;border:1px solid transparent;border-radius:6px}
+.gi.ok{background:var(--ok-bg);border-color:var(--ok)}.gi.bad{background:var(--bad-bg);border-color:var(--bad)}
+.gi .fb{background:transparent;padding:4px 0 0;margin:0;color:inherit}
+select,input[type=text],textarea{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:5px;padding:5px 8px;max-width:100%}
+input[type=text]{border-bottom:2px solid var(--teal);min-height:40px;font-family:var(--f-m);font-size:18px}
+select{min-height:40px}
+textarea{width:100%;resize:vertical;line-height:1.5}
+.hint{font:500 17px var(--f-m);color:var(--warn);background:var(--warn-soft);padding:2px 9px;border-radius:4px;margin-left:8px;white-space:nowrap}
+.btn{font:500 16px var(--f-b);background:var(--teal);color:#fff;border:1px solid var(--teal);border-radius:6px;padding:8px 16px;cursor:pointer}
+:root[data-theme="dark"] .btn{color:#06201f}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn{color:#06201f}}
+.btn.ghost{background:transparent;color:var(--teal)}
+.btn.sm{padding:6px 12px;font-size:15px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:14px}
+.sum{font:400 15px var(--f-m);color:var(--muted)}
+.si textarea{margin:6px 0}
+.plain{margin-bottom:4px}
+.use{display:inline-block;font:500 16px var(--f-m);color:var(--warn);background:var(--warn-soft);padding:3px 11px;border-radius:4px;margin-bottom:6px}
+.model{background:var(--teal-soft);border-radius:6px;padding:12px 14px;margin-top:8px;font-size:17px}
+.model p{margin:0 0 6px}
+.note{font-size:15px;color:var(--muted)}
+.nudge{font-size:15px;color:var(--warn);margin:4px 0 0}
+.rate{display:inline-flex;gap:6px;flex-wrap:wrap}
+
+/* teaching components */
+.map{display:grid;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface);margin-bottom:22px}
+.map div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;padding:10px 14px;border-top:1px solid var(--line)}
+.map div:first-child{border-top:0}
+.map b{font-weight:600}.map span{font:500 16px var(--f-m);color:var(--teal)}
+.tblh{font:500 13px/1.3 var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:22px 0 8px}
+.tbl{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.grp{font:500 13px var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:var(--teal);background:var(--bg);padding:10px 16px;border-top:1px solid var(--line)}
+.grp:first-child{border-top:0}
+.tr{display:grid;grid-template-columns:190px minmax(0,1fr);gap:6px 22px;padding:16px;border-top:1px solid var(--line)}
+.tr>div{min-width:0}
+.tr .st{font:600 20px/1.25 var(--f-d);grid-row:1/span 4}
+.tr .fm{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:4px}
+.tr .fm .c1,.tr .fm .c2{font:500 16px/1.4 var(--f-m);padding:6px 11px;border-radius:6px;color:var(--fg)}
+.tr .fm .c1{background:var(--teal-soft);border:1px solid var(--teal)}
+.tr .fm .c2{background:var(--gold-soft);border:1px solid var(--gold)}
+.tr .fm .sep{font:500 20px var(--f-m);color:var(--muted)}
+.tr .uj{font-size:16px;color:var(--muted)}
+.tr .exs{font-size:17.5px}
+.tr .wo{font-size:16px;color:var(--warn)}
+.tr b{background:var(--mark);font-weight:500;padding:0 2px;border-radius:2px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:15px;margin:0 0 10px}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:6px}
+textarea#sheet{font:400 14px/1.5 var(--f-m);margin-top:8px}
+@media (max-width:760px){
+  .tr{grid-template-columns:1fr}.tr .st{grid-row:auto}
+  .map div{grid-template-columns:1fr;gap:2px}
+  .sec-h{grid-template-columns:1fr}.time{grid-row:auto;justify-self:start;margin:0}.lead{grid-column:1}
+}
+.flip{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:stretch;margin:14px 0 6px}
+.flip>div{padding:12px 14px;border-radius:6px;background:var(--bg);border:1px solid var(--line)}
+.flip small{display:block;font:500 11px var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.flip .ar{display:flex;align-items:center;justify-content:center;border:0;background:none;padding:0;font:500 22px var(--f-m);color:var(--teal)}
+.flip .to{background:var(--teal-soft);border-color:var(--teal)}
+.flip .no{background:var(--bad-bg);border-color:var(--bad)}
+.flip small b{font-weight:500}
+@media (max-width:640px){.flip{grid-template-columns:1fr}.flip .ar{transform:rotate(90deg)}}
+.ladder{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:10px 0 0}
+.ladder>div{border-top:3px solid var(--line);padding:8px 0 0}
+.ladder>div:nth-child(2){border-color:var(--teal)}.ladder>div:nth-child(3){border-color:var(--gold)}
+.ladder small{display:block;font:500 11px var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:640px){.ladder{grid-template-columns:1fr}}
+.steps{margin:10px 0 0;padding-left:1.2em}.steps li{margin-bottom:4px}
+.read{font-family:var(--f-d);font-size:20px;line-height:1.75;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px 20px;margin-bottom:14px}
+.read mark{background:var(--mark);color:var(--fg);padding:1px 2px;border-radius:2px}
+.read .tg{font:500 11px var(--f-m);background:var(--teal);color:#fff;border-radius:3px;padding:0 4px;margin-right:4px;vertical-align:2px}
+:root[data-theme="dark"] .read .tg{color:#06201f}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .read .tg{color:#06201f}}
+.banks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:22px}
+.bank{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px}
+.bank h3{font-size:18px;margin-bottom:8px}
+.bank ul{list-style:none;margin:0;padding:0;font-size:16px}
+.bank li{padding:4px 0;border-top:1px dotted var(--line)}
+.bank li:first-child{border-top:0}
+.bank b{font-weight:600;color:var(--teal)}
+@media (max-width:700px){.banks{grid-template-columns:1fr}}
+.wordbank{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px;padding:10px;border:1px dashed var(--teal);border-radius:6px;font:400 16px var(--f-m)}
+.wordbank span{background:var(--teal-soft);padding:2px 8px;border-radius:4px}
+.seg{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.segb{font:500 15px var(--f-b);background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:999px;padding:5px 14px;cursor:pointer}
+.segb.on{background:var(--teal);border-color:var(--teal);color:#fff}
+:root[data-theme="dark"] .segb.on{color:#06201f}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .segb.on{color:#06201f}}
+.prompt{margin:0 0 10px;padding:10px 14px;background:var(--bg);border-left:3px solid var(--gold);font-family:var(--f-d);font-size:17px}
+.wmeta{display:flex;gap:14px;font:400 15px var(--f-m);margin-top:4px}
+.chk{list-style:none;margin:10px 0 0;padding:0;font-size:16px;display:grid;gap:3px}
+.chk li::before{content:"○";font-family:var(--f-m);margin-right:8px;color:var(--muted)}
+.chk li.y{color:var(--ok)}.chk li.y::before{content:"✓";color:var(--ok)}
+.chk li.w{color:var(--bad)}.chk li.w::before{content:"!";color:var(--bad)}
+.timer{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.clock{font:500 26px var(--f-m);color:var(--warn)}
+.review{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:20px}
+.review ul{margin:8px 0 0;padding-left:1.2em;columns:2;column-gap:28px}
+@media (max-width:600px){.review ul{columns:1}}
+.foot{padding-block:10px 40px;color:var(--muted);font-size:14px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<header class="hero"><div class="wrap">
+  <p class="kicker">Target English · IELTS Grammar</p>
+  <h1>Relative Clauses in Task 2</h1>
+  <p class="sub">Add detail to your nouns with who, which, whose and , which. Fewer short sentences, more Band 7+.</p>
+  <ul class="meta"><li>90 minutes</li><li>Writing Task 2</li><li>Discuss both views · Opinion · Advantages and disadvantages</li></ul>
+</div></header>
+
+<div class="bar"><div class="wrap barin">
+  <div class="stats"><span>Answered <b id="st-a">0/0</b></span><span>Correct first time <b id="st-c">0</b></span><span>Accuracy <b id="st-p">–</b></span><span class="sp"></span><span id="st-s" class="muted"></span><span id="st-save" class="muted"></span></div>
+  <div class="pbar"><i id="bar-f"></i></div>
+  <nav class="chips" id="chips" aria-label="Lesson sections"></nav>
+</div></div>
+
+<main class="wrap">
+
+<section class="sec" id="s-w">
+  <div class="sec-h"><span class="time">0–8 min</span><h2>Warm-up: spot the error</h2><p class="lead">Each sentence has a mistake. Choose the corrected version. This shows you what to watch today.</p></div>
+  <div class="ex"><h3>Choose the correct sentence</h3><ol class="qs" id="m-w"></ol></div>
+</section>
+
+<section class="sec" id="s-i">
+  <div class="sec-h"><span class="time">8–22 min</span><h2>Input: add detail without new sentences</h2><p class="lead">A relative clause adds information to a noun. It lets you build one rich sentence instead of three short ones.</p></div>
+  <div class="ex"><h3>Why it matters</h3>
+    <p>Band 6 essays use many short sentences. Band 7+ essays pack in more information with <b>who</b>, <b>which</b>, <b>whose</b> and <b>, which</b>.</p>
+    <div class="flip"><div><small>Band 6</small>Some students sleep too little. They often perform badly.</div><div class="ar">→</div><div class="to"><small>Band 7+</small>Students <b>who sleep too little</b> often perform badly.</div></div>
+  </div>
+  <p class="tblh">Reference table: six structures</p>
+  <div class="legend"><span><i style="background:var(--teal-soft);border:1px solid var(--teal)"></i>the noun you describe</span><span><i style="background:var(--gold-soft);border:1px solid var(--gold)"></i>the relative clause</span></div>
+  <div class="tbl" id="tbl"></div>
+  <div class="ex" style="margin-top:22px"><h3>Defining or non-defining?</h3>
+    <p><b>Defining</b> clauses tell us <i>which</i> people or things. There are no commas. <b>Non-defining</b> clauses add extra information. They have commas, and you can delete them without changing the main message.</p>
+    <div class="flip"><div><small>Defining (no commas)</small>Students <b>who sleep badly</b> often fail exams.</div><div class="ar">→</div><div class="to"><small>Non-defining (commas)</small>Tokyo<b>, which has 14 million people,</b> has an excellent metro.</div></div>
+    <p class="note">Test: delete the clause. “Students often fail exams” changes the meaning, so it is defining. “Tokyo has an excellent metro” still works, so it is non-defining.</p></div>
+  <div class="ex"><h3>See the upgrade</h3><div id="up"></div></div>
+  <div class="ex"><h3>Sort by structure</h3><p class="task">Which structure does each sentence use?</p><div id="m-i"></div></div>
+</section>
+
+<section class="sec" id="s-p">
+  <div class="sec-h"><span class="time">22–40 min</span><h2>Practice: recognise it, then write it yourself</h2><p class="lead">Five steps: check, choose, type, combine, rewrite.</p></div>
+  <div class="ex"><h3>A · Check the sentence</h3><p class="task">Is the sentence correct? Look at the pronoun and the commas.</p><ol class="qs" id="m-pa"></ol></div>
+  <div class="ex"><h3>B · Choose the best answer</h3><ol class="qs" id="m-pb"></ol></div>
+  <div class="ex"><h3>C · Type the missing word</h3><p class="task">Write the correct relative pronoun. Sometimes more than one answer is possible.</p><div id="m-pc"></div></div>
+  <div class="ex"><h3>D · Combine the sentences</h3><p class="task">Join each pair into one Band 7+ sentence with the structure shown. Write first, then open the model.</p><div id="m-pd"></div></div>
+  <div class="ex"><h3>E · Shorten the clause</h3><p class="task">Rewrite each sentence as a reduced relative clause. Delete “who / that + is / are / was” and keep the participle. Tip: copy your three best sentences by hand into your notebook.</p><div id="m-pe"></div></div>
+</section>
+
+<section class="sec" id="s-r">
+  <div class="sec-h"><span class="time">40–55 min</span><h2>Reading: the structure at work</h2><p class="lead">Read two model paragraphs. Each highlighted sentence has a letter.</p></div>
+  <div class="ex"><h3>Text 1 · Discuss both views · social media</h3>
+    <div class="read">Social media is now part of daily life. <mark><span class="tg">A</span>Teenagers who spend several hours online often sleep less and concentrate less at school.</mark> <mark><span class="tg">B</span>Social media, which was designed to connect people, can leave users feeling more isolated.</mark> <mark><span class="tg">C</span>Countries whose governments regulate online content have reduced the spread of false information.</mark> <mark><span class="tg">D</span>Studies published in recent years suggest a link between heavy use and anxiety.</mark> <mark><span class="tg">E</span>The extent to which social media is harmful depends on how people use it.</mark> For these reasons, users should set clear limits.</div>
+    <p class="task">Which structure is used in each highlighted sentence?</p><div id="m-r1"></div><ol class="qs" id="m-r1q" style="margin-top:14px"></ol></div>
+  <div class="ex"><h3>Text 2 · Opinion · tourism</h3>
+    <div class="read">Tourism brings both benefits and problems. <mark><span class="tg">A</span>Small towns whose economies depend on visitors can earn large incomes.</mark> <mark><span class="tg">B</span>Some historic cities, which receive millions of visitors every year, are struggling with overcrowding.</mark> <mark><span class="tg">C</span>Visitors arriving in large numbers can damage fragile places, which makes careful planning essential.</mark> <mark><span class="tg">D</span>Tourism is an industry in which governments must balance profit and protection.</mark> Overall, careful management is the key.</div>
+    <p class="task">Which structure is used in each highlighted sentence?</p><div id="m-r2"></div><ol class="qs" id="m-r2q" style="margin-top:14px"></ol></div>
+</section>
+
+<section class="sec" id="s-v">
+  <div class="sec-h"><span class="time">55–70 min</span><h2>Vocabulary: ready-made chunks</h2><p class="lead">These phrases make your relative clauses sound natural and academic. Learn them as chunks.</p></div>
+  <div class="banks" id="banks"></div>
+  <div class="ex"><h3>Use the phrases</h3><p class="task">Complete each sentence with a phrase from the box. Use each phrase once.</p><div class="wordbank" id="wb-v"></div><div id="m-v"></div></div>
+</section>
+
+<section class="sec" id="s-o">
+  <div class="sec-h"><span class="time">70–85 min</span><h2>Production: your own sentences</h2><p class="lead">Write single sentences first, then a short paragraph.</p></div>
+  <div class="ex"><h3>A · Write your own sentence</h3><p class="task">Write one sentence for each topic with the structure shown. Your sentence can be different from the model, so check the structure, not the words.</p><div id="m-oa"></div></div>
+  <div class="ex"><h3>B · Write a paragraph</h3><p class="task">Choose one question. Write 60–90 words and use at least two different structures from today.</p><div id="m-ob"></div></div>
+</section>
+
+<section class="sec" id="s-e">
+  <div class="sec-h"><span class="time">85–90 min</span><h2>Exit ticket</h2><p class="lead">Three quick questions to check what stayed with you.</p></div>
+  <div class="ex"><ol class="qs" id="m-e"></ol></div>
+  <p class="note">Remember: try to include one relative clause in every body paragraph.</p>
+</section>
+
+<section class="sec stretch" id="s-s">
+  <div class="sec-h"><span class="time">Stretch</span><h2>Challenge for fast finishers</h2><p class="lead">Optional. These tasks are harder and are not part of the main score.</p></div>
+  <div class="ex"><h3>S1 · Join with whose</h3><p class="task">Join each pair into one sentence with <b>whose</b>.</p><div id="m-s1"></div></div>
+  <div class="ex"><h3>S2 · Find and fix</h3><p class="task">Each sentence has a mistake. Write the corrected version.</p><div id="m-s2"></div></div>
+  <div class="ex"><h3>S3 · Join with a non-defining clause</h3><p class="task">Join each pair into one sentence. Put the extra information between commas.</p><div id="m-s3"></div></div>
+  <div class="ex"><h3>S4 · Ten-minute paragraph</h3><div id="m-s4"></div></div>
+</section>
+
+<section class="sec" id="s-x">
+  <div class="sec-h"><span class="time">Review</span><h2>Your review</h2><p class="lead">Questions you missed on the first try appear here. Go back to them next lesson.</p></div>
+  <div class="review"><div id="rv"></div>
+  <p style="margin-top:18px"><b>My answers sheet.</b> <span class="muted">Everything you typed, in one place. Copy it and paste it into the Kwiga task or keep it for your notes.</span></p>
+  <textarea id="sheet" rows="10" readonly aria-label="My answers sheet"></textarea>
+  <div class="actions"><button class="btn" type="button" id="copysheet">Copy my answers</button><button class="btn ghost" type="button" id="reset">Start again</button><span class="sum" id="sheet-s"></span></div></div>
+</section>
+
+<p class="foot">Target English · Lesson on Relative Clauses in Task 2. Your answers stay in this page only.</p>
+</main>
+
+<script>
+(function(){
+const $=s=>document.querySelector(s);
+const SECS=[['w','Warm-up','0–8'],['i','Input','8–22'],['p','Practice','22–40'],['r','Reading','40–55'],['v','Vocabulary','55–70'],['o','Production','70–85'],['e','Exit','85–90']];
+function hs(str){let x=1779033703^str.length;for(let i=0;i<str.length;i++){x=Math.imul(x^str.charCodeAt(i),3432918353);x=x<<13|x>>>19}return x>>>0}
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function shuf(arr,key){const r=rng(hs(key));const a=arr.map((v,i)=>[v,i]);for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+const nm=s=>s.toLowerCase().replace(/[’‘]/g,"'").replace(/n't\b/g," not").replace(/[.,;!?]+$/,'').replace(/\s+/g,' ').trim();
+const ST={},MQ={},GB={},SB={},WB={};
+const KEY='rel-state-v1';
+const EMPTY=()=>({first:{},vals:{},mcq:{},shown:{},rated:{},checked:{},pi:{}});
+let SAVE=EMPTY();const PR={};let svT=null;
+function loadSave(){try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x&&x.first)SAVE=Object.assign(EMPTY(),x)}catch(e){}}
+function persist(){clearTimeout(svT);svT=setTimeout(()=>{let ok=true;try{localStorage.setItem(KEY,JSON.stringify(SAVE))}catch(e){ok=false}const el=$('#st-save');if(el)el.textContent=ok?'Saved on this device ✓':'Auto-save is off here. Use “Copy my answers” at the end.'},250)}
+function reg(id,sec,label){ST[id]={sec,label,first:null}}
+function rec(id,ok){if(ST[id]&&ST[id].first===null){ST[id].first=ok;SAVE.first[id]=ok;persist()}refresh()}
+const strip=x=>x.replace(/<[^>]+>/g,'').replace('___','…');
+function mcqApply(q,i,good){const M=MQ[q],li=document.getElementById(q),o=li.querySelector('.opt[data-i="'+i+'"]'),fb=li.querySelector('.fb');if(!o)return;fb.hidden=false;
+  if(good){li.dataset.done=1;o.classList.add('ok');li.querySelectorAll('.opt').forEach(b=>b.disabled=true);fb.className='fb ok';fb.innerHTML='<b>Correct.</b> '+M.e}
+  else{o.classList.add('bad');o.disabled=true;fb.className='fb bad';fb.textContent='Not quite. Try another option.'}}
+function rateText(id,good){const f=$('#r-'+id);f.hidden=false;f.className='fb '+(good?'ok':'bad');f.textContent=good?'Good. Keep this pattern for your essay.':'Compare each part with the model, then try the sentence again.'}
+function restore(){
+  Object.keys(SAVE.first).forEach(id=>{if(ST[id])ST[id].first=SAVE.first[id]});
+  Object.keys(SAVE.vals).forEach(id=>{const el=document.getElementById(id);if(el)el.value=SAVE.vals[id]});
+  Object.keys(SAVE.mcq).forEach(q=>{if(!MQ[q]||!document.getElementById(q))return;const sv=SAVE.mcq[q];sv.w.forEach(i=>mcqApply(q,i,false));if(sv.d)mcqApply(q,MQ[q].c,true)});
+  Object.keys(SAVE.checked).forEach(b=>{if(GB[b])checkGap(b)});
+  Object.keys(SAVE.shown).forEach(id=>{const m=$('#m-'+id);if(m){m.hidden=false;const b=document.querySelector('[data-show="'+id+'"]');if(b)b.hidden=true}});
+  Object.keys(SAVE.rated).forEach(id=>{if($('#r-'+id))rateText(id,String(SAVE.rated[id])==='1')});
+  Object.keys(WB).forEach(b=>{const pi=SAVE.pi[b]||0;WB[b].pi=pi;const wp=$('#wp-'+b);if(wp&&WB[b].cfg.prompts[pi])wp.innerHTML=WB[b].cfg.prompts[pi].t;document.querySelectorAll('[data-wpick="'+b+'"]').forEach(x=>x.classList.toggle('on',+x.dataset.i===pi));updW(b)});
+}
+function refreshSheet(){const ta=$('#sheet');if(!ta)return;const out=['Relative Clauses in Task 2: my answers',''];
+  Object.entries(ST).forEach(([id,v])=>{const c=document.getElementById('c-'+id)||document.getElementById('w-'+id);if(!c||!c.value.trim())return;out.push(v.label+': '+(PR[id]?PR[id]+'\n   → ':'')+c.value.trim())});
+  ta.value=out.join('\n')}
+
+/* ---------- builders ---------- */
+function mcq(id,sec,label,prompt,opts,ci,exp){
+  reg(id,sec,label);MQ[id]={c:ci,e:exp};
+  const o=shuf(opts,id).map(([t,i])=>`<button class="opt" type="button" data-q="${id}" data-i="${i}">${t}</button>`).join('');
+  return `<li id="${id}"><p class="qp">${prompt}</p><div class="opts">${o}</div><p class="fb" hidden></p></li>`;
+}
+function gapBlock(bid,sec,lab,items,o){
+  GB[bid]={items,mode:o.mode};
+  const lis=items.map((it,n)=>{
+    const id=`${bid}-${n+1}`;reg(id,sec,`${lab} ${n+1}`);PR[id]=strip(it.s);
+    let ctl;
+    if(o.mode==='select'){
+      const opts=o.bank||shuf(it.opts,id).map(x=>x[0]);
+      ctl=`<select id="c-${id}" aria-label="Answer ${n+1}"><option value="">choose</option>${opts.map(x=>`<option>${x}</option>`).join('')}</select>`;
+    }else ctl=`<input id="c-${id}" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" size="${it.w||11}" aria-label="Answer ${n+1}">`;
+    ctl+=it.h?`<span class="hint">${it.h}</span>`:'';
+    const body=it.s.includes('___')?it.s.replace('___',ctl):`<p class="qp">${it.s}</p>${ctl}`;
+    return `<li class="gi" id="li-${id}"><div>${body}</div><p class="fb" id="f-${id}" hidden></p></li>`;
+  }).join('');
+  return `<ol class="qs">${lis}</ol><div class="actions"><button class="btn" type="button" data-check="${bid}">Check answers</button><span class="sum" id="sum-${bid}"></span></div>`;
+}
+function checkGap(bid){
+  const B=GB[bid];let ok=0,att=0;SAVE.checked[bid]=1;persist();
+  B.items.forEach((it,n)=>{
+    const id=`${bid}-${n+1}`,c=$('#c-'+id),v=c.value.trim(),li=$('#li-'+id),f=$('#f-'+id);
+    if(!v){li.className='gi';f.hidden=true;return}
+    att++;const acc=[].concat(it.a);
+    const good=B.mode==='select'?acc.includes(v):acc.map(nm).includes(nm(v));
+    if(good)ok++;
+    li.className='gi '+(good?'ok':'bad');f.hidden=false;
+    f.innerHTML=good?`<b>Correct.</b> ${it.e||''}`:`Answer: <b>${acc[0]}</b>. ${it.e||''}`;
+    rec(id,good);
+  });
+  $('#sum-'+bid).textContent=att?`${ok} of ${att} correct`:'Answer at least one question first.';
+}
+function selfBlock(bid,sec,lab,items){
+  const lis=items.map((it,n)=>{
+    const id=`${bid}-${n+1}`;reg(id,sec,`${lab} ${n+1}`);SB[id]=1;PR[id]=strip(it.p);
+    return `<li class="si" id="li-${id}"><div><p class="plain">${it.p}</p>${it.t?`<p class="use">Use: ${it.t}</p>`:''}
+      <textarea id="c-${id}" rows="2" data-d="${id}" placeholder="Write your sentence here" aria-label="Your sentence ${n+1}"></textarea>
+      <p class="nudge" id="n-${id}" hidden>Write your own version first, then compare it with the model.</p>
+      <button class="btn ghost sm" type="button" data-show="${id}">Show the model</button>
+      <div class="model" id="m-${id}" hidden><p><b>Model:</b> ${it.m}</p>${it.n?`<p class="note">${it.n}</p>`:''}
+      <p>Your sentence can be different from the model. Does it use the right structure correctly?</p><span class="rate"><button class="btn sm" type="button" data-rate="${id}" data-v="1">Yes, mine works</button><button class="btn sm ghost" type="button" data-rate="${id}" data-v="0">No, I need more practice</button></span><p class="fb" id="r-${id}" hidden></p></div></div></li>`;
+  }).join('');
+  return `<ol class="qs">${lis}</ol>`;
+}
+const NAMES={defining:'Defining who / which',nondef:'Non-defining , which / , who',whose:'Whose',prep:'Preposition + whom / which',whole:', which (whole idea)',reduced:'Reduced relative'};
+const PREPS=['in','to','on','of','for','with','by','at','from','about','through'];
+function detect(t){
+  const x=t.replace(/\r/g,'');
+  const words=(x.trim().match(/\S+/g)||[]).length,s=new Set();
+  const re=/(\S+)\s+(who|whom|which)\b/gi;let m;
+  while((m=re.exec(x))){
+    const prev=m[1].toLowerCase();const after=x.slice(m.index+m[0].length,m.index+m[0].length+90);
+    if(prev.endsWith(',')){
+      const cut=after.search(/[.!?]/);const seg=cut<0?after:after.slice(0,cut);
+      if(/,/.test(seg)&&/^\s+(is|are|was|were|has|have|had|can|receives|provides|offers|\w+s)\b/i.test(seg)&&m[2].toLowerCase()!=='which')s.add('nondef');
+      else if(m[2].toLowerCase()==='which'&&/,/.test(seg)&&!/^\s+(means|has led|have led|can cause|forced|makes|caused|leads|suggests)/i.test(seg))s.add('nondef');
+      else s.add('whole');
+    }else if(PREPS.includes(prev)){s.add('prep')}
+    else if(/^(.)*[a-z]$/.test(prev)){s.add('defining')}
+  }
+  if(/\bwhose\b/i.test(x))s.add('whose');
+  const stop=['is','was','has','does','as','this','its','his','us','always','also','often','was'];
+  const re2=/\b([a-z]+s)\s+(\w+ing|introduced|published|given|used|made|designed|affected|caused|based|employed|trained|educated)\b/gi;
+  while((m=re2.exec(x))){if(!stop.includes(m[1].toLowerCase()))s.add('reduced')}
+  const warns=[];
+  if(/,\s+that\s+(is|are|was|were|has|have|can|will|makes|means)\b/i.test(x))warns.push('Do not use “that” after a comma. Use which (things) or who (people).');
+  if(/(^|[.!?]\s+)which\b/.test(x))warns.push('A sentence cannot start with Which. Join it to the first sentence with a comma.');
+  if(/\b(in|to|on|for|with|of|by|at|from)\s+who\b/i.test(x))warns.push('After a preposition use whom (people) or which (things), not who.');
+  if(/\bwho[’']s\s+(economy|economies|population|children|parents|government|income|incomes|jobs|members|salary)\b/i.test(x))warns.push('Use whose, not who’s, to show possession.');
+  if(/\b(what)\s+(is|are|was|has|have|makes)\b/i.test(x)&&/,\s*what\b/i.test(x))warns.push('Do not use “what” as a relative pronoun. Use which.');
+  return{words,s,warns};
+}
+function writeBlock(bid,sec,lab,cfg){
+  WB[bid]={cfg,pi:0};reg(bid,sec,lab);
+  const seg=cfg.prompts.length>1?`<div class="seg">${cfg.prompts.map((p,i)=>`<button class="segb${i?'':' on'}" type="button" data-wpick="${bid}" data-i="${i}">${p.tab}</button>`).join('')}</div>`:'';
+  return `<div id="wb-${bid}">${seg}<blockquote class="prompt" id="wp-${bid}">${cfg.prompts[0].t}</blockquote>
+  ${cfg.timer?`<div class="timer"><span id="wt-${bid}" class="clock">10:00</span><button class="btn ghost sm" type="button" data-wtimer="${bid}">Start timer</button></div>`:''}
+  <textarea id="w-${bid}" data-w="${bid}" rows="8" placeholder="Write your paragraph here" aria-label="Your paragraph"></textarea>
+  <div class="wmeta"><span id="wc-${bid}">0 words</span><span class="muted">target ${cfg.min}–${cfg.max}</span><span class="muted" id="wf2-${bid}"></span></div>
+  <ul class="chk" id="wk-${bid}"></ul>
+  <div class="actions"><button class="btn" type="button" data-wcheck="${bid}">Check my paragraph</button><button class="btn ghost" type="button" data-wcopy="${bid}">Copy text</button><button class="btn ghost" type="button" data-wmodel="${bid}">Show a model</button><span class="sum" id="ws-${bid}"></span></div>
+  <div class="model" id="wm-${bid}" hidden></div>
+  <p class="note" style="margin-top:10px">Copy your paragraph and paste it into the writing task that follows this lesson, so your teacher can give feedback.</p></div>`;
+}
+function updW(bid){
+  const c=WB[bid].cfg,t=$('#w-'+bid).value,d=detect(t);
+  $('#wc-'+bid).textContent=d.words+' words';
+  const found=[...d.s].map(k=>NAMES[k]).join(', ');
+  $('#wf2-'+bid).textContent=found?'found: '+found:'';
+  const L=[[d.words>=c.min,`At least ${c.min} words`]];
+  if(c.req){c.req.forEach(r=>L.push([r.k.some(k=>d.s.has(k)),r.l]))}
+  else L.push([[...d.s].length>=2,'At least two different structures']);
+  const rows=L.map(([y,l])=>`<li class="${y?'y':''}">${l}</li>`);
+  if(d.warns.length)rows.push(`<li class="w">${d.warns[0]}</li>`);else if(d.words>5)rows.push('<li class="y">No common mistakes found</li>');
+  $('#wk-'+bid).innerHTML=rows.join('');
+  return{d,L};
+}
+
+/* ---------- content ---------- */
+const STRUCT=['Defining who / which','Non-defining , which / , who','Whose','Preposition + whom / which',', which (whole idea)','Reduced relative'];
+const TBL=[
+ ['Identify a noun (defining)'],
+ ['Defining who / which / that','noun | who / which / that + verb','Say exactly which people or things you mean','Employees <b>who</b> work from home often report higher job satisfaction.','No commas. Who for people, which for things. That is also possible. Never “what”. Do not repeat the object: the idea which many people support (not “support it”).'],
+ ['Whose','noun | whose + noun + verb','Show that something belongs to or belongs with the noun','Countries <b>whose</b> economies depend on tourism suffered badly during the pandemic.','Whose + noun. Never “who’s” (= who is). Whose works for people and things.'],
+ ['Preposition + whom / which','noun | preposition + whom / which + clause','Formal style. Typical in essays: the extent to which, an area in which','Education is an area <b>in which</b> governments should invest more.','After a preposition use whom (people) or which (things). Never who or that.'],
+ ['Add extra information (non-defining)'],
+ ['Non-defining , which / , who','noun | , who / which + extra information ,','Add a fact or comment. You could remove it','Singapore<b>, which</b> has an efficient public transport system<b>,</b> has relatively little congestion.','Two commas (or one at the end of the sentence). Only who / which, never that.'],
+ [', which (whole idea)','whole clause | , which + verb','Comment on the whole idea before the comma: a result or an opinion','Fuel prices have risen sharply<b>, which</b> has forced many families to use public transport.','Which refers to the whole idea. Never “that”. Never start a new sentence with Which.'],
+ ['Shorten the clause'],
+ ['Reduced relative','noun | -ing / -ed phrase','Make the sentence shorter and more academic','Students <b>studying</b> abroad often develop greater independence. / Measures <b>introduced</b> last year have reduced pollution.','Only when who / which is the subject. -ing = active, -ed = passive. Delete “who are” / “which were”.']
+];
+const UP=[
+ ['Defining','Some students do not get enough sleep. Those students often perform badly in exams.','Students who do not get enough sleep often perform badly in exams.'],
+ ['Non-defining','Online shopping is convenient for customers. It is putting small shops under pressure.','Online shopping, which is convenient for customers, is putting small shops under pressure.'],
+ ['Whose','Some countries depend on tourism. Their economies suffer when travel stops.','Countries whose economies depend on tourism suffer when travel stops.'],
+ ['Preposition + which','Education is important. Governments should invest more in it.','Education is an area in which governments should invest more.'],
+ [', which','Prices have risen sharply. This has forced families to cut costs.','Prices have risen sharply, which has forced families to cut costs.'],
+ ['Reduced relative','Students who study abroad often become more independent.','Students studying abroad often become more independent.']
+];
+const BANKS=[
+ ['Preposition + which',[['the extent to which','how far something is true'],['the way in which','how something is done'],['a context in which','a situation where'],['an area in which','a field where'],['the reason for which','why'],['a society in which','a place or system where']]],
+ ['After , which',[[', which means that','explains a result'],[', which has led to','a consequence'],[', which can cause','a possible effect'],[', which makes it harder to','a difficulty'],[', which is why','the reason'],[', which suggests that','a conclusion']]],
+ ['With whose',[['countries whose economies depend on …','a group of countries'],['families whose incomes are low','a group of families'],['people whose jobs are at risk','a group of people'],['students whose first language is not English','a group of students'],['companies whose profits are falling','a group of companies'],['cities whose populations are growing fast','a group of cities']]]
+];
+function build(){
+  Object.keys(ST).forEach(k=>delete ST[k]);
+  const W=[
+   ['Teachers which work long hours need more support.',['Teachers who work long hours need more support.','Teachers which work long hours need more support.','Teachers whose work long hours need more support.'],'Use <b>who</b> (or that) for people.'],
+   ['The city, that has a good metro, has little traffic.',['The city, which has a good metro, has little traffic.','The city, that has a good metro, has little traffic.','The city, what has a good metro, has little traffic.'],'After a comma use <b>which</b>, not that.'],
+   ['Countries who economy depends on oil are vulnerable.',['Countries whose economy depends on oil are vulnerable.','Countries who economy depends on oil are vulnerable.','Countries who’s economy depends on oil are vulnerable.'],'Use <b>whose</b> + noun to show possession.'],
+   ['Prices have risen, that makes life harder.',['Prices have risen, which makes life harder.','Prices have risen, that makes life harder.','Prices have risen, what makes life harder.'],'Use <b>, which</b> to comment on the whole idea.'],
+   ['This is the extent to that technology helps learners.',['This is the extent to which technology helps learners.','This is the extent to that technology helps learners.','This is the extent which to technology helps learners.'],'After a preposition use <b>which</b>.'],
+   ['The idea which many people support it is popular.',['The idea which many people support is popular.','The idea which many people support it is popular.','The idea which many people support it, is popular.'],'Do not repeat the object. <b>Which</b> already replaces “it”.']
+  ];
+  $('#m-w').innerHTML=W.map((w,i)=>mcq('w'+(i+1),'w','Warm-up '+(i+1),`<span class="wrongs">${w[0]}</span><br>Choose the correct version.`,w[1],0,w[2])).join('');
+  const fmt=f=>{const p=f.split(' | ');if(p.length<2)return `<span class="c1">${f}</span>`;return `<span class="c1">${p[0]}</span><span class="sep">+</span><span class="c2">${p[1]}</span>`};
+  $('#tbl').innerHTML=TBL.map(r=>r.length===1?`<div class="grp">${r[0]}</div>`:`<div class="tr"><div class="st">${r[0]}</div><div class="fm">${fmt(r[1])}</div><div class="uj"><strong>Use it to:</strong> ${r[2]}</div><div class="exs">${r[3]}</div><div class="wo"><strong>Watch out:</strong> ${r[4]}</div></div>`).join('');
+  $('#up').innerHTML=UP.map(u=>`<div class="flip"><div><small>Band 5–6</small>${u[1]}</div><div class="ar">→</div><div class="to"><small>Band 7+ · ${u[0]}</small>${u[2]}</div></div>`).join('');
+  $('#m-i').innerHTML=gapBlock('i','i','Sort',[
+   {s:'“Teachers who stay up to date with new methods usually get better results.”',a:'Defining who / which',e:'No commas: it tells us which teachers.'},
+   {s:'“London, which has a population of nearly nine million, has an extensive public transport network.”',a:'Non-defining , which / , who',e:'Extra information between commas.'},
+   {s:'“Countries whose economies rely on one industry are more vulnerable.”',a:'Whose',e:'Whose + noun.'},
+   {s:'“Education is the area in which governments should invest most.”',a:'Preposition + whom / which',e:'In which: preposition + which.'},
+   {s:'“Fuel prices have doubled, which has forced many families to use public transport.”',a:', which (whole idea)',e:'Which refers to the whole first idea.'},
+   {s:'“Students studying abroad often develop greater independence.”',a:'Reduced relative',e:'Students who study → students studying.'},
+   {s:'“The people with whom young adults live often influence their career choices.”',a:'Preposition + whom / which',e:'With whom: preposition + whom.'},
+   {s:'“Smartphones, which most teenagers own, can be a serious distraction.”',a:'Non-defining , which / , who',e:'Extra information between commas.'},
+   {s:'“Measures introduced last year have reduced air pollution.”',a:'Reduced relative',e:'Measures which were introduced → measures introduced.'},
+   {s:'“Many students rely on online tools, which can reduce their ability to think independently.”',a:', which (whole idea)',e:'Which refers to the whole idea: relying on tools.'}
+  ],{mode:'select',bank:STRUCT});
+  const PA=[
+   ['Students who study abroad often become independent.',0,'Defining clause: no commas, who for people.'],
+   ['Singapore which has a good metro has little traffic.',1,'Non-defining: use commas before and after the clause.'],
+   ['Tourism, that provides jobs, can also damage the environment.',1,'Never use that after a comma. Use which.'],
+   ['Employees whose managers listen to them are happier.',0,'Whose + noun.'],
+   ['Prices have risen, that has forced families to cut costs.',1,'Use <b>, which</b> for the whole idea.'],
+   ['The area in which she works is growing fast.',0,'Preposition + which.']
+  ];
+  $('#m-pa').innerHTML=PA.map((q,i)=>mcq('pa'+(i+1),'p','A'+(i+1),`<i>${q[0]}</i>`,['Correct','Wrong'],q[1],q[2])).join('');
+  const PB=[
+   ['People ___ live in cities often rely on public transport.',['who','whose','whom','what'],'Who is the subject for people.'],
+   ['The company, ___ was founded in 2005, now employs 500 people.',['which','that','what','who’s'],'Non-defining with a thing: which.'],
+   ['Countries ___ populations are ageing need more health care.',['whose','who','which','that'],'Whose + noun shows possession.'],
+   ['The extent to ___ technology improves learning is debated.',['which','that','what','whom'],'Preposition + which.'],
+   ['Many students sleep too little, ___ affects their results.',['which','that','what','who'],'Which refers to the whole idea.'],
+   ['The teachers with ___ I spoke were enthusiastic.',['whom','who','that','which'],'Preposition + whom for people.']
+  ];
+  let h=PB.map((q,i)=>mcq('pb'+(i+1),'p','B'+(i+1),q[0].replace('___','<b>______</b>'),q[1],0,q[2])).join('');
+  h+=mcq('pb7','p','B7','Which sentence is correct?',['Students studying abroad gain independence.','Students studied abroad gain independence.','Students who studying abroad gain independence.'],0,'Active meaning: -ing.');
+  h+=mcq('pb8','p','B8','Which sentence is correct?',['Laws introduced in 2019 have cut smoking.','Laws introducing in 2019 have cut smoking.','Laws which introduced in 2019 have cut smoking.'],0,'Passive meaning: -ed.');
+  $('#m-pb').innerHTML=h;
+  $('#m-pc').innerHTML=gapBlock('pc','p','C',[
+   {s:'Teenagers ___ spend hours online often sleep badly.',a:['who','that'],w:8,e:'People: who (or that).'},
+   {s:'Singapore, ___ is a small island, has little traffic.',a:'which',w:8,e:'Non-defining: which.'},
+   {s:'Countries ___ economies depend on tourism are vulnerable.',a:'whose',w:8,e:'Possession: whose.'},
+   {s:'Education is an area in ___ governments should invest.',a:'which',w:8,e:'Preposition + which.'},
+   {s:'Fuel costs have risen, ___ has hurt many families.',a:'which',w:8,e:'The whole idea: , which.'},
+   {s:'The students to ___ the survey was given were aged 16–18.',a:'whom',w:8,e:'Preposition + whom.'}
+  ],{mode:'type'});
+  $('#m-pd').innerHTML=selfBlock('pd','p','D',[
+   {p:'Many teenagers spend hours online. They often sleep badly.',t:'Defining who',m:'Teenagers <b>who</b> spend hours online often sleep badly.'},
+   {p:'Tokyo has over 14 million people. It has an excellent metro system.',t:'Non-defining which',m:'Tokyo, <b>which</b> has over 14 million people, has an excellent metro system.'},
+   {p:'Some countries depend on tourism. Their economies suffer during crises.',t:'whose',m:'Countries <b>whose</b> economies depend on tourism suffer during crises.'},
+   {p:'Health care is an area. Governments should spend more on it.',t:'Preposition + which',m:'Health care is an area <b>on which</b> governments should spend more.'},
+   {p:'Rents have risen sharply. This has forced many students to share flats.',t:', which',m:'Rents have risen sharply<b>, which</b> has forced many students to share flats.'},
+   {p:'Students study abroad. They often become more independent.',t:'Reduced relative',m:'Students <b>studying</b> abroad often become more independent.'},
+   {p:'Parents often give advice. Teenagers rarely follow it.',t:'Defining that',m:'Parents often give advice <b>that</b> teenagers rarely follow.'},
+   {p:'Laws were introduced last year. They have reduced smoking.',t:'Reduced relative',m:'Laws <b>introduced</b> last year have reduced smoking.'}
+  ]);
+  $('#m-pe').innerHTML=selfBlock('pe','p','E',[
+   {p:'People who live in big cities often feel lonely.',t:'-ing',m:'People <b>living</b> in big cities often feel lonely.'},
+   {p:'Policies that were introduced in 2015 have failed.',t:'-ed',m:'Policies <b>introduced</b> in 2015 have failed.'},
+   {p:'Students who are given more freedom tend to be more responsible.',t:'-ed',m:'Students <b>given</b> more freedom tend to be more responsible.'},
+   {p:'Workers who commute long distances are often tired.',t:'-ing',m:'Workers <b>commuting</b> long distances are often tired.'},
+   {p:'Studies that were published last year show that sleep matters.',t:'-ed',m:'Studies <b>published</b> last year show that sleep matters.'},
+   {p:'Companies that offer flexible hours attract more workers.',t:'-ing',m:'Companies <b>offering</b> flexible hours attract more workers.'}
+  ]);
+  const RK=(id,items)=>gapBlock(id,'r','Reading '+id.slice(1),items,{mode:'select',bank:STRUCT});
+  $('#m-r1').innerHTML=RK('r1',[
+   {s:'Sentence A: “Teenagers who spend several hours online …”',a:'Defining who / which',e:'No commas: which teenagers.'},
+   {s:'Sentence B: “Social media, which was designed to connect people, …”',a:'Non-defining , which / , who',e:'Extra information in commas.'},
+   {s:'Sentence C: “Countries whose governments regulate online content …”',a:'Whose',e:'Whose + noun.'},
+   {s:'Sentence D: “Studies published in recent years …”',a:'Reduced relative',e:'Studies which were published → studies published.'},
+   {s:'Sentence E: “The extent to which social media is harmful …”',a:'Preposition + whom / which',e:'To which.'}
+  ]);
+  $('#m-r1q').innerHTML=mcq('r1q','r','Reading 1 (commas)','In sentence B, why are there commas around “which was designed to connect people”?',['It adds extra information; the sentence works without it','It tells us which social media','It shows the sentence is a question'],0,'Non-defining clauses are extra information between commas.');
+  $('#m-r2').innerHTML=RK('r2',[
+   {s:'Sentence A: “Small towns whose economies depend on visitors …”',a:'Whose',e:'Whose + noun.'},
+   {s:'Sentence B: “Some historic cities, which receive millions of visitors …”',a:'Non-defining , which / , who',e:'Extra information in commas.'},
+   {s:'Sentence C: “… fragile places, which makes careful planning essential.”',a:', which (whole idea)',e:'Which refers to the whole idea.'},
+   {s:'Sentence D: “an industry in which governments must balance …”',a:'Preposition + whom / which',e:'In which.'}
+  ]);
+  $('#m-r2q').innerHTML=mcq('r2q','r','Reading 2 (reference)','In sentence C, what does “which” refer to?',['the whole idea: visitors damage fragile places','fragile places only','large numbers only'],0,'<b>, which</b> comments on the whole first idea.');
+  $('#banks').innerHTML=BANKS.map(b=>`<div class="bank"><h3>${b[0]}</h3><ul>${b[1].map(x=>`<li><b>${x[0]}</b><br><span class="muted">${x[1]}</span></li>`).join('')}</ul></div>`).join('');
+  const VB=['a society in which','an area in which','countries whose economies depend on tourism','families whose incomes are low','people whose jobs are at risk','the extent to which','the way in which','which has led to','which means that'];
+  $('#wb-v').innerHTML=VB.map(x=>`<span>${x}</span>`).join('');
+  $('#m-v').innerHTML=gapBlock('v','v','Vocabulary',[
+   {s:'Researchers disagree about ___ screen time is harmful to children.',a:'the extent to which',e:'How far it is true.'},
+   {s:'The government wants to build ___ everyone has equal chances.',a:'a society in which',e:'A system where.'},
+   {s:'Health care is ___ governments should spend more.',a:'an area in which',e:'A field where.'},
+   {s:'Technology has transformed ___ we communicate with each other.',a:'the way in which',e:'How something is done.'},
+   {s:'___ suffer most when international travel stops.',a:'countries whose economies depend on tourism',e:'A group of countries.'},
+   {s:'Free school meals help ___.',a:'families whose incomes are low',e:'A group of families.'},
+   {s:'Automation is a threat to ___.',a:'people whose jobs are at risk',e:'A group of people.'},
+   {s:'Fast food consumption has risen, ___ a sharp increase in obesity.',a:'which has led to',e:'Followed by a noun phrase.'},
+   {s:'Rents have risen faster than wages, ___ young people cannot afford to move out.',a:'which means that',e:'Followed by a clause.'}
+  ],{mode:'select',bank:VB});
+  $('#m-oa').innerHTML=selfBlock('oa','o','Own sentence',[
+   {p:'Topic: education.',t:'Defining who',m:'Teachers <b>who</b> use technology creatively often keep students more engaged.'},
+   {p:'Topic: health.',t:'Non-defining which',m:'Fast food, <b>which</b> is cheap and convenient, is a major cause of obesity.'},
+   {p:'Topic: the economy.',t:'whose',m:'Families <b>whose</b> incomes are low often struggle to afford healthy food.'},
+   {p:'Topic: government.',t:'Preposition + which',m:'Public transport is an area <b>in which</b> governments should invest more.'},
+   {p:'Topic: the environment.',t:', which',m:'Plastic waste is increasing every year<b>, which</b> is damaging marine life.'},
+   {p:'Topic: work.',t:'Reduced relative',m:'Employees <b>working</b> from home often save hours of commuting time.'},
+   {p:'Topic: technology.',t:'Defining that',m:'Apps <b>that</b> track sleep can help people improve their habits.'},
+   {p:'Topic: cities.',t:'Preposition + which',m:'Cities <b>in which</b> cars are restricted tend to have cleaner air.'}
+  ]);
+  const MA={
+   a:'Many people believe that social media is harmful. Teenagers who spend hours online often sleep badly and struggle to concentrate. Social media, which was designed to connect people, can also leave users feeling isolated. However, the extent to which it is harmful depends on how it is used. Families whose members use it sensibly can stay close across long distances. Overall, social media is a useful tool, but users need clear limits.',
+   b:'I strongly agree that public transport deserves more funding. Cities in which buses and trains run frequently have less traffic and cleaner air. Fuel prices have risen sharply, which has forced many families to look for cheaper ways to travel. Residents living in remote areas also depend on reliable services to reach work and school. Public transport is an area in which governments should invest first.'};
+  $('#m-ob').innerHTML=writeBlock('wa','o','Paragraph',{min:60,max:90,prompts:[
+   {tab:'Discuss both views',t:'Some people believe that social media does more harm than good. Others disagree. Discuss both views and give your opinion.',m:MA.a},
+   {tab:'Opinion',t:'Some people think governments should spend more on public transport than on roads. Do you agree or disagree?',m:MA.b}]});
+  $('#m-e').innerHTML=[
+   mcq('e1','e','Exit 1','Which sentence is correct?',['Students who study abroad become more independent.','Students which study abroad become more independent.','Students whose study abroad become more independent.'],0,'Who for people.'),
+   mcq('e2','e','Exit 2','Which sentence is punctuated correctly?',['Tokyo, which has over 14 million people, has an excellent metro.','Tokyo which has over 14 million people, has an excellent metro.','Tokyo, that has over 14 million people, has an excellent metro.'],0,'Non-defining: two commas and which.'),
+   mcq('e3','e','Exit 3','Which sentence is correct?',['Rents have risen, which has forced students to share flats.','Rents have risen. Which has forced students to share flats.','Rents have risen, that has forced students to share flats.'],0,'Join with , which. Never start a sentence with Which.')
+  ].join('');
+  $('#m-s1').innerHTML=selfBlock('s1','s','S1',[
+   {p:'Some countries have ageing populations. Those countries need more health care.',t:'whose',m:'Countries <b>whose</b> populations are ageing need more health care.'},
+   {p:'Some people have jobs at risk. They worry about automation.',t:'whose',m:'People <b>whose</b> jobs are at risk worry about automation.'},
+   {p:'Some companies have falling profits. They often cut staff.',t:'whose',m:'Companies <b>whose</b> profits are falling often cut staff.'}
+  ]);
+  $('#m-s2').innerHTML=selfBlock('s2','s','S2',[
+   {p:'Teachers which use technology get better results.',m:'Teachers <b>who</b> use technology get better results.'},
+   {p:'The city, that I visited last year, is very crowded.',m:'The city, <b>which</b> I visited last year, is very crowded.'},
+   {p:'This is the way in that people communicate.',m:'This is the way <b>in which</b> people communicate.'},
+   {p:'Prices rose. Which forced families to cut costs.',m:'Prices rose<b>, which</b> forced families to cut costs.'}
+  ]);
+  $('#m-s3').innerHTML=selfBlock('s3','s','S3',[
+   {p:'Singapore is a small island. It has very little traffic.',t:'Non-defining which',m:'Singapore, <b>which</b> is a small island, has very little traffic.'},
+   {p:'Smartphones are owned by most teenagers. They can distract students in class.',t:'Non-defining which',m:'Smartphones, <b>which</b> most teenagers own, can distract students in class.'},
+   {p:'Norway has very high living costs. It also has high salaries.',t:'Non-defining which',m:'Norway, <b>which</b> has very high living costs, also has high salaries.'}
+  ]);
+  $('#m-s4').innerHTML=writeBlock('wc','s','Ten-minute paragraph',{min:60,max:90,timer:600,req:[{k:['defining'],l:'Uses a defining who / which clause'},{k:['nondef'],l:'Uses a non-defining clause with commas'},{k:['whole','prep','whose'],l:'Uses , which / whose / preposition + which'}],prompts:[
+   {tab:'Opinion',t:'Some people think cities should ban cars from their centres. To what extent do you agree? Write one body paragraph with a defining clause, a non-defining clause and one more relative structure.',m:'I largely agree that cars should be banned from city centres. Residents who live near busy roads suffer from noise and polluted air. Car use, which has grown rapidly in recent decades, is also a major source of carbon emissions. Many cities have introduced low-emission zones, which has already improved air quality in some areas. Public transport is an area in which governments should invest.'}]});
+  buildChips();restore();refresh();
+}
+function buildChips(){$('#chips').innerHTML=SECS.map(s=>`<a class="chip" href="#s-${s[0]}" data-s="${s[0]}">${s[1]}<small>${s[2]}</small></a>`).join('')+`<a class="chip" href="#s-s" data-s="s">Stretch</a><a class="chip" href="#s-x" data-s="x">Review</a>`}
+function refresh(){
+  const all=Object.entries(ST),core=all.filter(([k,v])=>v.sec!=='s'),tot=core.length;
+  const ans=core.filter(([k,v])=>v.first!==null).length,cor=core.filter(([k,v])=>v.first===true).length;
+  $('#st-a').textContent=ans+'/'+tot;$('#st-c').textContent=cor;$('#st-p').textContent=ans?Math.round(cor/ans*100)+'%':'–';
+  $('#bar-f').style.width=(tot?ans/tot*100:0)+'%';
+  const st=all.filter(([k,v])=>v.sec==='s'),sa=st.filter(([k,v])=>v.first!==null).length;
+  $('#st-s').textContent=sa?`Stretch ${sa}/${st.length}`:'';
+  SECS.concat([['s']]).forEach(s=>{const its=all.filter(([k,v])=>v.sec===s[0]);const c=document.querySelector(`.chip[data-s="${s[0]}"]`);if(c)c.classList.toggle('done',its.length>0&&its.every(([k,v])=>v.first!==null))});
+  const miss=all.filter(([k,v])=>v.first===false);
+  $('#rv').innerHTML=!ans?'<p class="muted">Nothing to review yet.</p>':miss.length?`<p>${miss.length} to review:</p><ul>${miss.map(([k,v])=>`<li>${v.label}</li>`).join('')}</ul>`:'<p>No first-try mistakes so far.</p>';refreshSheet();
+}
+
+/* ---------- events ---------- */
+document.addEventListener('click',e=>{
+  const t=e.target;
+  const o=t.closest('.opt');
+  if(o&&o.dataset.q){
+    const q=o.dataset.q,M=MQ[q],li=document.getElementById(q);if(!M||li.dataset.done)return;
+    const i=+o.dataset.i,good=i===M.c;rec(q,good);const sv=SAVE.mcq[q]||(SAVE.mcq[q]={w:[],d:0});if(good)sv.d=1;else sv.w.push(i);mcqApply(q,i,good);persist();
+    return}
+  const chk=t.closest('[data-check]');if(chk){checkGap(chk.dataset.check);return}
+  const sh=t.closest('[data-show]');
+  if(sh){const id=sh.dataset.show,v=$('#c-'+id).value.trim().split(/\s+/).filter(Boolean).length;
+    if(v<3){$('#n-'+id).hidden=false;return}$('#n-'+id).hidden=true;$('#m-'+id).hidden=false;sh.hidden=true;SAVE.shown[id]=1;persist();return}
+  const ra=t.closest('[data-rate]');
+  if(ra){const id=ra.dataset.rate,good=ra.dataset.v==='1';rec(id,good);SAVE.rated[id]=ra.dataset.v;persist();rateText(id,good);return}
+  const wp=t.closest('[data-wpick]');
+  if(wp){const b=wp.dataset.wpick,i=+wp.dataset.i;WB[b].pi=i;SAVE.pi[b]=i;persist();wp.parentNode.querySelectorAll('.segb').forEach(x=>x.classList.toggle('on',x===wp));$('#wp-'+b).innerHTML=WB[b].cfg.prompts[i].t;$('#wm-'+b).hidden=true;return}
+  const wc=t.closest('[data-wcheck]');
+  if(wc){const b=wc.dataset.wcheck,r=updW(b),good=r.L.every(x=>x[0])&&r.d.warns.length===0;
+    rec(b,good);
+    $('#ws-'+b).textContent=r.d.words<10?'Write your paragraph first.':good?'All checks passed.':'Some checks are not complete yet. See the list.';return}
+  const cp=t.closest('[data-wcopy]');
+  if(cp){const ta=$('#w-'+cp.dataset.wcopy);const done=()=>{$('#ws-'+cp.dataset.wcopy).textContent='Copied.'};
+    try{navigator.clipboard.writeText(ta.value).then(done,()=>{ta.select();$('#ws-'+cp.dataset.wcopy).textContent='Text selected. Press Ctrl+C.'})}catch(err){ta.select();$('#ws-'+cp.dataset.wcopy).textContent='Text selected. Press Ctrl+C.'}return}
+  const wm=t.closest('[data-wmodel]');
+  if(wm){const b=wm.dataset.wmodel,m=$('#wm-'+b);if(updW(b).d.words<20){$('#ws-'+b).textContent='Write at least 20 words before opening the model.';return}
+    m.hidden=false;m.innerHTML=`<p><b>Model:</b> ${WB[b].cfg.prompts[WB[b].pi].m}</p><p class="note">Compare: which structures did the model use for which job?</p>`;return}
+  const tm=t.closest('[data-wtimer]');
+  if(tm){const b=tm.dataset.wtimer;if(WB[b].iv){clearInterval(WB[b].iv);WB[b].iv=null;tm.textContent='Start timer';return}
+    let s=WB[b].cfg.timer;tm.textContent='Stop timer';
+    WB[b].iv=setInterval(()=>{s--;const el=$('#wt-'+b);el.textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');if(s<=0){clearInterval(WB[b].iv);WB[b].iv=null;tm.textContent='Start timer';el.textContent='Time is up'}},1000);return}
+  const ch=t.closest('.chip');
+  if(ch){e.preventDefault();const el=document.getElementById('s-'+ch.dataset.s);if(el)el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});return}
+  if(t.id==='reset'){if(!t.dataset.arm){t.dataset.arm='1';t.textContent='Click again to erase all my answers';setTimeout(()=>{delete t.dataset.arm;t.textContent='Start again'},4000);return}
+    delete t.dataset.arm;t.textContent='Start again';SAVE=EMPTY();try{localStorage.removeItem(KEY)}catch(err){}build();window.scrollTo(0,0);return}
+  if(t.id==='copysheet'){const ta=$('#sheet'),m=$('#sheet-s');const f=()=>{ta.select();m.textContent='Text selected. Press Ctrl+C.'};try{navigator.clipboard.writeText(ta.value).then(()=>{m.textContent='Copied.'},f)}catch(err){f()}return}
+});
+function onVal(e){const t=e.target;if(!t||!t.id)return;
+  if(/^(c|w)-/.test(t.id)&&/^(TEXTAREA|INPUT|SELECT)$/.test(t.tagName)){SAVE.vals[t.id]=t.value;persist()}
+  if(t.dataset&&t.dataset.w)updW(t.dataset.w);
+  refreshSheet()}
+document.addEventListener('input',onVal);document.addEventListener('change',onVal);
+loadSave();build();
+try{localStorage.setItem('cond-t','1');localStorage.removeItem('cond-t');$('#st-save').textContent='Answers save automatically on this device'}catch(e){$('#st-save').textContent='Auto-save is off here. Use “Copy my answers” at the end.'}
+})();
+</script>
+
+<!-- === Grammar for IELTS Writing · site integration === -->
+<script>
+(function(){
+"use strict";
+var LKEY="rel-state-v1", LTITLE="Relative Clauses in Task 2", LFILE="relative-clauses.html";
+/* ---- styles ---- */
+var st=document.createElement("style");
+st.textContent=[
+".gsitebar{position:static;z-index:999;background:#14532d;color:#fff;display:flex;align-items:center;gap:6px;padding:6px 12px;font:500 13px/1.2 -apple-system,'Segoe UI',Roboto,Arial,sans-serif;box-shadow:0 2px 10px rgba(0,0,0,.25);flex-wrap:wrap}",
+".gsitebar a{color:#fff;text-decoration:none;padding:7px 11px;border-radius:8px;min-height:36px;display:inline-flex;align-items:center;white-space:nowrap}",
+".gsitebar a:hover{background:rgba(255,255,255,.15)}",
+".gsitebar .gbrand{font-weight:800;letter-spacing:.3px;margin-right:4px}",
+".gsitebar .gbrand b{background:#84cc16;color:#14532d;border-radius:6px;padding:2px 7px;margin-right:7px}",
+".gsitebar .gsp{flex:1}",
+".gsitebar .gcur{background:rgba(255,255,255,.18)}",
+".bar{top:env(safe-area-inset-top,0px)!important}",
+".sec{scroll-margin-top:118px!important}",
+".gexp{display:inline-flex;gap:8px;margin-left:8px;flex-wrap:wrap}",
+".gexp button{font:500 14px -apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:#166534;color:#fff;border:1px solid #166534;border-radius:6px;padding:8px 14px;cursor:pointer;min-height:40px}",
+".gexp button:hover{background:#14532d}",
+"@media(max-width:900px){.gsitebar .gbrand{display:none}}@media(max-width:640px){.gsitebar a{padding:7px 8px;font-size:12px}}"
+].join("\n");
+document.head?document.head.appendChild(st):document.documentElement.appendChild(st);
+/* ---- bar ---- */
+var bar=document.createElement("div");
+bar.className="gsitebar";
+bar.innerHTML='<span class="gbrand"><b>GF</b>Grammar for IELTS Writing</span>'+
+ '<a href="index.html">← All lessons</a>'+
+ '<span class="gsp"></span>'+
+ '<a href="gym.html">Paraphrase Gym</a>'+
+ '<a href="task1.html">Task 1 Lab</a>'+
+ '<a href="mywork.html">My Work</a>';
+document.body.insertBefore(bar,document.body.firstChild);
+/* ---- docx/doc builders ---- */
+function crc32(buf){if(!crc32.t){crc32.t=[];for(var n=0;n<256;n++){var c=n;for(var k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;crc32.t[n]=c>>>0}}var c=0xFFFFFFFF;for(var i=0;i<buf.length;i++)c=crc32.t[(c^buf[i])&255]^(c>>>8);return(c^0xFFFFFFFF)>>>0}
+function buildZip(files){var enc=new TextEncoder(),parts=[],central=[],off=0;files.forEach(function(f){var nm=enc.encode(f.name),d=f.data,crc=crc32(d);var h=new DataView(new ArrayBuffer(30));h.setUint32(0,0x04034b50,true);h.setUint16(4,20,true);h.setUint32(14,crc,true);h.setUint32(18,d.length,true);h.setUint32(22,d.length,true);h.setUint16(26,nm.length,true);parts.push(new Uint8Array(h.buffer),nm,d);var cv=new DataView(new ArrayBuffer(46));cv.setUint32(0,0x02014b50,true);cv.setUint16(4,20,true);cv.setUint16(6,20,true);cv.setUint32(16,crc,true);cv.setUint32(20,d.length,true);cv.setUint32(24,d.length,true);cv.setUint16(28,nm.length,true);cv.setUint32(42,off,true);central.push(new Uint8Array(cv.buffer),nm);off+=30+nm.length+d.length});var cdStart=off,cdSize=0;central.forEach(function(u){cdSize+=u.length});var e=new DataView(new ArrayBuffer(22));e.setUint32(0,0x06054b50,true);e.setUint16(8,files.length,true);e.setUint16(10,files.length,true);e.setUint32(12,cdSize,true);e.setUint32(16,cdStart,true);parts.push.apply(parts,central);parts.push(new Uint8Array(e.buffer));return new Blob(parts,{type:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"})}
+function xesc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function docxFromText(title,text){
+  var enc=new TextEncoder();
+  var para=function(s,bold,size){return '<w:p><w:r><w:rPr>'+(bold?'<w:b/>':'')+'<w:sz w:val="'+(size||22)+'"/></w:rPr><w:t xml:space="preserve">'+xesc(s)+'</w:t></w:r></w:p>'};
+  var today=new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});
+  var body=para("Grammar for IELTS Writing — "+title,true,32)+para("Date: "+today,false,20)+para("",false,20);
+  text.split(/\n/).forEach(function(line){body+=para(line,line.length&&line.indexOf(':')===-1&&line===line.toUpperCase()?false:false,24)});
+  var doc='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>'+body+'<w:sectPr/></w:body></w:document>';
+  var ct='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>';
+  var rels='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>';
+  return buildZip([{name:"[Content_Types].xml",data:enc.encode(ct)},{name:"_rels/.rels",data:enc.encode(rels)},{name:"word/document.xml",data:enc.encode(doc)}]);
+}
+function docFromText(title,text){
+  var today=new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});
+  var paras=text.split(/\n/).map(function(l){return '<p style="font-family:Georgia;font-size:12pt">'+xesc(l||' ')+'</p>'}).join('');
+  var html='<html xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="UTF-8"></head><body><h2 style="font-family:Arial">'+xesc(title)+'</h2><p style="font-family:Arial;color:#666;font-size:11px">'+today+'</p>'+paras+'</body></html>';
+  return new Blob([html],{type:"application/msword"});
+}
+window.GDL=function(blob,fname){var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=fname;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},600)};
+window.GDOCX=docxFromText;window.GDOC=docFromText;
+/* ---- export buttons next to Copy my answers ---- */
+function addExport(){
+  var cp=document.getElementById("copysheet");if(!cp||document.getElementById("gexp"))return;
+  var wrap=document.createElement("span");wrap.className="gexp";wrap.id="gexp";
+  var b1=document.createElement("button");b1.type="button";b1.textContent="⬇ .docx";
+  var b2=document.createElement("button");b2.type="button";b2.textContent="⬇ .doc";
+  function grab(){var ta=document.getElementById("sheet");var t=ta?ta.value.trim():"";
+    if(!t){var s=document.getElementById("sheet-s");if(s)s.textContent="Nothing to download yet — answer some tasks first.";return null}return t}
+  b1.addEventListener("click",function(){var t=grab();if(t)window.GDL(window.GDOCX(LTITLE,t),LFILE.replace(/\.html$/,"")+"_my_answers.docx")});
+  b2.addEventListener("click",function(){var t=grab();if(t)window.GDL(window.GDOC(LTITLE,t),LFILE.replace(/\.html$/,"")+"_my_answers.doc")});
+  wrap.appendChild(b1);wrap.appendChild(b2);
+  cp.parentNode.insertBefore(wrap,cp.nextSibling);
+}
+addExport();setTimeout(addExport,800);
+/* ---- sheet watcher → shared store for My Work ---- */
+var lastVal=null;
+setInterval(function(){
+  var ta=document.getElementById("sheet");if(!ta)return;
+  var v=ta.value;
+  if(v===lastVal)return;lastVal=v;
+  if(!v.trim())return;
+  try{
+    var all=JSON.parse(localStorage.getItem("gram_sheets")||"{}");
+    all[LKEY]={title:LTITLE,text:v,updated:Date.now()};
+    localStorage.setItem("gram_sheets",JSON.stringify(all));
+  }catch(e){}
+},1500);
+})();
+</script>
